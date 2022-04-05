@@ -1,0 +1,15 @@
+.c-sidebar {
+    box-sizing:border-box;
+    padding-bottom: 10px;
+    line-height:30px;
+    &__top{
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__bottom {
+        display: flex;
+        flex-direction: column;
+    }
+
+}

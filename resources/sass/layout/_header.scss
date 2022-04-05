@@ -1,0 +1,24 @@
+#l-header{
+    background-color: $color_header;
+    box-sizing: border-box;
+    width: 100%;
+    height: 80px;
+    color: $font-color-header;
+    padding-left: $space_xl;
+    padding-right: $space_xl;
+    position:fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: .3s;
+    z-index: 2;
+    @include mq(){
+        width: 100%;
+        position: relative;
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+
+

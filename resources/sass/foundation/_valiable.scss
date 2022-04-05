@@ -1,0 +1,78 @@
+//サイト全体で使える変数を管理
+
+// Typography
+$font-family-sans-serif: 'Noto Sans JP', sans-serif;
+$line-height-default: 1.6;
+
+//width
+$site-width: 1080px;
+$main: 800px;
+$sidebar: 280px;
+
+//fontsize
+$font-size-s: 10px;
+$font-size-m: 14px;
+$font-size-default: 16px;
+$font-size-l: 18px;
+$font-size-xl: 24px;
+$font-size-xxl: 30px;
+$font-size-3l: 38px;
+
+//余白
+$space_s:5px;
+$space_m:10px;
+$space_l:15px;
+$space_xl:20px;
+$space_xxl:30px;
+$space_3l:40px;
+
+// Colors
+$blue: rgb(104,198,223);
+$blue2:rgb(072,171,212);
+$blue3:rgb(051,123,183);
+
+$indigo: #6574cd;
+$purple: #9561e2;
+$pink: #f66d9b;
+$red: #e3342f;
+$orange: #f6993f;
+$yellow: #ffed4a;
+$green: #38c172;
+$teal: #4dc0b5;
+$cyan: #6cb2eb;
+$white: #FFFFFF;
+$gray: #EEF1F2;
+$black: #111;
+
+$color_corp: $white;
+$color_bg: $black;
+$color_main:$gray;
+$color_sidebar:$white;
+$color_title:$gray;
+$color_header:$gray;
+$color_footer:$black;
+$color_button:$black;
+$color_form: $white;
+
+
+//font-color
+$font-color-default: #777;
+$font-color-header: #777;
+$font-color-footer: #777 ;
+$font-color-hover: #000;
+
+//メディアクエリのブレークポイント設定
+//マップ変数を使用
+$breakpoints: (
+    'sm': 'screen and (max-width:414px)',
+    'md': 'screen and (max-width:768px)',
+    'lg': 'screen and (max-width:1000px)',
+    'xl': 'screen and (max-width:1200px)',
+) !default;
+
+//mixin
+@mixin mq($breakpoint :sm) {
+    @media #{map-get($breakpoints,$breakpoint)}{
+        @content ;
+    }
+}
