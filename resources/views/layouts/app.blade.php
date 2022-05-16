@@ -14,7 +14,7 @@
 
     <!-- 子テンプレートでsection('title')があるかどうかで表示をわけている -->
     @hasSection('title')
-        <title>@yield('title') | フォロボット</title>
+        <title>@yield('title') | CrypTrend</title>
     @else
         <title>{{ config('app.name') }}</title>
 @endif
@@ -33,7 +33,7 @@
 <!-- ヘッダーのテンプレート -->
 @section('header')
     <header id="l-header">
-        <h1 class="c-title"><a class="c-menu__link" href="/welcome">Twitterデータを利用した集客サービス|フォロボット</a></h1>
+        <h1 class="c-title"><a class="c-menu__link" href="/welcome">仮想通貨トレンド分析システム|CrypTrend</a></h1>
         <div class="c-menu__sp js-toggle-sp-menu">
             <span></span>
             <span></span>
@@ -43,8 +43,16 @@
             <ul class="c-menu">
                 @if (Route::has('register'))
                     @auth
+                        <li class="c-menu__item js-toggle-sp-menu-target"><a class="c-menu__link"
+                                                                             >一括フォロー</a></li>
+                        <li class="c-menu__item js-toggle-sp-menu-target"><a class="c-menu__link"
+                                                                              >仮想通貨トレンド</a></li>
+                        <li class="c-menu__item js-toggle-sp-menu-target"><a class="c-menu__link"
+                                                                             href="{{ route('news.index') }}">仮想通貨ニュース</a></li>
+                        <li class="c-menu__sidebar js-toggle-sp-menu-target"><a class="c-menu__link"
+                                                                                href="{{ route('twitter.accounts') }}">Twitterアカウント登録</a></li>
                         <li class="c-menu__item js-toggle-sp-menu-target">
-                            <a class="c-menu__link" href="{{ route('home') }}">マイページ</a></li>
+                            <a class="c-menu__link" href="{{ route('home.profile') }}">マイページ</a></li>
                         <div>
                             <li class="c-menu__item js-toggle-sp-menu-target">
                                 <a class="c-menu__link" href="{{ route('logout') }}"
@@ -57,22 +65,7 @@
                                 @csrf
                             </form>
                         </div>
-                        <li class="c-menu__sidebar js-toggle-sp-menu-target"><a class="c-menu__link"
-                                                                                href="/howto">使い方</a></li>
-                        <li class="c-menu__sidebar js-toggle-sp-menu-target"><a class="c-menu__link"
-                                                                                href="{{ route('home') }}">自動機能開始</a></li>
-                        <li class="c-menu__sidebar js-toggle-sp-menu-target"><a class="c-menu__link"
-                                                                                href="{{ route('twitter.accounts') }}">Twitterアカウント</a></li>
-                        <li class="c-menu__sidebar js-toggle-sp-menu-target"><a class="c-menu__link"
-                                                                                href="{{ route('twitter.followkeywords') }}">「自動フォロー」キーワード</a></li>
-                        <li class="c-menu__sidebar js-toggle-sp-menu-target"><a class="c-menu__link"
-                                                                                href="{{ route('twitter.favorites') }}">「自動いいね」キーワード</a></li>
-                        <li class="c-menu__sidebar js-toggle-sp-menu-target"><a class="c-menu__link"
-                                                                                href="{{ route('twitter.tweets') }}">「自動ツイート」</a></li>
-                        <li class="c-menu__sidebar js-toggle-sp-menu-target"><a class="c-menu__link"
-                                                                                href="{{ route('twitter.targets') }}">ターゲットアカウント</a></li>
-                        <li class="c-menu__sidebar js-toggle-sp-menu-target"><a class="c-menu__link"
-                                                                                href="{{ route('home.profile') }}">プロフィール</a></li>
+
                     @else
                         <li class="c-menu__item js-toggle-sp-menu-target"><a class="c-menu__link" href="/welcome">{{ __('TOP') }}</a></li>
                         <li class="c-menu__item js-toggle-sp-menu-target"><a class="c-menu__link"
@@ -103,7 +96,7 @@
 @section('footer')
     <footer id="l-footer">
         <div class="p-footer">
-            <p>Copyright ©follobot. All Rights Reserved</p>
+            <p>Copyright ©CrypTrend. All Rights Reserved</p>
         </div>
     </footer>
 @show

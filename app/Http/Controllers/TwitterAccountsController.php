@@ -21,8 +21,8 @@ class TwitterAccountsController extends Controller
     {
         //Twitter連携を許可した場合とキャンセルした場合の条件分岐
         if( isset( $_GET["oauth_token"] ) && isset( $_GET["oauth_verifier"] ) ) {
-            $api_key = 'dmQHWdKlgRBynzEzOvLMzfAG8';
-            $api_secret = '6NC6nlxCyu2E2ZXKbqV8t9EUewbDPQxamKHgZSHM2YITQUUIsW';
+            $api_key = 'n2BFchS09CY5Myr9ZxTvJX887';
+            $api_secret = 'ShH0CWC93JF9uYjlyAlOt2vSgtUHG7j4NogjBTvxaYEVo6YGeP';
             $callback_url = 'http://127.0.0.1:8000/twitter/accounts';
             $request_token_secret = session("oauth_token_secret") ;
             $request_url = "https://api.twitter.com/oauth/access_token";
@@ -55,10 +55,10 @@ class TwitterAccountsController extends Controller
     {
         $user_id = Auth::id();
         $data = DB::table('twitter_accounts')->where('user_id', '=',$user_id)->count();
-        if($data<10) {
+        if($data<1) {
 
-            $api_key = 'dmQHWdKlgRBynzEzOvLMzfAG8';
-            $api_secret = '6NC6nlxCyu2E2ZXKbqV8t9EUewbDPQxamKHgZSHM2YITQUUIsW';
+            $api_key = 'n2BFchS09CY5Myr9ZxTvJX887';
+            $api_secret = 'ShH0CWC93JF9uYjlyAlOt2vSgtUHG7j4NogjBTvxaYEVo6YGeP';
             $callback_url = 'http://127.0.0.1:8000/twitter/accounts';
             $access_token_secret = "";
             $request_url = "https://api.twitter.com/oauth/request_token";

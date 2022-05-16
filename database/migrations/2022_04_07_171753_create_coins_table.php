@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFollowKeywordsTable extends Migration
+class CreateCoinsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,14 @@ class CreateFollowKeywordsTable extends Migration
      */
     public function up()
     {
-        Schema::create('follow_keywords', function (Blueprint $table) {
+        Schema::create('coins', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('keyword');
+            $table->string('coins_name');
+            $table->string('hour')->nullable();
+            $table->string('day')->nullable();
+            $table->string('week')->nullable();
+            $table->string('high')->nullable();
+            $table->string('low')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +32,6 @@ class CreateFollowKeywordsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('follow_keywords');
+        Schema::dropIfExists('coins');
     }
 }

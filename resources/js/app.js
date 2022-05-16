@@ -26,6 +26,8 @@ Vue.component('targets', require('./components/Targets.vue').default);
 Vue.component('accounts', require('./components/TwitterAccounts.vue').default);
 Vue.component('home', require('./components/Home.vue').default);
 
+Vue.component('news', require('./components/News.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -64,5 +66,8 @@ const accounts = new Vue({
     el: '#js-accounts'
 });
 
+const news = new Vue({
+    el: '#js-news'
+});
 
-//aaa
+//aaaaaaa

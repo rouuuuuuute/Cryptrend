@@ -25,7 +25,7 @@
                 @if (Route::has('register'))
                     <div class="c-top">
                         @auth
-                            <a class="c-button c-button__top c-menu__link" href="{{ route('home') }}">マイページへ</a>
+                            <a class="c-button c-button__top c-menu__link" >マイページへ</a>
                         @else
                             <a class="c-button c-button__top  c-menu__link"
                                href="{{ route('register') }}">無料でフォロワーを増やす</a>

@@ -22,11 +22,9 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Route::get('/howto', function () {
-    return view('home.howto');
-});
 
 //Twitterアカウント
+// cryptrendで使ってる
 Route::get('/twitter/accounts', 'TwitterAccountsController@index')->name('twitter.accounts');
 
 Route::POST('/twitter/accounts/request', 'TwitterAccountsController@request')->name('twitter.accounts.request');
@@ -34,14 +32,8 @@ Route::POST('/twitter/accounts/request', 'TwitterAccountsController@request')->n
 Route::POST('/twitter/accounts/delete', 'TwitterAccountsController@destroy')->name('twitter.accounts.destroy');
 
 
-//サービス利用状況
-Route::get('/home', 'HomeController@index')->name('home');
-
-//Route::post('/home/edit', 'HomeController@edit')->name('home.edit');
-//
-//Route::post('/home/withdraw', 'HomeController@withdraw')->name('home.withdraw');
-
 /////////////////////////////////////
+/// // cryptrendで使ってる
 //プロフィール画面
 Route::get('/profile', 'ProfileController@index')->name('home.profile');
 
@@ -50,36 +42,10 @@ Route::post('/profile/edit', 'ProfileController@edit')->name('home.profile.edit'
 Route::post('/profile/withdraw', 'ProfileController@withdraw')->name('home.profile.withdraw');
 
 /////////////////////////////////////
-//自動フォローキーワード
-Route::get('/twitter/keywords/follow', 'FollowKeywordsController@index')->name('twitter.followkeywords');
+// cryptrendで使ってる
+//Googleニュース
+Route::get('/news', 'NewsController@index')->name('news.index');
 
-Route::post('/twitter/keywords/follow/new', 'FollowKeywordsController@create')->name('twitter.followkeywords.create');
-
-Route::post('/twitter/keywords/follow/edit', 'FollowKeywordsController@edit')->name('twitter.followkeywords.edit');
-
-Route::post('/twitter/keywords/follow/delete', 'FollowKeywordsController@destroy')->name('twitter.followkeywords.destroy');
-
-/////////////////////////////////////
-//自動いいねキーワード
-Route::get('/twitter/keywords/favorites', 'FavoritesController@index')->name('twitter.favorites');
-
-Route::post('/twitter/keywords/favorites/new', 'FavoritesController@create')->name('twitter.favorites.create');
-
-Route::post('/twitter/keywords/favorites/edit', 'FavoritesController@edit')->name('twitter.favorites.edit');
-
-Route::post('/twitter/keywords/favorites/delete', 'FavoritesController@destroy')->name('twitter.favorites.destroy');
-
-/////////////////////////////////////
-//自動ツイート
-Route::get('/twitter/tweets', 'TweetsController@index')->name('twitter.tweets');
-
-Route::post('/twitter/tweets/new', 'TweetsController@create')->name('twitter.tweets.create');
-
-Route::post('/twitter/tweets/edit', 'TweetsController@edit')->name('twitter.tweets.edit');
-
-Route::post('/twitter/tweets/delete', 'TweetsController@destroy')->name('twitter.tweets.destroy');
-
-Route::get('/twitter/tweets/post', 'TweetsController@post')->name('twitter.tweets.post');
 
 /////////////////////////////////////
 //ターゲットアカウントリスト
@@ -116,17 +82,3 @@ Route::get('/twitter/api/follow', 'FollowingTargetsController@create')->name('tw
 //アンフォロー
 Route::get('/twitter/api/unfollow', 'UnfollowersController@create')->name('twitter.unfollow');
 
-/////////////////////////////////////
-//メール
-//15分以内のAPI制限
-Route::get('/mail/minutes', 'MailSendController@minutes');
-
-//当日に1000件以上の制限
-Route::get('/mail/day', 'MailSendController@day');
-
-//処理完了
-Route::get('/mail/finished', 'MailSendController@finished');
-
-//凍結
-Route::get('/mail/suspended', 'MailSendController@suspended');
-/////////////////////////////////////

@@ -15,7 +15,12 @@ class CreateTwitterAccountsTable extends Migration
     {
         Schema::create('twitter_accounts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('account_name');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('twitter_id')->unique();
+            $table->string('screen_name');
+            $table->string('oauth_token');
+            $table->string('oauth_token_secret');
             $table->timestamps();
         });
     }
@@ -28,5 +33,6 @@ class CreateTwitterAccountsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('twitter_accounts');
+
     }
 }
