@@ -21,6 +21,9 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->boolean('delete_flg')->default(0);
+            $table->boolean('autofollow')->default(0);
+            $table->timestamp('follow_day')->nullable();
+            $table->integer('follow_count')->nullable();
             $table->timestamps();
         });
     }

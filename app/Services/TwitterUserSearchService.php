@@ -2,15 +2,13 @@
 
 namespace App\Services;
 
-use App\FollowedTarget;
-use App\FollowKeyword;
-use App\Target;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Log;
 
-class FavoritesService
+//キーワード検索
+class TwitterUserSearchService
 {
 
     //プロパティ
@@ -18,28 +16,36 @@ class FavoritesService
     public $api_secret;
     public $access_token;
     public $access_token_secret;
-    public $tweet_id;
+    public $q;
+    public $count;
+    public $page;
 
-    public function __construct($api_key, $api_secret, $access_token, $access_token_secret,$tweet_id)
+    public function __construct($api_key, $api_secret, $access_token, $access_token_secret, $q, $count, $page)
     {
         $this->api_key = $api_key;
         $this->api_secret = $api_secret;
         $this->access_token = $access_token;
         $this->access_token_secret = $access_token_secret;
-        $this->tweet_id = $tweet_id;
+        $this->q = $q;
+        $this->count = $count;
+        $this->page = $page;
     }
 
-    public function favorite()
+    public function search()
     {
-        Log::debug(print_r('FavoritesServiceの処理を開始します',true));
+        Log::debug(print_r('////////////////////////////////////////', true));
+        Log::debug(print_r('TwitterUserSearchSrviceの処理を開始します', true));
 
 
-        $request_url = 'https://api.twitter.com/1.1/favorites/create.json';    // エンドポイント
-        $request_method = 'POST';
+        $request_url = 'https://api.twitter.com/1.1/users/search.json';        // エンドポイント
+        $request_method = 'GET';
 
 // パラメータA (オプション)
         $params_a = array(
-            "id" => $this->tweet_id,
+            "q" => $this->q,
+            "count"=> $this->count,//10-20の間で指定
+            'page' => $this->page,
+            'include_entities' => 'false'
         );
 
 // キーを作成する (URLエンコードする)
@@ -96,21 +102,21 @@ class FavoritesService
         $context = array(
             'http' => array(
                 'method' => $request_method, // リクエストメソッド
-                'header' => array(    // ヘッダー
+                'header' => array(              // ヘッダー
                     'Authorization: OAuth ' . $header_params,
                 ),
             ),
         );
 
-// パラメータがある場合、URLの末尾に追加 (POSTの場合は不要)
-//	if ( $params_a ) {
-//		$request_url .= '?' . http_build_query( $params_a ) ;
-//	}
-
-// オプションがある場合、コンテキストにPOSTフィールドを作成する
+// パラメータがある場合、URLの末尾に追加
         if ($params_a) {
-            $context['http']['content'] = http_build_query($params_a);
+            $request_url .= '?' . http_build_query($params_a);
         }
+
+// オプションがある場合、コンテキストにPOSTフィールドを作成する (GETの場合は不要)
+//	if( $params_a ) {
+//		$context['http']['content'] = http_build_query( $params_a ) ;
+//	}
 
 // cURLを使ってリクエスト
         $curl = curl_init();
@@ -120,21 +126,23 @@ class FavoritesService
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);    // 証明書の検証を行わない
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);    // curl_execの結果を文字列で返す
         curl_setopt($curl, CURLOPT_HTTPHEADER, $context['http']['header']);    // ヘッダー
-        if (isset($context['http']['content']) && !empty($context['http']['content'])) {
-            curl_setopt($curl, CURLOPT_POSTFIELDS, $context['http']['content']);    // リクエストボディ
-        }
+//	if( isset( $context['http']['content'] ) && !empty( $context['http']['content'] ) ) {		// GETの場合は不要
+//		curl_setopt( $curl , CURLOPT_POSTFIELDS , $context['http']['content'] ) ;	// リクエストボディ
+//	}
         curl_setopt($curl, CURLOPT_TIMEOUT, 5);    // タイムアウトの秒数
         $res1 = curl_exec($curl);
         $res2 = curl_getinfo($curl);
         curl_close($curl);
 
 // 取得したデータ
-        $json = substr($res1, $res2['header_size']);    // 取得したデータ(JSONなど)
+        $json = substr($res1, $res2['header_size']);
 
+        $arr = json_decode($json, true);
+//        $tweets = Arr::collapse($arr);
 
-        Log::debug(print_r('FavoritesService処理を終了します',true));
+        Log::debug(print_r('TwitterUserSearchSrvice処理を終了します',true));
         Log::debug(print_r('//////////////////////////////////////////',true));
 
-        return $json;
+        return $arr;
     }
 }

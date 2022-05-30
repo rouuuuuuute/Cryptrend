@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\CoinController;
 
+//todo
 class CoinweekCommand extends Command
 {
     /**

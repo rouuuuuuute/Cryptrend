@@ -31,7 +31,6 @@ Route::POST('/twitter/accounts/request', 'TwitterAccountsController@request')->n
 
 Route::POST('/twitter/accounts/delete', 'TwitterAccountsController@destroy')->name('twitter.accounts.destroy');
 
-
 /////////////////////////////////////
 /// // cryptrendで使ってる
 //プロフィール画面
@@ -46,6 +45,20 @@ Route::post('/profile/withdraw', 'ProfileController@withdraw')->name('home.profi
 //Googleニュース
 Route::get('/news', 'NewsController@index')->name('news.index');
 
+/////////////////////////////////////
+// cryptrendで使ってる
+//coin
+Route::get('/home', 'CoinController@index')->name('home.index');
+
+/////////////////////////////////////
+//cryptrendで使ってる
+//オートフォローコントローラー（フォローを実施できるページ）
+Route::get('/twitter/autofollow','AutofollowController@index')->name('autofollow.index');//表示
+//Route::post('autofollow','AutofollowController@follow')->name('autofollow.follow');//フォロー
+//Route::post('autofollow/all','AutofollowController@allfollow')->name('autofollow.all');//自動フォローをonにする処理
+//Route::get('autofollow/addfollow','AutofollowController@addfollow')->name('autofollow.addfollow');//DBにツイッターアカウントを追加。cronに追加する処理
+//Route::get('autofollow/autofollow','AutofollowController@addfollow')->name('autofollow.autofollow');//自動フォロー。15分に一度行う。
+
 
 /////////////////////////////////////
 //ターゲットアカウントリスト
@@ -56,7 +69,6 @@ Route::post('/twitter/targets/new', 'TargetsController@create')->name('twitter.t
 Route::post('/twitter/targets/edit', 'TargetsController@edit')->name('twitter.targets.edit');
 
 Route::post('/twitter/targets/delete', 'TargetsController@destroy')->name('twitter.targets.destroy');
-
 
 /////////////////////////////////////
 //ajax

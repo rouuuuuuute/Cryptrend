@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Log;
 
+//キーワード検索
 class SearchService
 {
 
@@ -20,13 +21,15 @@ class SearchService
     public $access_token_secret;
     public $q;
 
-    public function __construct($api_key, $api_secret, $access_token, $access_token_secret, $q)
+    public function __construct($api_key, $api_secret, $access_token, $access_token_secret, $q ,$before_hour,$now_time)
     {
         $this->api_key = $api_key;
         $this->api_secret = $api_secret;
         $this->access_token = $access_token;
         $this->access_token_secret = $access_token_secret;
         $this->q = $q;
+        $this->before_hour = $before_hour;
+        $this->now_time = $now_time;
     }
 
     public function search()
@@ -41,9 +44,10 @@ class SearchService
 // パラメータA (オプション)
         $params_a = array(
             "q" => $this->q,
-            "lang" => "ja",
-            "locale" => "ja",
-            "count" => "3"
+            "count"=>100,
+            'result_type' => 'recent',
+            'since' => $this->before_hour,
+            'until' => $this->now_time
         );
 
 // キーを作成する (URLエンコードする)
@@ -136,14 +140,11 @@ class SearchService
         $json = substr($res1, $res2['header_size']);
 
         $arr = json_decode($json, true);
-        $tweets = Arr::collapse($arr);
+//        $tweets = Arr::collapse($arr);
 
         Log::debug(print_r('SearchService処理を終了します',true));
         Log::debug(print_r('//////////////////////////////////////////',true));
 
-
-
-
-        return $tweets;
+        return $arr;
     }
 }
