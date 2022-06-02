@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use App\Services\TwitterUserSearchService;
+use App\Services\FollowingService;
 use App\Autofollow;
 use App\User;
 use App\Updatetime;
@@ -260,23 +261,21 @@ class AutofollowController extends Controller
 
   //ーーーーーーオートフォローアクション。cronで自動で行われる処理。15分に一度実施されます。
   //ーーーーーーDBからオートフォロー「1」にされていると実施される
-  //----------自動処理、かつ複数ユーザーで行う可能性があるのでセッションは使わない
   public static function autofollow(){
     Log::debug("オートフォロー開始します");
 
-    //DBからユーザーを20人、screen_nameのみランダムに取得し、$randomUserに詰め込む。
+    //DBからユーザーを14人、screen_nameのみランダムに取得し、$randomUserに詰め込む。
     //そのscreen_nameを$follow_targetsに詰め込む
     $follow_targets = array();
-    for($i = 0; $i < 20; $i++){
+    for($i = 0; $i < 14; $i++){
       $randomUser = Autofollow::inRandomOrder()->first();
       array_push($follow_targets,$randomUser->screen_name);
     }
-    //スクリーンネームにクォーテーションをつける
-    $follow_targets = implode(",", $follow_targets);
-    Log::debug("フォローターゲット");
-    Log::debug($follow_targets);
+      Log::debug(print_r('$follow_targetsの表示///////////////',true));
+      Log::debug(print_r($follow_targets,true));
 
-    //フォロー元のユーザーアカウント（db上のautofollowが1のユーザー）を検索。
+
+      //フォロー元のユーザーアカウント（db上のautofollowが1のユーザー）を検索。
     //また、そのユーザー数をカウントする。
     $follow_acount = User::where('autofollow', 1)->get();
     Log::debug("autoフォロー1の状態の人です。".$follow_acount);
@@ -300,63 +299,44 @@ class AutofollowController extends Controller
 
       //一人分の自動フォロー処理。------------------------------■
       $follow_count = $follow_acount[$i]->follow_count;
+      $follow_id = $follow_acount[$i]->id;
       Log::debug("本日このサービスでフォローした数".$follow_count);
 
       if($follow_count > 395){
         Log::debug("すでに1日のフォロー数が395を超えています。処理を終了します。");
       }else{
         Log::debug("まだフォロー数は395を超えていません。ここからフォロー処理を実施します。");
-        $config = config('services');
-        $consumerKey = $config['twitter']['client_id'];	// APIキー
-        $consumerSecret = $config['twitter']['client_secret'];	// APIシークレット
-        $accessToken = ($follow_acount[$i]->token);	// ログインユーザーのアクセストークン
-        Log::debug("アクセストークンです。".$accessToken);
-        $accessTokenSecret = ($follow_acount[$i]->tokensecret);	// ログインユーザーのアクセストークンシークレット
-        Log::debug("アクセストークンシークレットですです。".$accessTokenSecret);
-        $oAuth = new TwitterOAuth($consumerKey, $consumerSecret, $accessToken, $accessTokenSecret);
-        Log::debug($follow_acount[$i]->name."さんがフォローします");
 
-        //lookupで先ほど取得したscreen_nameを使い情報取得。そのままscreen_nameを$temp_userに詰め込む。
-        $lookupuser = $oAuth->get("users/lookup", ["screen_name" => "$follow_targets"]);
-        $temp_user = array();
+          $account_id = TwitterAccount::where('user_id',$follow_id)->value('twitter_id');
+          $api_key = 'n2BFchS09CY5Myr9ZxTvJX887';
+          $api_secret = 'ShH0CWC93JF9uYjlyAlOt2vSgtUHG7j4NogjBTvxaYEVo6YGeP';
+          $access_token = TwitterAccount::where('id', $account_id)->value('oauth_token');
+          $access_token_secret = TwitterAccount::where('id', $account_id)->value('oauth_token_secret');
 
-        //フォロー対象のまとめ。fを変数にし、forでフォロー。
-        for($f=0; $f<15; $f++){//15を超えないように。
-          if(!$lookupuser[$f]->following){
-            array_push($temp_user,$lookupuser[$f]->screen_name);
-          }
-          //if(count($temp_user) == 14){不要か
-          //Log::debug("14人に達しました。フォロー対象をまとめました。");
-            //break;
-          //}
-        }
-
-        //実際のフォロー
-        Log::debug("tempユーザー一覧です。このユーザーたちをフォローします。");
-        Log::debug($temp_user);
-
-        foreach ($temp_user as $value)
+        foreach ($follow_targets as $value)
         {
           //Log::debug($value);
-          $target = $value;
-          Log::debug("ターゲットの中身".$target);
-          $oAuth->post("friendships/create", ["screen_name" => $target]);
-          Log::debug($target."をフォローしました");
+          $screen_name = $value;
+          Log::debug("screen_nameの中身".$screen_name);
+          $follow = new FollowingService($api_key, $api_secret, $access_token, $access_token_secret,$screen_name);
+          $results = $follow->following();
+          Log::debug(print_r($results, true));
         }
 
-        //フォローした数をカウントとしてdbに追加。
-        $count = count($temp_user);
-        Log::debug("フォローした人数です".$count);
-        $now_follow_num = $follow_acount[$i]->follow_count;//処理中のユーザーのカウント数
-        Log::debug("db上の数です。".$now_follow_num);
-        $now_follow_num = $now_follow_num + $count;
-        Log::debug("dbにオールフォロー数を足しました、saveします！db上の数はこちらに更新されます→".$now_follow_num);
-        $now_usertwiiter_id = $follow_acount[$i]->twitter_id;//処理中のユーザーのツイッターid
-        Log::debug("処理中のユーザーのツイッターidです".$now_usertwiiter_id);
 
-        $user = User::where('twitter_id', $now_usertwiiter_id)->first();
+        //フォローした数をカウントとしてdbに追加。
+        $count = count($follow_targets);
+        $now_follow_num = $follow_acount[$i]->follow_count;//処理中のユーザーのカウント数
+        $now_follow_num = $now_follow_num + $count;
+
+        Log::debug("フォローした人数です".$count);
+        Log::debug("db上の数です。".$now_follow_num);
+        Log::debug("dbにオールフォロー数を足しました、saveします！db上の数はこちらに更新されます→".$now_follow_num);
+
+        $user = User::where('id', $follow_id)->first();
         $user->follow_count = $now_follow_num;
         $user->update();
+
         Log::debug("DBを更新しました");
 
         Log::debug("フォロー処理を終了します。");
