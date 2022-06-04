@@ -44,13 +44,17 @@
                 @if (Route::has('register'))
                     @auth
                         <li class="c-menu__item js-toggle-sp-menu-target"><a class="c-menu__link"
-                                                                             >一括フォロー</a></li>
+                                                                             href="{{ route('autofollow.index') }}"
+                            >一括フォロー</a></li>
                         <li class="c-menu__item js-toggle-sp-menu-target"><a class="c-menu__link"
-                                                                              >仮想通貨トレンド</a></li>
+                                                                             href="{{ route('home.index') }}"
+                            >仮想通貨トレンド</a></li>
                         <li class="c-menu__item js-toggle-sp-menu-target"><a class="c-menu__link"
-                                                                             href="{{ route('news.index') }}">仮想通貨ニュース</a></li>
+                                                                             href="{{ route('news.index') }}">仮想通貨ニュース</a>
+                        </li>
                         <li class="c-menu__sidebar js-toggle-sp-menu-target"><a class="c-menu__link"
-                                                                                href="{{ route('twitter.accounts') }}">Twitterアカウント登録</a></li>
+                                                                                href="{{ route('twitter.accounts') }}">Twitterアカウント登録</a>
+                        </li>
                         <li class="c-menu__item js-toggle-sp-menu-target">
                             <a class="c-menu__link" href="{{ route('home.profile') }}">マイページ</a></li>
                         <div>
@@ -67,11 +71,13 @@
                         </div>
 
                     @else
-                        <li class="c-menu__item js-toggle-sp-menu-target"><a class="c-menu__link" href="/welcome">{{ __('TOP') }}</a></li>
                         <li class="c-menu__item js-toggle-sp-menu-target"><a class="c-menu__link"
-                                                    href="{{ route('register') }}">{{ __('まずは無料登録') }}</a></li>
+                                                                             href="/welcome">{{ __('TOP') }}</a></li>
                         <li class="c-menu__item js-toggle-sp-menu-target"><a class="c-menu__link"
-                                                    href="{{ route('login') }}">{{ __('ログイン') }}</a>
+                                                                             href="{{ route('register') }}">{{ __('まずは無料登録') }}</a>
+                        </li>
+                        <li class="c-menu__item js-toggle-sp-menu-target"><a class="c-menu__link"
+                                                                             href="{{ route('login') }}">{{ __('ログイン') }}</a>
                         </li>
                     @endauth
                 @endif
@@ -81,9 +87,9 @@
 @show
 
 @if ( session ('flash_message'))
-<div class="c-arelt" role="alert">
-    <p>{{ session ('flash_message')}}</p>
-</div>
+    <div class="c-arelt" role="alert">
+        <p>{{ session ('flash_message')}}</p>
+    </div>
 @endif
 
 <main id="l-main">

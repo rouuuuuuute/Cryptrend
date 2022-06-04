@@ -47,7 +47,7 @@ class TestCommand extends Command
 //        CoinController::week();
 //        CoinController::index();
 //        AutofollowController::addfollow();
-        AutofollowController::autofollow();
+//        AutofollowController::autofollow();
 
     }
 }

@@ -9,7 +9,7 @@ use Illuminate\Support\Arr;
 use App\FollowingTarget;
 use Illuminate\Support\Facades\Log;
 
-class FollowingService
+class LookupSearchService
 {
 
     //プロパティ
@@ -28,10 +28,15 @@ class FollowingService
         $this->screen_name = $screen_name;
     }
 
-    public function following()
+    public function lookup()
     {
-        $request_url = 'https://api.twitter.com/1.1/friendships/create.json';
-        $request_method = 'POST';
+
+//        Log::debug(print_r('//////////////////////////////////////////', true));
+//        Log::debug(print_r('LookupSearchServiceを開始します', true));
+
+
+        $request_url = 'https://api.twitter.com/1.1/users/lookup.json';
+        $request_method = 'GET';
 
         // パラメータA (オプション)
         $params_a = array(
@@ -129,11 +134,14 @@ class FollowingService
 
         $arr = json_decode($json, true);
 
-        Log::debug(print_r($arr, true));
+//        Log::debug(print_r($arr, true));
+//
+//        Log::debug(print_r('LookupSearchServiceを終了します'));
+//        Log::debug(print_r('//////////////////////////////////////////', true));
 
-        Log::debug(print_r('FollowingService処理を終了します', true));
-        Log::debug(print_r('//////////////////////////////////////////', true));
 
+        //データ確認のため
+//        Log::debug(print_r($arr));
         return $arr;
     }
 }

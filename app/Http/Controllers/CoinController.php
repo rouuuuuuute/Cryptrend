@@ -30,8 +30,8 @@ class CoinController extends Controller
         $week = $coinupdatedate["update_week"];
         $highlow = $coinupdatedate["update_highandlow"];
 
-//    return view('coin/index',compact('hour','day','week','highlow'));
-        return view('home.coin');
+    return view('home.coin',compact('hour','day','week','highlow'));
+//        return view('home.coin');
     }
 
 

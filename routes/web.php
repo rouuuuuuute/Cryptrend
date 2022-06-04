@@ -49,26 +49,21 @@ Route::get('/news', 'NewsController@index')->name('news.index');
 // cryptrendで使ってる
 //coin
 Route::get('/home', 'CoinController@index')->name('home.index');
+Route::get('coin/hour','CoinController@hour')->name('coin.hour');//1日のツイート数を検索。cronで実施。
+Route::get('coin/day','CoinController@day')->name('coin.day');//1日のツイート数を検索。cronで実施。
+Route::get('coin/week','CoinController@week')->name('coin.week');//1日のツイート数を検索。cronで実施。
+Route::get('coin/highandlow','CoinController@highandlow')->name('coin.highandlow');//1日のツイート数を検索。cronで実施。
+
+
 
 /////////////////////////////////////
 //cryptrendで使ってる
 //オートフォローコントローラー（フォローを実施できるページ）
-Route::get('/twitter/autofollow','AutofollowController@index')->name('autofollow.index');//表示
-//Route::post('autofollow','AutofollowController@follow')->name('autofollow.follow');//フォロー
-//Route::post('autofollow/all','AutofollowController@allfollow')->name('autofollow.all');//自動フォローをonにする処理
-//Route::get('autofollow/addfollow','AutofollowController@addfollow')->name('autofollow.addfollow');//DBにツイッターアカウントを追加。cronに追加する処理
-//Route::get('autofollow/autofollow','AutofollowController@addfollow')->name('autofollow.autofollow');//自動フォロー。15分に一度行う。
-
-
-/////////////////////////////////////
-//ターゲットアカウントリスト
-Route::get('/twitter/targets', 'TargetsController@index')->name('twitter.targets');
-
-Route::post('/twitter/targets/new', 'TargetsController@create')->name('twitter.targets.create');
-
-Route::post('/twitter/targets/edit', 'TargetsController@edit')->name('twitter.targets.edit');
-
-Route::post('/twitter/targets/delete', 'TargetsController@destroy')->name('twitter.targets.destroy');
+Route::get('/twitter/autofollow','AutofollowController@index')->name('autofollow.index');
+Route::post('/twitter/autofollow/follow','AutofollowController@follow')->name('autofollow.follow');//フォロー
+Route::post('/twitter/autofollow/all','AutofollowController@all')->name('autofollow.all');//自動フォローをonにする処理
+Route::get('/twitter/autofollow/addfollow','AutofollowController@addfollow')->name('autofollow.addfollow');//DBにツイッターアカウントを追加。cronに追加する処理
+Route::get('/twitterautofollow/autofollow','AutofollowController@addfollow')->name('autofollow.autofollow');//自動フォロー。15分に一度行う。
 
 /////////////////////////////////////
 //ajax
@@ -83,14 +78,6 @@ Route::get('/twitter/targets/json/targets', 'RequestDatabaseController@targets')
 
 Route::get('/twitter/follower/json/ratelimit', 'RequestDatabaseController@ratelimit');
 
-/////////////////////////////////////
-/// twitterapi
-//フォロワーサーチ
-Route::get('/twitter/api/search/follower', 'FollowedTargetsController@create')->name('twitter.search.follower');
-
-//フォロー
-Route::get('/twitter/api/follow', 'FollowingTargetsController@create')->name('twitter.follow');
-
-//アンフォロー
-Route::get('/twitter/api/unfollow', 'UnfollowersController@create')->name('twitter.unfollow');
-
+//ajaxのデータを表示させるvue
+Route::get('ajax/coin', 'AjaxController@coin')->name('ajax.coin');
+Route::get('ajax/users', 'AjaxController@users')->name('ajax.users');

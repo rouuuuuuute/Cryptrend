@@ -2147,10 +2147,10 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/laravel-mix/node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Favorites.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/laravel-mix/node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Favorites.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/laravel-mix/node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Coin.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/laravel-mix/node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Coin.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -2158,8 +2158,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2244,225 +2242,166 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: {
-    csrf: {
-      type: String,
-      required: true
-    }
-  },
-  mounted: function mounted() {
-    this.$nextTick(function () {
-      var _this = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/twitter/json/accounts').then(function (response) {
-        _this.accounts = response.data;
-      });
-    });
-  },
-  methods: {
-    changeScreenName: function changeScreenName(e) {
-      var _this2 = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/twitter/keywords/favorites/json/keywords', {
-        params: {
-          id: e.target.value
-        }
-      }).then(function (response) {
-        _this2.keyword = null;
-        _this2.favoritelogic = null;
-        _this2.favorite2 = null;
-        _this2.keyword = response.data[0].favorite_keyword;
-        _this2.favoritelogic = response.data[0].logic;
-        _this2.favorite2 = response.data[0].favorite_keyword2;
-        console.log(response.data);
-      });
-    },
-    checkForm: function checkForm(e) {
-      if (this.account) {
-        return true;
-      }
-
-      this.errors = [];
-
-      if (!this.account) {
-        this.errors.push('アカウントを選択してください');
-      }
-
-      e.preventDefault();
-    }
-  },
+  props: [//それぞれcoinのindexページから取得
+  'coin_ajax', //coinのデータを取得するためのajaxに使うURL。
+  'hour', //過去1時間のデータ。
+  'day', //過去1日のデータ
+  'week' //過去1習慣のデータ
+  ],
   data: function data() {
     return {
-      accounts: [],
-      keyword: null,
-      favoritelogic: [],
-      favorite2: [],
-      errors: [],
-      account: null,
-      check: false
+      coins: [],
+      showCoins: [],
+      //コインのツイート数、取引額の見た目上のデータをここに詰め込む
+      exitCoins: [],
+      //コインのツイート数、取引額の実際のデータをここに詰め込む
+      link_before: 'https://twitter.com/search?q=',
+      //ツイッター上にリンクするためのURL情報前半
+      link_after: '&src=typed_query',
+      //同上
+      hour_show: false,
+      //trueになれば1時間ごとのツイート数を表示
+      day_show: false,
+      //trueになれば1日ごとのツイート数を表示
+      week_show: false,
+      //trueになれば1週間ごとのツイート数を表示
+      check_show: false //trueになればコインボタンの表示を行う。
+
     };
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/laravel-mix/node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FollowKeywords.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/laravel-mix/node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FollowKeywords.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: {
-    csrf: {
-      type: String,
-      required: true
-    }
   },
+  //ページ表示の時点では1時間ごとの表示を行う。
   mounted: function mounted() {
-    this.$nextTick(function () {
-      var _this = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/twitter/json/accounts').then(function (response) {
-        _this.accounts = response.data;
-      });
+    this.showHour();
+    var self = this;
+    var url = this.coin_ajax;
+    axios.get(url).then(function (response) {
+      self.coins = response.data;
     });
   },
-  methods: {
-    changeScreenName: function changeScreenName(e) {
-      var _this2 = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/twitter/keywords/follow/json/keywords', {
-        params: {
-          id: e.target.value
-        }
-      }).then(function (response) {
-        _this2.keyword = null;
-        _this2.logic = null;
-        _this2.keyword2 = null;
-        _this2.keyword = response.data[0].keyword;
-        _this2.logic = response.data[0].logic;
-        _this2.keyword2 = response.data[0].keyword2;
-      });
+  computed: {
+    //時間ごとのツイート数を多い順に並び替える算出プロパティ。hour_showは。
+    sortCoinsByHour: function sortCoinsByHour() {
+      if (this.hour_show) {
+        var arr = this.coins;
+        return arr.slice().sort(function (a, b) {
+          return b.hour - a.hour;
+        });
+      }
     },
-    checkForm: function checkForm(e) {
-      if (this.account) {
-        return true;
+    //1日ごとのツイート数を多い順に並び替える。
+    sortCoinsByDay: function sortCoinsByDay() {
+      if (this.day_show) {
+        var arr = this.coins;
+        return arr.slice().sort(function (a, b) {
+          return b.day - a.day;
+        });
       }
-
-      this.errors = [];
-
-      if (!this.account) {
-        this.errors.push('アカウントを選択してください');
+    },
+    //1週間ごとのツイート数を多い順に並び替える。
+    sortCoinsByWeek: function sortCoinsByWeek() {
+      if (this.week_show) {
+        var arr = this.coins;
+        return arr.slice().sort(function (a, b) {
+          return b.week - a.week;
+        });
       }
-
-      e.preventDefault();
     }
   },
-  data: function data() {
-    return {
-      accounts: [],
-      keyword: null,
-      logic: [],
-      keyword2: [],
-      errors: [],
-      account: null,
-      check: false
-    };
+  methods: {
+    //1時間ごとのコインのツイート数を出すメソッド
+    showHour: function showHour() {
+      this.hour_show = true;
+      console.log(this.hour_show);
+      this.showCoins = [];
+      this.exitCoins = [];
+      this.resetCheckbox();
+      this.day_show = false;
+      this.week_show = false;
+    },
+    //1日ごとのコインのツイート数を出すメソッド
+    showDay: function showDay() {
+      this.day_show = true;
+      console.log(this.day_show);
+      this.showCoins = [];
+      this.exitCoins = [];
+      this.resetCheckbox();
+      this.hour_show = false;
+      this.week_show = false;
+    },
+    //1週間ごとのコインのツイート数を出すメソッド
+    showWeek: function showWeek() {
+      this.week_show = true;
+      console.log(this.week_show);
+      this.showCoins = [];
+      this.exitCoins = [];
+      this.resetCheckbox();
+      this.hour_show = false;
+      this.day_show = false;
+    },
+    //exitCoinsは表示上のコインではなく、データ上登録されているcoinデータ。
+    pushCoin: function pushCoin(pcoin) {
+      //exitCoinにpcoin.nameがなければ追加する
+      if (this.exitCoins.indexOf(pcoin.name) == -1) {
+        this.showCoins.push(pcoin);
+        this.exitCoins.push(pcoin.name);
+        console.log(this.exitCoins);
+        this.hour_show = false;
+        this.day_show = false;
+        this.week_show = false;
+      } else {
+        console.log(this.exitCoins);
+        this.exitCoins = this.exitCoins.filter(function (n) {
+          return n !== pcoin.name;
+        });
+        this.showCoins = this.showCoins.filter(function (n) {
+          return n !== pcoin;
+        });
+        console.log(this.exitCoins);
+      }
+    },
+    //表示内容を初期化するメソッド。
+    resetCoin: function resetCoin() {
+      this.showCoins = [];
+      this.exitCoins = [];
+      this.hour_show = true;
+      this.day_show = false;
+      this.week_show = false;
+      this.resetCheckbox();
+    },
+    //チェックボックスのチェックをリセットするメソッド。
+    //期間集計を表示するときにも使うため「resetCoin」とは分けています。
+    resetCheckbox: function resetCheckbox() {
+      var checkboxs = document.getElementsByClassName("p-sidebtn__coin__input");
+
+      for (var i = 0; i < checkboxs.length; i++) {
+        checkboxs[i].checked = false;
+      }
+    },
+    //コインの表示をするためのボックスを出し入れするメソッド。
+    coinbuttonShow: function coinbuttonShow() {
+      console.log("スタート");
+      this.check_show = !this.check_show;
+    }
   }
 });
 
@@ -2788,187 +2727,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: {
-    csrf: {
-      type: String,
-      required: true
-    }
-  },
-  mounted: function mounted() {
-    this.$nextTick(function () {
-      var _this = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/twitter/json/accounts').then(function (response) {
-        _this.accounts = response.data;
-      });
-    });
-  },
-  methods: {
-    changeScreenName: function changeScreenName(e) {
-      var _this2 = this;
-
-      this.automation = true;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/twitter/keywords/follow/json/keywords', {
-        params: {
-          id: e.target.value
-        }
-      }).then(function (response) {
-        _this2.keyword = null;
-        _this2.logic = null;
-        _this2.keyword2 = null;
-        _this2.keyword = response.data[0].keyword;
-        _this2.logic = response.data[0].logic;
-        _this2.keyword2 = response.data[0].keyword2;
-      });
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/twitter/keywords/favorites/json/keywords', {
-        params: {
-          id: e.target.value
-        }
-      }).then(function (response) {
-        _this2.favorite = null;
-        _this2.favoritelogic = null;
-        _this2.favorite2 = null;
-        _this2.favorite = response.data[0].favorite_keyword;
-        _this2.favoritelogic = response.data[0].logic;
-        _this2.favorite2 = response.data[0].favorite_keyword2;
-      });
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/twitter/tweets/json/tweets', {
-        params: {
-          id: e.target.value
-        }
-      }).then(function (response) {
-        _this2.tweet = null;
-        _this2.reserved = null;
-        _this2.tweet = response.data[0].tweet;
-        _this2.reserved = response.data[0].reserved_at;
-      });
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/twitter/targets/json/targets', {
-        params: {
-          id: e.target.value
-        }
-      }).then(function (response) {
-        _this2.targets = null;
-        _this2.targets = response.data;
-      });
-    },
-    submit: function submit(e) {
-      //自動機能ボタン実行時に、アカウント選択、フォローキーワード登録、いいねキーワード登録、ターゲット登録がされているか確認。されていなければ、ajaxをとめてエラーを返す
-      //自動ツイートは必ずしも登録するわけではないと思うので省いている
-      this.errors = [];
-
-      if (!this.account) {
-        this.errors.push('アカウントを選択してください');
-        e.preventDefault();
-        return;
-      }
-
-      if (!this.keyword) {
-        this.errors.push('自動フォローキーワードを登録してください');
-        e.preventDefault();
-        return;
-      }
-
-      if (!this.favorite) {
-        this.errors.push('自動いいねキーワードを登録してください');
-        e.preventDefault();
-        return;
-      }
-
-      if (this.targets.length === 0) {
-        this.errors.push('フォロワーターゲットを登録してください');
-        e.preventDefault();
-        return;
-      } //自動ツイート投稿
-
-
-      var tweet_ajax = function tweet_ajax() {
-        axios__WEBPACK_IMPORTED_MODULE_0___default().get('/twitter/tweets/post', {
-          params: {
-            id: document.auto.account_id.value
-          }
-        });
-      };
-
-      var that = this; //自動フォローアンフォローいいね機能
-
-      function follow_ajax(that) {
-        axios__WEBPACK_IMPORTED_MODULE_0___default().get('/twitter/api/search/follower', {
-          params: {
-            id: document.auto.account_id.value
-          }
-        }).then(function (response) {
-          var suspend = response.data.susBool;
-
-          if (suspend === 0) {
-            that.automation = 'stop';
-            that.errors.push('自動機能を停止しました。詳細はメールをご確認ください');
-            console.log('凍結されている');
-            console.log(suspend);
-            clearInterval(followTimer);
-            clearInterval(tweetTimer);
-          } else {
-            console.log('自動機能実行中');
-          }
-        });
-      } //自動ツイートの予約時間を取得
-
-
-      var reserved_time = this.reserved;
-      var reservedTime = Date.parse(reserved_time); //自動ツイートが登録されていれば実行
-      //1分毎にif文でUNIXTimeに変換した予約時間と現在時間を比較し、予約時間を超えていたらtweet_ajaxを実行
-      //自動機能開始時に過去日に設定していた場合は、すぐに投稿されるようにする
-
-      if (this.tweet) {
-        var _tweetTimer = setInterval(function () {
-          var date = new Date();
-          var now = date.getTime();
-
-          if (now > reservedTime) {
-            tweet_ajax();
-            clearInterval(_tweetTimer);
-            console.log('reservedTimeが現在時刻より過去のためツイートして中止');
-          } else {
-            console.log('自動ツイート実行中');
-          }
-        }, 60000);
-      } //アカウントが選択されているか確認
-      //凍結対策のため20分ごとにfollow_ajaxを実行（自動フォローターゲット作成→自動フォロー→自動アンフォロー→自動いいねの処理になる）
-      //凍結された場合はclearIntervalでとめる
-
-
-      this.automation = false;
-      follow_ajax(that);
-      var followTimer = setInterval(function () {
-        follow_ajax(that);
-      }, 1200000);
-    }
-  },
-  data: function data() {
-    return {
-      accounts: [],
-      keyword: null,
-      logic: null,
-      keyword2: null,
-      favorite: null,
-      favoritelogic: null,
-      favorite2: null,
-      tweet: null,
-      reserved: null,
-      targets: null,
-      target: null,
-      errors: [],
-      account: null,
-      automation: true,
-      ratelimit: []
-    };
-  }
+  props: ['list_gn' //ニュースデータ。viewから受け取っています。
+  ],
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -3116,317 +2896,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-
-/***/ }),
-
-/***/ "./node_modules/laravel-mix/node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Targets.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/laravel-mix/node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Targets.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: {
-    csrf: {
-      type: String,
-      required: true
-    }
-  },
-  mounted: function mounted() {
-    this.$nextTick(function () {
-      var _this = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/twitter/json/accounts').then(function (response) {
-        _this.accounts = response.data;
-      });
-    });
-  },
-  methods: {
-    changeScreenName: function changeScreenName(e) {
-      var _this2 = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/twitter/targets/json/targets', {
-        params: {
-          id: e.target.value
-        }
-      }).then(function (response) {
-        _this2.keywords = null;
-        _this2.keywords = response.data;
-      });
-    },
-    checkForm: function checkForm(e) {
-      if (this.account) {
-        return true;
-      }
-
-      this.errors = [];
-
-      if (!this.account) {
-        this.errors.push('アカウントを選択してください');
-      }
-
-      e.preventDefault();
-    }
-  },
-  data: function data() {
-    return {
-      accounts: [],
-      keywords: [],
-      errors: [],
-      account: null,
-      keyword: null
-    };
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/laravel-mix/node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Tweets.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/laravel-mix/node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Tweets.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: {
-    csrf: {
-      type: String,
-      required: true
-    }
-  },
-  mounted: function mounted() {
-    this.$nextTick(function () {
-      var _this = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/twitter/json/accounts').then(function (response) {
-        _this.accounts = response.data;
-      });
-    });
-  },
-  methods: {
-    changeScreenName: function changeScreenName(e) {
-      var _this2 = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/twitter/tweets/json/tweets', {
-        params: {
-          id: e.target.value
-        }
-      }).then(function (response) {
-        _this2.keyword = null;
-        _this2.time = null;
-        _this2.keyword = response.data[0].tweet;
-        var time = response.data[0].reserved_at;
-        var timeJs = new Date(time);
-        _this2.time = toDateIso(timeJs);
-
-        function toDateIso(timeJs) {
-          var shift = timeJs.getTime() + 9 * 60 * 60 * 1000;
-          var timeLocal = new Date(shift).toISOString().split('.')[0];
-          return timeLocal;
-        }
-      });
-    },
-    checkForm: function checkForm(e) {
-      if (this.account) {
-        return true;
-      }
-
-      this.errors = [];
-
-      if (!this.account) {
-        this.errors.push('アカウントを選択してください');
-      }
-
-      e.preventDefault();
-    },
-    datetimepicker: function datetimepicker(e) {
-      $('#target').datetimepicker();
-    }
-  },
-  data: function data() {
-    return {
-      accounts: [],
-      keyword: null,
-      time: null,
-      errors: [],
-      account: null,
-      reserved: null
-    };
-  }
-});
 
 /***/ }),
 
@@ -3740,10 +3209,10 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
-/***/ "./resources/js/components/Favorites.vue":
-/*!***********************************************!*\
-  !*** ./resources/js/components/Favorites.vue ***!
-  \***********************************************/
+/***/ "./resources/js/components/Coin.vue":
+/*!******************************************!*\
+  !*** ./resources/js/components/Coin.vue ***!
+  \******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -3751,8 +3220,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Favorites_vue_vue_type_template_id_0b01de08___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Favorites.vue?vue&type=template&id=0b01de08& */ "./resources/js/components/Favorites.vue?vue&type=template&id=0b01de08&");
-/* harmony import */ var _Favorites_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Favorites.vue?vue&type=script&lang=js& */ "./resources/js/components/Favorites.vue?vue&type=script&lang=js&");
+/* harmony import */ var _Coin_vue_vue_type_template_id_78ea74fc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Coin.vue?vue&type=template&id=78ea74fc& */ "./resources/js/components/Coin.vue?vue&type=template&id=78ea74fc&");
+/* harmony import */ var _Coin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Coin.vue?vue&type=script&lang=js& */ "./resources/js/components/Coin.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -3762,9 +3231,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Favorites_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Favorites_vue_vue_type_template_id_0b01de08___WEBPACK_IMPORTED_MODULE_0__.render,
-  _Favorites_vue_vue_type_template_id_0b01de08___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _Coin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Coin_vue_vue_type_template_id_78ea74fc___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Coin_vue_vue_type_template_id_78ea74fc___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
   null,
@@ -3774,46 +3243,7 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/Favorites.vue"
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/FollowKeywords.vue":
-/*!****************************************************!*\
-  !*** ./resources/js/components/FollowKeywords.vue ***!
-  \****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _FollowKeywords_vue_vue_type_template_id_02aa97b4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FollowKeywords.vue?vue&type=template&id=02aa97b4& */ "./resources/js/components/FollowKeywords.vue?vue&type=template&id=02aa97b4&");
-/* harmony import */ var _FollowKeywords_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FollowKeywords.vue?vue&type=script&lang=js& */ "./resources/js/components/FollowKeywords.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _FollowKeywords_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _FollowKeywords_vue_vue_type_template_id_02aa97b4___WEBPACK_IMPORTED_MODULE_0__.render,
-  _FollowKeywords_vue_vue_type_template_id_02aa97b4___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/FollowKeywords.vue"
+component.options.__file = "resources/js/components/Coin.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
@@ -3977,84 +3407,6 @@ component.options.__file = "resources/js/components/Sidebar.vue"
 
 /***/ }),
 
-/***/ "./resources/js/components/Targets.vue":
-/*!*********************************************!*\
-  !*** ./resources/js/components/Targets.vue ***!
-  \*********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _Targets_vue_vue_type_template_id_5c489967___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Targets.vue?vue&type=template&id=5c489967& */ "./resources/js/components/Targets.vue?vue&type=template&id=5c489967&");
-/* harmony import */ var _Targets_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Targets.vue?vue&type=script&lang=js& */ "./resources/js/components/Targets.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Targets_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Targets_vue_vue_type_template_id_5c489967___WEBPACK_IMPORTED_MODULE_0__.render,
-  _Targets_vue_vue_type_template_id_5c489967___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/Targets.vue"
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/Tweets.vue":
-/*!********************************************!*\
-  !*** ./resources/js/components/Tweets.vue ***!
-  \********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _Tweets_vue_vue_type_template_id_829d5566___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Tweets.vue?vue&type=template&id=829d5566& */ "./resources/js/components/Tweets.vue?vue&type=template&id=829d5566&");
-/* harmony import */ var _Tweets_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Tweets.vue?vue&type=script&lang=js& */ "./resources/js/components/Tweets.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Tweets_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Tweets_vue_vue_type_template_id_829d5566___WEBPACK_IMPORTED_MODULE_0__.render,
-  _Tweets_vue_vue_type_template_id_829d5566___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/Tweets.vue"
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
-
-/***/ }),
-
 /***/ "./resources/js/components/TwitterAccounts.vue":
 /*!*****************************************************!*\
   !*** ./resources/js/components/TwitterAccounts.vue ***!
@@ -4094,10 +3446,10 @@ component.options.__file = "resources/js/components/TwitterAccounts.vue"
 
 /***/ }),
 
-/***/ "./resources/js/components/Favorites.vue?vue&type=script&lang=js&":
-/*!************************************************************************!*\
-  !*** ./resources/js/components/Favorites.vue?vue&type=script&lang=js& ***!
-  \************************************************************************/
+/***/ "./resources/js/components/Coin.vue?vue&type=script&lang=js&":
+/*!*******************************************************************!*\
+  !*** ./resources/js/components/Coin.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -4105,24 +3457,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_laravel_mix_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Favorites_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/laravel-mix/node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Favorites.vue?vue&type=script&lang=js& */ "./node_modules/laravel-mix/node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Favorites.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_laravel_mix_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Favorites_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/FollowKeywords.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************!*\
-  !*** ./resources/js/components/FollowKeywords.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_laravel_mix_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FollowKeywords_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/laravel-mix/node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FollowKeywords.vue?vue&type=script&lang=js& */ "./node_modules/laravel-mix/node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FollowKeywords.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_laravel_mix_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FollowKeywords_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_laravel_mix_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Coin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/laravel-mix/node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Coin.vue?vue&type=script&lang=js& */ "./node_modules/laravel-mix/node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Coin.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_laravel_mix_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Coin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -4194,38 +3530,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/Targets.vue?vue&type=script&lang=js&":
-/*!**********************************************************************!*\
-  !*** ./resources/js/components/Targets.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_laravel_mix_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Targets_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/laravel-mix/node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Targets.vue?vue&type=script&lang=js& */ "./node_modules/laravel-mix/node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Targets.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_laravel_mix_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Targets_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/Tweets.vue?vue&type=script&lang=js&":
-/*!*********************************************************************!*\
-  !*** ./resources/js/components/Tweets.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_laravel_mix_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Tweets_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/laravel-mix/node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Tweets.vue?vue&type=script&lang=js& */ "./node_modules/laravel-mix/node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Tweets.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_laravel_mix_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Tweets_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
 /***/ "./resources/js/components/TwitterAccounts.vue?vue&type=script&lang=js&":
 /*!******************************************************************************!*\
   !*** ./resources/js/components/TwitterAccounts.vue?vue&type=script&lang=js& ***!
@@ -4242,36 +3546,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/Favorites.vue?vue&type=template&id=0b01de08&":
-/*!******************************************************************************!*\
-  !*** ./resources/js/components/Favorites.vue?vue&type=template&id=0b01de08& ***!
-  \******************************************************************************/
+/***/ "./resources/js/components/Coin.vue?vue&type=template&id=78ea74fc&":
+/*!*************************************************************************!*\
+  !*** ./resources/js/components/Coin.vue?vue&type=template&id=78ea74fc& ***!
+  \*************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Favorites_vue_vue_type_template_id_0b01de08___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Favorites_vue_vue_type_template_id_0b01de08___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Coin_vue_vue_type_template_id_78ea74fc___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Coin_vue_vue_type_template_id_78ea74fc___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Favorites_vue_vue_type_template_id_0b01de08___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Favorites.vue?vue&type=template&id=0b01de08& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Favorites.vue?vue&type=template&id=0b01de08&");
-
-
-/***/ }),
-
-/***/ "./resources/js/components/FollowKeywords.vue?vue&type=template&id=02aa97b4&":
-/*!***********************************************************************************!*\
-  !*** ./resources/js/components/FollowKeywords.vue?vue&type=template&id=02aa97b4& ***!
-  \***********************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FollowKeywords_vue_vue_type_template_id_02aa97b4___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FollowKeywords_vue_vue_type_template_id_02aa97b4___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
-/* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FollowKeywords_vue_vue_type_template_id_02aa97b4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FollowKeywords.vue?vue&type=template&id=02aa97b4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FollowKeywords.vue?vue&type=template&id=02aa97b4&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Coin_vue_vue_type_template_id_78ea74fc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Coin.vue?vue&type=template&id=78ea74fc& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Coin.vue?vue&type=template&id=78ea74fc&");
 
 
 /***/ }),
@@ -4344,40 +3631,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/Targets.vue?vue&type=template&id=5c489967&":
-/*!****************************************************************************!*\
-  !*** ./resources/js/components/Targets.vue?vue&type=template&id=5c489967& ***!
-  \****************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Targets_vue_vue_type_template_id_5c489967___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Targets_vue_vue_type_template_id_5c489967___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
-/* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Targets_vue_vue_type_template_id_5c489967___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Targets.vue?vue&type=template&id=5c489967& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Targets.vue?vue&type=template&id=5c489967&");
-
-
-/***/ }),
-
-/***/ "./resources/js/components/Tweets.vue?vue&type=template&id=829d5566&":
-/*!***************************************************************************!*\
-  !*** ./resources/js/components/Tweets.vue?vue&type=template&id=829d5566& ***!
-  \***************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Tweets_vue_vue_type_template_id_829d5566___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Tweets_vue_vue_type_template_id_829d5566___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
-/* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Tweets_vue_vue_type_template_id_829d5566___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Tweets.vue?vue&type=template&id=829d5566& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Tweets.vue?vue&type=template&id=829d5566&");
-
-
-/***/ }),
-
 /***/ "./resources/js/components/TwitterAccounts.vue?vue&type=template&id=3b316144&":
 /*!************************************************************************************!*\
   !*** ./resources/js/components/TwitterAccounts.vue?vue&type=template&id=3b316144& ***!
@@ -4395,10 +3648,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Favorites.vue?vue&type=template&id=0b01de08&":
-/*!*********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Favorites.vue?vue&type=template&id=0b01de08& ***!
-  \*********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Coin.vue?vue&type=template&id=78ea74fc&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Coin.vue?vue&type=template&id=78ea74fc& ***!
+  \****************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -4411,211 +3664,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("article", { staticClass: "p-main" }, [
-      _c("div", { staticClass: "p-form" }, [
-        _c("div", { staticClass: "c-title c-title__form" }, [
-          _vm._v("いいねキーワード登録")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "c-form" }, [
-          _c(
-            "form",
-            { attrs: { method: "POST" }, on: { submit: _vm.checkForm } },
-            [
-              _c("input", {
-                attrs: { type: "hidden", name: "_token" },
-                domProps: { value: _vm.csrf }
-              }),
-              _vm._v(" "),
-              _c("div", [
-                _c("div", [
-                  !_vm.account
-                    ? _c(
-                        "span",
-                        {
-                          staticClass: "c-invalid__feedback",
-                          attrs: { role: "alert" }
-                        },
-                        [_c("strong", [_vm._v("アカウントを選択してください")])]
-                      )
-                    : _vm._e()
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "c-select" }, [
-                  _c("label", { attrs: { for: "favorites" } }, [
-                    _vm._v(" Twitterアカウント ")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.account,
-                          expression: "account"
-                        }
-                      ],
-                      staticClass: "c-select__expand",
-                      attrs: { name: "account_id" },
-                      on: {
-                        change: [
-                          function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.account = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          },
-                          _vm.changeScreenName
-                        ]
-                      }
-                    },
-                    _vm._l(_vm.accounts, function(account, key) {
-                      return _c("option", { domProps: { value: account.id } }, [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(account.screen_name) +
-                            "\n                                "
-                        )
-                      ])
-                    }),
-                    0
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "c-select__expand--arrow" })
-                ]),
-                _vm._v(" "),
-                _c("div", [
-                  _c("input", {
-                    staticClass: "c-form__input form-control",
-                    attrs: {
-                      id: "favorites",
-                      type: "text",
-                      name: "favorite_keyword",
-                      required: "",
-                      autofocus: "",
-                      placeholder: "入力してください"
-                    },
-                    domProps: { value: _vm.keyword }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.check,
-                        expression: "check"
-                      }
-                    ],
-                    attrs: { type: "checkbox" },
-                    domProps: {
-                      checked: Array.isArray(_vm.check)
-                        ? _vm._i(_vm.check, null) > -1
-                        : _vm.check
-                    },
-                    on: {
-                      change: function($event) {
-                        var $$a = _vm.check,
-                          $$el = $event.target,
-                          $$c = $$el.checked ? true : false
-                        if (Array.isArray($$a)) {
-                          var $$v = null,
-                            $$i = _vm._i($$a, $$v)
-                          if ($$el.checked) {
-                            $$i < 0 && (_vm.check = $$a.concat([$$v]))
-                          } else {
-                            $$i > -1 &&
-                              (_vm.check = $$a
-                                .slice(0, $$i)
-                                .concat($$a.slice($$i + 1)))
-                          }
-                        } else {
-                          _vm.check = $$c
-                        }
-                      }
-                    }
-                  }),
-                  _vm._v(
-                    "AND,OR,NOT条件を追加する\n                            "
-                  ),
-                  _vm.check
-                    ? _c("select", { attrs: { name: "logic" } }, [
-                        _c("option", { attrs: { value: "AND" } }, [
-                          _vm._v("AND")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "OR" } }, [
-                          _vm._v("OR")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "NOT" } }, [
-                          _vm._v("NOT")
-                        ])
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.check
-                    ? _c("input", {
-                        staticClass: "c-form__input form-control",
-                        attrs: {
-                          id: "favorites2",
-                          type: "text",
-                          name: "favorite_keyword2",
-                          autofocus: ""
-                        },
-                        domProps: { value: _vm.favorite2 }
-                      })
-                    : _vm._e()
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "c-button__wrap" }, [
-                _vm.keyword != null
-                  ? _c("div", { staticClass: "c-button c-button__form" }, [
-                      _vm._m(0)
-                    ])
-                  : _c("div", { staticClass: "c-button c-button__form" }, [
-                      _vm._m(1)
-                    ]),
-                _vm._v(" "),
-                _vm.keyword != null
-                  ? _c("div", { staticClass: "c-button c-button__form" }, [
-                      _vm._m(2)
-                    ])
-                  : _vm._e()
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _vm.errors.length
-            ? _c("div", [
-                _c("h1", [_vm._v("以下のエラーを修正してください。")]),
-                _vm._v(" "),
-                _c(
-                  "ul",
-                  _vm._l(_vm.errors, function(error) {
-                    return _c("li", [_vm._v(_vm._s(error))])
-                  }),
-                  0
-                )
-              ])
-            : _vm._e()
-        ])
-      ])
-    ])
-  ])
+  return _vm._m(0)
 }
 var staticRenderFns = [
   function() {
@@ -4623,348 +3672,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", [
-      _c(
-        "button",
-        {
-          attrs: {
-            type: "submit",
-            formaction: "/twitter/keywords/favorites/edit"
-          }
-        },
-        [
-          _vm._v(
-            "\n                                    更新する\n                                "
-          )
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "button",
-        {
-          attrs: {
-            type: "submit",
-            formaction: "/twitter/keywords/favorites/new"
-          }
-        },
-        [
-          _vm._v(
-            "\n                                    登録する\n                                "
-          )
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "button",
-        {
-          attrs: {
-            type: "submit",
-            formaction: "/twitter/keywords/favorites/delete"
-          }
-        },
-        [
-          _vm._v(
-            "\n                                    削除する\n                                "
-          )
-        ]
-      )
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FollowKeywords.vue?vue&type=template&id=02aa97b4&":
-/*!**************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FollowKeywords.vue?vue&type=template&id=02aa97b4& ***!
-  \**************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render),
-/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
-/* harmony export */ });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("article", { staticClass: "p-main" }, [
-      _c("div", { staticClass: "p-form" }, [
-        _c("div", { staticClass: "c-title c-title__form" }, [
-          _vm._v("フォローキーワード登録")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "c-form" }, [
-          _c(
-            "form",
-            { attrs: { method: "POST" }, on: { submit: _vm.checkForm } },
-            [
-              _c("input", {
-                attrs: { type: "hidden", name: "_token" },
-                domProps: { value: _vm.csrf }
-              }),
-              _vm._v(" "),
-              _c("div", [
-                _c("div", [
-                  !_vm.account
-                    ? _c(
-                        "span",
-                        {
-                          staticClass: "c-invalid__feedback",
-                          attrs: { role: "alert" }
-                        },
-                        [_c("strong", [_vm._v("アカウントを選択してください")])]
-                      )
-                    : _vm._e()
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "c-select" }, [
-                  _c("label", { attrs: { for: "keyword" } }, [
-                    _vm._v(" Twitterアカウント ")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.account,
-                          expression: "account"
-                        }
-                      ],
-                      staticClass: "c-select__expand",
-                      attrs: { name: "account_id" },
-                      on: {
-                        change: [
-                          function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.account = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          },
-                          _vm.changeScreenName
-                        ]
-                      }
-                    },
-                    _vm._l(_vm.accounts, function(account, key) {
-                      return _c("option", { domProps: { value: account.id } }, [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(account.screen_name) +
-                            "\n                                "
-                        )
-                      ])
-                    }),
-                    0
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "c-select__expand--arrow" })
-                ]),
-                _vm._v(" "),
-                _c("div", [
-                  _c("input", {
-                    staticClass: "c-form__input form-control",
-                    attrs: {
-                      id: "keyword",
-                      type: "text",
-                      name: "keyword",
-                      required: "",
-                      autofocus: "",
-                      placeholder: "入力してください"
-                    },
-                    domProps: { value: _vm.keyword }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.check,
-                        expression: "check"
-                      }
-                    ],
-                    attrs: { type: "checkbox" },
-                    domProps: {
-                      checked: Array.isArray(_vm.check)
-                        ? _vm._i(_vm.check, null) > -1
-                        : _vm.check
-                    },
-                    on: {
-                      change: function($event) {
-                        var $$a = _vm.check,
-                          $$el = $event.target,
-                          $$c = $$el.checked ? true : false
-                        if (Array.isArray($$a)) {
-                          var $$v = null,
-                            $$i = _vm._i($$a, $$v)
-                          if ($$el.checked) {
-                            $$i < 0 && (_vm.check = $$a.concat([$$v]))
-                          } else {
-                            $$i > -1 &&
-                              (_vm.check = $$a
-                                .slice(0, $$i)
-                                .concat($$a.slice($$i + 1)))
-                          }
-                        } else {
-                          _vm.check = $$c
-                        }
-                      }
-                    }
-                  }),
-                  _vm._v(
-                    "AND,OR,NOT条件を追加する\n                            "
-                  ),
-                  _vm.check
-                    ? _c("select", { attrs: { name: "logic" } }, [
-                        _c("option", { attrs: { value: "AND" } }, [
-                          _vm._v("AND")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "OR" } }, [
-                          _vm._v("OR")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "NOT" } }, [
-                          _vm._v("NOT")
-                        ])
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.check
-                    ? _c("input", {
-                        staticClass: "c-form__input form-control ",
-                        attrs: {
-                          type: "text",
-                          name: "keyword2",
-                          autofocus: ""
-                        },
-                        domProps: { value: _vm.keyword2 }
-                      })
-                    : _vm._e()
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "c-button__wrap" }, [
-                _vm.keyword != null
-                  ? _c("div", { staticClass: "c-button c-button__form" }, [
-                      _vm._m(0)
-                    ])
-                  : _c("div", { staticClass: "c-button c-button__form" }, [
-                      _vm._m(1)
-                    ]),
-                _vm._v(" "),
-                _vm.keyword != null
-                  ? _c("div", { staticClass: "c-button c-button__form" }, [
-                      _vm._m(2)
-                    ])
-                  : _vm._e()
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _vm.errors.length
-            ? _c("div", [
-                _c("h1", [_vm._v("以下のエラーを修正してください。")]),
-                _vm._v(" "),
-                _c(
-                  "ul",
-                  _vm._l(_vm.errors, function(error) {
-                    return _c("li", [_vm._v(_vm._s(error))])
-                  }),
-                  0
-                )
-              ])
-            : _vm._e()
-        ])
-      ])
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "button",
-        {
-          attrs: { type: "submit", formaction: "/twitter/keywords/follow/edit" }
-        },
-        [
-          _vm._v(
-            "\n                                    更新する\n                                "
-          )
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "button",
-        {
-          attrs: { type: "submit", formaction: "/twitter/keywords/follow/new" }
-        },
-        [
-          _vm._v(
-            "\n                                    登録する\n                                "
-          )
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "button",
-        {
-          attrs: {
-            type: "submit",
-            formaction: "/twitter/keywords/follow/delete"
-          }
-        },
-        [
-          _vm._v(
-            "\n                                    削除する\n                                "
-          )
-        ]
-      )
+      _c("h1", [_vm._v("こんにちはーーーーーーーーーーーーーーーーーー")])
     ])
   }
 ]
@@ -5286,7 +3994,40 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("section", { staticClass: "l-top__main" }, [
+    _c(
+      "div",
+      { staticClass: "p-news__container" },
+      _vm._l(_vm.list_gn, function(list) {
+        return _c("div", { staticClass: "p-news__card" }, [
+          _c("h4", [
+            _c("a", { attrs: { href: list.url, target: "_blank" } }, [
+              _vm._v(_vm._s(list.title))
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-news__card__right" }, [
+            _c(
+              "a",
+              {
+                staticClass: "p-news__jamp",
+                attrs: { href: list.url, target: "_blank" }
+              },
+              [_vm._v("続きを読む")]
+            ),
+            _c("br"),
+            _vm._v(" "),
+            _c("span", [
+              _vm._v("投稿日時："),
+              _c("br"),
+              _vm._v("\n  " + _vm._s(list.pubDate) + "\n  ")
+            ])
+          ])
+        ])
+      }),
+      0
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -5472,12 +4213,6 @@ var staticRenderFns = [
               _vm._v(" "),
               _c(
                 "a",
-                { staticClass: "c-menu__link", attrs: { href: "/profile" } },
-                [_vm._v("プロフィール")]
-              ),
-              _vm._v(" "),
-              _c(
-                "a",
                 {
                   staticClass: "c-menu__link",
                   attrs: { href: "/twitter/accounts" }
@@ -5488,475 +4223,6 @@ var staticRenderFns = [
           ])
         ])
       ])
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Targets.vue?vue&type=template&id=5c489967&":
-/*!*******************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Targets.vue?vue&type=template&id=5c489967& ***!
-  \*******************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render),
-/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
-/* harmony export */ });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("article", { staticClass: "p-main" }, [
-      _c("div", { staticClass: "p-form" }, [
-        _c("div", { staticClass: "c-title c-title__form" }, [
-          _vm._v("ターゲットアカウント登録")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "c-form" }, [
-          _c(
-            "form",
-            { attrs: { method: "POST" }, on: { submit: _vm.checkForm } },
-            [
-              _c("input", {
-                attrs: { type: "hidden", name: "_token" },
-                domProps: { value: _vm.csrf }
-              }),
-              _vm._v(" "),
-              _c("div", [
-                _c("div", [
-                  !_vm.account
-                    ? _c(
-                        "span",
-                        {
-                          staticClass: "c-invalid__feedback",
-                          attrs: { role: "alert" }
-                        },
-                        [_c("strong", [_vm._v("アカウントを選択してください")])]
-                      )
-                    : _vm._e()
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "c-select" }, [
-                  _c("label", [_vm._v(" Twitterアカウント ")]),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.account,
-                          expression: "account"
-                        }
-                      ],
-                      staticClass: "c-select__expand",
-                      attrs: { name: "account_id" },
-                      on: {
-                        change: [
-                          function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.account = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          },
-                          _vm.changeScreenName
-                        ]
-                      }
-                    },
-                    _vm._l(_vm.accounts, function(account, key) {
-                      return _c("option", { domProps: { value: account.id } }, [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(account.screen_name) +
-                            "\n                                "
-                        )
-                      ])
-                    }),
-                    0
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "c-select__expand--arrow" })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "c-select" }, [
-                  _c("label", [_vm._v(" フォロワーターゲット ")]),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.keyword,
-                          expression: "keyword"
-                        }
-                      ],
-                      staticClass: "c-select__expand",
-                      attrs: { name: "target_id" },
-                      on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.keyword = $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        }
-                      }
-                    },
-                    [
-                      _vm._l(_vm.keywords, function(keyword, key) {
-                        return _c(
-                          "option",
-                          { domProps: { value: keyword.id } },
-                          [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(keyword.target_name) +
-                                "\n                                "
-                            )
-                          ]
-                        )
-                      }),
-                      _vm._v(" "),
-                      _c("option", { domProps: { value: null } }, [
-                        _vm._v("アカウントを登録する")
-                      ])
-                    ],
-                    2
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "c-select__expand--arrow" })
-                ]),
-                _vm._v(" "),
-                _c("div", [
-                  _vm.keyword === null
-                    ? _c("input", {
-                        staticClass: "c-form__input form-control",
-                        attrs: {
-                          id: "targets",
-                          type: "text",
-                          name: "target_name",
-                          required: "",
-                          autofocus: "",
-                          placeholder: "@以下のアカウント名を記入してください"
-                        },
-                        domProps: { value: _vm.keyword }
-                      })
-                    : _vm._e()
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "c-button__wrap" }, [
-                _vm.keyword === null
-                  ? _c("div", { staticClass: "c-button c-button__form" }, [
-                      _vm._m(0)
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.keyword !== null
-                  ? _c("div", { staticClass: "c-button c-button__form" }, [
-                      _vm._m(1)
-                    ])
-                  : _vm._e()
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _vm.errors.length
-            ? _c("div", [
-                _c("h1", [_vm._v("以下のエラーを修正してください。")]),
-                _vm._v(" "),
-                _c(
-                  "ul",
-                  _vm._l(_vm.errors, function(error) {
-                    return _c("li", [_vm._v(_vm._s(error))])
-                  }),
-                  0
-                )
-              ])
-            : _vm._e()
-        ])
-      ])
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "button",
-        { attrs: { type: "submit", formaction: "/twitter/targets/new" } },
-        [
-          _vm._v(
-            "\n                                    登録する\n                                "
-          )
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "button",
-        { attrs: { type: "submit", formaction: "/twitter/targets/delete" } },
-        [
-          _vm._v(
-            "\n                                    削除する\n                                "
-          )
-        ]
-      )
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Tweets.vue?vue&type=template&id=829d5566&":
-/*!******************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Tweets.vue?vue&type=template&id=829d5566& ***!
-  \******************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render),
-/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
-/* harmony export */ });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("article", { staticClass: "p-main" }, [
-      _c("div", { staticClass: "p-form" }, [
-        _c("div", { staticClass: "c-title c-title__form" }, [
-          _vm._v("予約ツイート登録")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "c-form" }, [
-          _c(
-            "form",
-            { attrs: { method: "POST" }, on: { submit: _vm.checkForm } },
-            [
-              _c("input", {
-                attrs: { type: "hidden", name: "_token" },
-                domProps: { value: _vm.csrf }
-              }),
-              _vm._v(" "),
-              _c("div", [
-                _c("div", [
-                  !_vm.account
-                    ? _c(
-                        "span",
-                        {
-                          staticClass: "c-invalid__feedback",
-                          attrs: { role: "alert" }
-                        },
-                        [_c("strong", [_vm._v("アカウントを選択してください")])]
-                      )
-                    : _vm._e()
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "c-select" }, [
-                  _c("label", { attrs: { for: "favorites" } }, [
-                    _vm._v(" Twitterアカウント ")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.account,
-                          expression: "account"
-                        }
-                      ],
-                      staticClass: "c-select__expand",
-                      attrs: { name: "account_id" },
-                      on: {
-                        change: [
-                          function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.account = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          },
-                          _vm.changeScreenName
-                        ]
-                      }
-                    },
-                    _vm._l(_vm.accounts, function(account, key) {
-                      return _c("option", { domProps: { value: account.id } }, [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(account.screen_name) +
-                            "\n                                "
-                        )
-                      ])
-                    }),
-                    0
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "c-select__expand--arrow" })
-                ]),
-                _vm._v(" "),
-                _c("div", [
-                  _c("input", {
-                    staticClass: "c-form__input form-control",
-                    attrs: {
-                      id: "favorites",
-                      type: "text",
-                      name: "tweet",
-                      required: "",
-                      autofocus: ""
-                    },
-                    domProps: { value: _vm.keyword }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", [
-                  _c("input", {
-                    staticClass: "c-form__input form-control",
-                    attrs: {
-                      id: "",
-                      type: "datetime-local",
-                      name: "reserved_at",
-                      autocomplete: "reserved_at",
-                      autofocus: "",
-                      required: ""
-                    },
-                    domProps: { value: _vm.time }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "c-button__wrap" }, [
-                _vm.keyword != null
-                  ? _c("div", { staticClass: "c-button c-button__form" }, [
-                      _vm._m(0)
-                    ])
-                  : _c("div", { staticClass: "c-button c-button__form" }, [
-                      _vm._m(1)
-                    ]),
-                _vm._v(" "),
-                _vm.keyword != null
-                  ? _c("div", { staticClass: "c-button c-button__form" }, [
-                      _vm._m(2)
-                    ])
-                  : _vm._e()
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _vm.errors.length
-            ? _c("div", [
-                _c("h1", [_vm._v("以下のエラーを修正してください。")]),
-                _vm._v(" "),
-                _c(
-                  "ul",
-                  _vm._l(_vm.errors, function(error) {
-                    return _c("li", [_vm._v(_vm._s(error))])
-                  }),
-                  0
-                )
-              ])
-            : _vm._e()
-        ])
-      ])
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "button",
-        { attrs: { type: "submit", formaction: "/twitter/tweets/edit" } },
-        [
-          _vm._v(
-            "\n                                    更新する\n                                "
-          )
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "button",
-        { attrs: { type: "submit", formaction: "/twitter/tweets/new" } },
-        [
-          _vm._v(
-            "\n                                    登録する\n                                "
-          )
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "button",
-        { attrs: { type: "submit", formaction: "/twitter/tweets/delete" } },
-        [
-          _vm._v(
-            "\n                                    削除する\n                                "
-          )
-        ]
-      )
     ])
   }
 ]
@@ -6060,7 +4326,7 @@ var render = function() {
                         )
                       }),
                       _vm._v(" "),
-                      _vm.accounts.length < 10
+                      _vm.accounts.length < 1
                         ? _c("option", { domProps: { value: "register" } }, [
                             _vm._v("アカウントを登録する")
                           ])
@@ -18406,14 +16672,11 @@ __webpack_require__.r(__webpack_exports__);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('sidebar', __webpack_require__(/*! ./components/Sidebar.vue */ "./resources/js/components/Sidebar.vue")["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('follow-keywords', __webpack_require__(/*! ./components/FollowKeywords.vue */ "./resources/js/components/FollowKeywords.vue")["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('favorites', __webpack_require__(/*! ./components/Favorites.vue */ "./resources/js/components/Favorites.vue")["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('tweets', __webpack_require__(/*! ./components/Tweets.vue */ "./resources/js/components/Tweets.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('profile', __webpack_require__(/*! ./components/Profile.vue */ "./resources/js/components/Profile.vue")["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('targets', __webpack_require__(/*! ./components/Targets.vue */ "./resources/js/components/Targets.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('accounts', __webpack_require__(/*! ./components/TwitterAccounts.vue */ "./resources/js/components/TwitterAccounts.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('home', __webpack_require__(/*! ./components/Home.vue */ "./resources/js/components/Home.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('news', __webpack_require__(/*! ./components/News.vue */ "./resources/js/components/News.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('coin', __webpack_require__(/*! ./components/Coin.vue */ "./resources/js/components/Coin.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -18438,15 +16701,15 @@ var home = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
 var profile = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
   el: '#js-profile'
 });
-var targets = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
-  el: '#js-targets'
-});
 var accounts = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
   el: '#js-accounts'
 });
 var news = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
   el: '#js-news'
-}); //a
+});
+var coin = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
+  el: '#js-coin'
+}); //aaaaa
 })();
 
 /******/ })()
