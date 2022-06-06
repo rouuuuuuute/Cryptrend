@@ -7,6 +7,7 @@
 @import "layout/_footer.scss";
 @import "layout/_header.scss";
 @import "layout/_main.scss";
+@import "layout/_side.scss";
 
 //object
 //project
@@ -21,6 +22,8 @@
 @import "object/project/_service.scss";
 @import "object/project/_autofollow.scss";
 @import "object/project/_twitter.scss";
+@import "object/project/_news.scss";
+@import "object/project/_sidebtn.scss";
 
 //component
 @import "object/component/_alert.scss";

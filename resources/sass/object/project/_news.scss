@@ -1,0 +1,51 @@
+.p-news{
+    &__container{
+      width: 100%;
+      margin: 10px auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-content: center;
+      justify-content: center;
+
+    }
+    &__card{
+      width: 45%;
+      min-height: 200px;
+      box-sizing: border-box;
+      text-align: center;
+      display: flex;
+      margin: 5px;
+      background-color: $white;
+        border-radius: 10px;
+      h4{
+        height: 100%;
+        padding: 15px;
+          font-size: $font-size_l;
+        width: 80%;
+        text-align: left;
+        box-sizing: border-box;
+      }
+      span{
+        font-size: $font-size_s;
+        width: 30%;
+      }
+      }
+      &__jamp{
+        padding: 5px;
+        margin: 15px 0;
+        color: $black;
+        background: $white;
+        border: solid 1px $black;
+        line-height: 30px;
+        display: inline-block;
+        border-radius: 10px;
+        &:hover{
+          transform: translate3d(0, 5px, 0);
+          color: $white;
+          box-shadow: none;
+          background: $black;
+        }
+
+
+      }
+}

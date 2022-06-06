@@ -80,4 +80,3 @@ Route::get('/twitter/follower/json/ratelimit', 'RequestDatabaseController@rateli
 
 //ajaxのデータを表示させるvue
 Route::get('ajax/coin', 'AjaxController@coin')->name('ajax.coin');
-Route::get('ajax/users', 'AjaxController@users')->name('ajax.users');

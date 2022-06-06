@@ -1,0 +1,138 @@
+.p-sidebtn{
+  position: relative;
+  padding-left: 20px;
+  margin-right: 20px;
+  display: none;
+  &__container{
+    width: 100%;
+    margin: 10px auto;
+    //@media screen and (max-width: $res-max-width){
+    //  width: 95%;
+    //  display: flex;
+    //  justify-content: space-between;
+    //}
+    label{
+      margin: 5px;
+      padding: 5px;
+      box-shadow: 2px 2px;
+      display: block;
+      height: 25px;
+      line-height: 25px;
+      text-align: center;
+      &:hover{
+        transform: translate3d(0, 1px, 0);
+        box-shadow: 1px 1px;
+      }
+      //@media screen and (max-width: $res-max-width){
+      //  width: 200px;
+      //  text-align: center;
+      //}
+    }
+  }
+
+  &__coin{
+    height: 30px;
+    line-height: 30px;
+    width: 100%;
+    background-color: #00000014;
+    //@media screen and (max-width: $res-max-width){
+    //  font-size: 10px;
+    //  width: 50%;
+    //}
+    &__input{
+      display: none;
+    }
+    &__checkparts{
+      padding-left: 20px;
+      position:relative;
+      margin-right: 20px;
+    }
+
+    label{
+      margin: 1px auto;
+      display: block;
+        //@media screen and (max-width: $res-max-width){
+        //  width: 100%;
+        //  display: inline-block;
+        //  margin: auto;
+        //  padding: auto;
+        //  box-shadow: none;
+        //}
+    }
+    &:hover{
+      transform: translate3d(0, 1px, 0);
+      color: #007db9;
+      box-shadow: none;
+      background: #fff;
+    }
+
+
+    &__container{
+      height: 70%;
+      text-align: left;
+      animation-duration: 0.3s;
+      animation-name:toup;
+      //@media screen and (max-width: $res-max-width){
+      //  display: flex;
+      //  justify-content: flex-start;
+      //  flex-wrap: wrap;
+      //  height: auto;
+      //  background-color: #7fffdf54;
+      //}
+    }
+  }
+  &__highlight{
+    height: 30px;
+    background-color: #ff570061;
+    width: 100%;
+    //@media screen and (max-width: $res-max-width){
+    //  width: 100px;
+    //}
+  }
+  &__coinshow{
+    width: 95%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    button{
+      height: 25px;
+      box-shadow: 2px 2px;
+
+      &:hover{
+        box-shadow: 1px 1px;
+        color: #007db9;
+      }
+    }
+
+  }
+  &__toshowcoin{
+    width: 100%;
+    box-shadow: 2px 2px;
+    background-color: #ffff00ba;
+    height: 25px;
+    //@media screen and (max-width: $res-max-width){
+    //  width: 40%;
+    //}
+  }
+}
+
+
+
+.btn_active{
+  background-color: #00f7ffb0;
+}
+
+.p-sidebtn__coin__input:checked + .p-sidebtn__coin__checkparts{
+  color: #d01137;
+}
+.p-sidebtn__coin__input:checked + .p-sidebtn__coin__checkparts::after{
+  content: "";
+  display: block;
+  position: absolute;
+  top: -5px;
+  left: 5px;
+  width: 7px;
+  height: 14px;
+  transform: rotate(40deg);
+  border-bottom: 3px solid #d01137;
+  border-right: 3px solid #d01137;
+}

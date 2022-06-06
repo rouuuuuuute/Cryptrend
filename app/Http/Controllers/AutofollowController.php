@@ -32,22 +32,6 @@ class AutofollowController extends Controller
         $this->middleware('auth');
     }
 
-//    public static function test()
-//    {
-//
-//        $account_id = TwitterAccount::where('id')->value('twitter_id');
-//        $api_key = 'n2BFchS09CY5Myr9ZxTvJX887';
-//        $api_secret = 'ShH0CWC93JF9uYjlyAlOt2vSgtUHG7j4NogjBTvxaYEVo6YGeP';
-//        $access_token = TwitterAccount::where('id', $account_id)->value('oauth_token');
-//        $access_token_secret = TwitterAccount::where('id', $account_id)->value('oauth_token_secret');
-//        $q = '仮想通貨';
-//        $count = 20;
-//        $page = mt_rand(1, 30);
-//
-//        $search = new TwitterUserSearchService($api_key, $api_secret, $access_token, $access_token_secret, $q, $count, $page);
-//        $results = $search->search();
-//        Log::debug(print_r($results, true));
-//    }
 
     //ーーーーーーーーーーオートフォロートップページーーーーーーーーーー
     //Sessionに'today_follow_end';が入っていると本日の本サービスでのフォローはできないようにします。(1日に395人以上を超えたら制限。)

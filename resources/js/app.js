@@ -20,7 +20,7 @@ import Vue from 'vue';
 Vue.component('sidebar', require('./components/Sidebar.vue').default);
 Vue.component('profile', require('./components/Profile.vue').default);
 Vue.component('accounts', require('./components/TwitterAccounts.vue').default);
-Vue.component('home', require('./components/Home.vue').default);
+// Vue.component('home', require('./components/Home.vue').default);
 
 Vue.component('news', require('./components/News.vue').default);
 Vue.component('coin', require('./components/Coin.vue').default);
@@ -40,9 +40,9 @@ const sidebar = new Vue({
 
 
 
-const home = new Vue({
-    el: '#js-home'
-});
+// const home = new Vue({
+//     el: '#js-home'
+// });
 
 const profile = new Vue({
     el: '#js-profile'
@@ -68,4 +68,4 @@ const nologin = new Vue({
     el: '#js-nologin'
 });
 
-//aaaazaaa
+//aaaazaaaaaaaa
