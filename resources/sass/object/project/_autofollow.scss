@@ -1,0 +1,43 @@
+.p-autofollow {
+    width: 500px;
+    background-color: $color_form;
+    padding: 20px;
+    text-align: center;
+    @include mq() {
+        width: 100%;
+    }
+
+    &__container {
+        p {
+            text-align: center;
+            width: 80%;
+            margin: 25px auto;
+            line-height: 30px;
+        }
+    }
+
+    &__btncontainer {
+        padding: 15px;
+        border: solid 5px #6091d3;
+        background-color: #00000014;
+        width: 80%;
+        margin: auto;
+    }
+
+    &__description {
+        width: 100%;
+        margin: auto;
+        animation-duration: 0.5s;
+        -webkit-animation-name: toup;
+        animation-name: toup;
+    }
+
+    &__ongoing {
+        text-align: center;
+        color: $blue;
+        font-weight: bold;
+        font-size: 16px;
+        animation: 2s linear infinite blink_effect;
+    }
+
+}

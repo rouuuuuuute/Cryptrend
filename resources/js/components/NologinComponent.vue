@@ -3,8 +3,8 @@
 
         <!--ツイッター認証していない場合はDBからランダムに取得したsampleusersを並べる。-->
         <div class="p-twiiter__container">
-            <div v-for="(sampleuser,index) in sampleusers" v-bind:key="index" class="c-card">
-                <div class="c-card__header">
+            <div v-for="(sampleuser,index) in sampleusers" v-bind:key="index" class="c-card__twitter">
+                <div class="c-card__twitter--header">
                     <img :src="sampleuser.profile_image" alt="">
                     <h4><a :href="'https://twitter.com/' + sampleuser.screen_name" target="_blank">{{
                             sampleuser.name
