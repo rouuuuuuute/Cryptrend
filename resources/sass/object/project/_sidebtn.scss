@@ -16,9 +16,10 @@
       padding: 5px;
       box-shadow: 2px 2px;
       display: block;
-      height: 25px;
+      height: 30px;
       line-height: 25px;
       text-align: center;
+        border-radius:5px;
       &:hover{
         transform: translate3d(0, 1px, 0);
         box-shadow: 1px 1px;
@@ -34,7 +35,9 @@
     height: 30px;
     line-height: 30px;
     width: 100%;
-    background-color: #00000014;
+    background-color: $white;
+      border-radius:5px;
+      margin : 3px;
     //@media screen and (max-width: $res-max-width){
     //  font-size: 10px;
     //  width: 50%;
@@ -61,9 +64,9 @@
     }
     &:hover{
       transform: translate3d(0, 1px, 0);
-      color: #007db9;
+      color: $white;
       box-shadow: none;
-      background: #fff;
+      background: $black;
     }
 
 
@@ -83,8 +86,10 @@
   }
   &__highlight{
     height: 30px;
-    background-color: #ff570061;
+      color:$black;
+    background-color: $white;
     width: 100%;
+      border-radius:5px;
     //@media screen and (max-width: $res-max-width){
     //  width: 100px;
     //}
@@ -96,19 +101,16 @@
     button{
       height: 25px;
       box-shadow: 2px 2px;
-
-      &:hover{
-        box-shadow: 1px 1px;
-        color: #007db9;
-      }
     }
 
   }
   &__toshowcoin{
     width: 100%;
     box-shadow: 2px 2px;
-    background-color: #ffff00ba;
+
     height: 25px;
+      border-radius:5px;
+      margin: 5px;
     //@media screen and (max-width: $res-max-width){
     //  width: 40%;
     //}
@@ -118,11 +120,12 @@
 
 
 .btn_active{
-  background-color: #00f7ffb0;
+  background-color: $black;
+    color : $white;
 }
 
 .p-sidebtn__coin__input:checked + .p-sidebtn__coin__checkparts{
-  color: #d01137;
+  color: $red;
 }
 .p-sidebtn__coin__input:checked + .p-sidebtn__coin__checkparts::after{
   content: "";

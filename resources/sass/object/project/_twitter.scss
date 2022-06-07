@@ -6,11 +6,20 @@
     flex-wrap: wrap;
     justify-content: center;
     background-color: $color-main;
+      @include mq(){
+          width:100%;
+          display: flex;
+          flex-direction: column;
+      }
 
     h2{
       text-align: center;
       width: 100%;
       margin: 24px;
     }
+      p{
+          width:100%;
+
+      }
   }
 }

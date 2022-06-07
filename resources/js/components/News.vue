@@ -1,6 +1,6 @@
 <template>
     <!--各ニュースをfor文で出力する-->
-    <section class="l-top__main">
+    <section class="p-main__service">
         <div class="p-news__container">
             <div v-for="list in list_gn" class="p-news__card">
                 <h4><a :href="list.url" target="_blank">{{ list.title }}</a></h4>

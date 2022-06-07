@@ -1,7 +1,7 @@
 <template>
     <section>
         <div>
-            <article class="p-main">
+            <article class="p-main__service">
                 <div class="p-autofollow__container">
                     <div class="p-autofollow__description">
                         <p>まとめてフォローをONにすると15分に一度、自動フォローを実施します。</p>
@@ -27,7 +27,7 @@
                             </h4>
                         </div>
                         <button v-on:click="follow(user,index)">@{{ user.screen_name }} をフォローする</button>
-                        <p>{{ user.description }}</p>
+                        <p>{{ user.description }}</p><br>
                         <p>《最新ツイート》<br>
                             {{ user.status.text }}</p><br>
                         フォロー数：{{ user.friends_count }} フォロワー数：{{ user.followers_count }}<br>
@@ -95,7 +95,7 @@ export default {
         //自動フォローを切り替えた際にボタンの表示、「自動フォロー実施中です」の表示非表示を切り替えるメソッド
         checkOngoing: function () {
             //console.log("checkOngoingを呼び出します");
-            if(this.autofollow_check === 1 || true){
+            if (this.autofollow_check === 1 || true) {
                 this.ongoing = true;
             } else {
                 this.ongoing = false;

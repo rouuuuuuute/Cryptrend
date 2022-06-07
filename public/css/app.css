@@ -486,18 +486,13 @@ img {
   #l-main {
     padding-top: 0;
     width: 100%;
+    display: block;
   }
 }
 @media screen and (max-width:414px) {
   #l-main__article {
     width: 100%;
   }
-}
-
-.l-side {
-  width: 20%;
-  float: left;
-  margin: 5% 0% 5% 5%;
 }
 
 .p-top {
@@ -560,6 +555,18 @@ img {
 @media screen and (max-width:414px) {
   .p-main {
     width: 100%;
+  }
+}
+.p-main__service {
+  width: 1080px;
+}
+@media screen and (max-width:414px) {
+  .p-main__service {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
   }
 }
 
@@ -647,10 +654,20 @@ img {
   justify-content: center;
   background-color: #EEF1F2;
 }
+@media screen and (max-width:414px) {
+  .p-twiiter__container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}
 .p-twiiter__container h2 {
   text-align: center;
   width: 100%;
   margin: 24px;
+}
+.p-twiiter__container p {
+  width: 100%;
 }
 
 .p-news__container {
@@ -660,6 +677,14 @@ img {
   flex-wrap: wrap;
   align-content: center;
   justify-content: center;
+}
+@media screen and (max-width:414px) {
+  .p-news__container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+  }
 }
 .p-news__card {
   width: 45%;
@@ -671,6 +696,14 @@ img {
   background-color: #FFFFFF;
   border-radius: 10px;
 }
+@media screen and (max-width:414px) {
+  .p-news__card {
+    width: 100%;
+    margin: 5px auto;
+    display: flex;
+    flex-direction: column;
+  }
+}
 .p-news__card h4 {
   height: 100%;
   padding: 15px;
@@ -678,6 +711,12 @@ img {
   width: 80%;
   text-align: left;
   box-sizing: border-box;
+}
+@media screen and (max-width:414px) {
+  .p-news__card h4 {
+    width: 100%;
+    margin: auto;
+  }
 }
 .p-news__card span {
   font-size: 10px;
@@ -692,6 +731,12 @@ img {
   line-height: 30px;
   display: inline-block;
   border-radius: 10px;
+}
+@media screen and (max-width:414px) {
+  .p-news__jamp {
+    width: 40%;
+    margin: auto;
+  }
 }
 .p-news__jamp:hover {
   transform: translate3d(0, 5px, 0);
@@ -715,9 +760,10 @@ img {
   padding: 5px;
   box-shadow: 2px 2px;
   display: block;
-  height: 25px;
+  height: 30px;
   line-height: 25px;
   text-align: center;
+  border-radius: 5px;
 }
 .p-sidebtn__container label:hover {
   transform: translate3d(0, 1px, 0);
@@ -727,7 +773,9 @@ img {
   height: 30px;
   line-height: 30px;
   width: 100%;
-  background-color: #00000014;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  margin: 3px;
 }
 .p-sidebtn__coin__input {
   display: none;
@@ -743,9 +791,9 @@ img {
 }
 .p-sidebtn__coin:hover {
   transform: translate3d(0, 1px, 0);
-  color: #007db9;
+  color: #FFFFFF;
   box-shadow: none;
-  background: #fff;
+  background: #111;
 }
 .p-sidebtn__coin__container {
   height: 70%;
@@ -755,8 +803,10 @@ img {
 }
 .p-sidebtn__highlight {
   height: 30px;
-  background-color: #ff570061;
+  color: #111;
+  background-color: #FFFFFF;
   width: 100%;
+  border-radius: 5px;
 }
 .p-sidebtn__coinshow {
   width: 95%;
@@ -767,23 +817,21 @@ img {
   height: 25px;
   box-shadow: 2px 2px;
 }
-.p-sidebtn__coinshow button:hover {
-  box-shadow: 1px 1px;
-  color: #007db9;
-}
 .p-sidebtn__toshowcoin {
   width: 100%;
   box-shadow: 2px 2px;
-  background-color: #ffff00ba;
   height: 25px;
+  border-radius: 5px;
+  margin: 5px;
 }
 
 .btn_active {
-  background-color: #00f7ffb0;
+  background-color: #111;
+  color: #FFFFFF;
 }
 
 .p-sidebtn__coin__input:checked + .p-sidebtn__coin__checkparts {
-  color: #d01137;
+  color: #e3342f;
 }
 
 .p-sidebtn__coin__input:checked + .p-sidebtn__coin__checkparts::after {
@@ -797,6 +845,121 @@ img {
   transform: rotate(40deg);
   border-bottom: 3px solid #d01137;
   border-right: 3px solid #d01137;
+}
+
+.p-coinranking__top {
+  text-align: center;
+  font-size: 18px;
+  padding: 5px;
+}
+.p-coinranking__each {
+  font-size: 50px;
+}
+.p-coinranking__container {
+  float: left;
+  margin: 5% 5% 10% 5%;
+  width: 60%;
+}
+@media screen and (max-width:414px) {
+  .p-coinranking__container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 0;
+  }
+}
+.p-coinranking__container h2 {
+  padding: 5%;
+}
+.p-coinranking__container h3 {
+  height: 60px;
+  line-height: 20px;
+  font-size: 16px;
+  padding: 1%;
+  background-color: #111;
+  color: #FFFFFF;
+  width: 100%;
+  margin: auto auto;
+  text-align: center;
+  border-bottom: 0.1px solid;
+}
+@media screen and (max-width:414px) {
+  .p-coinranking__container h3 {
+    height: 60px;
+  }
+}
+.p-coinranking__container span {
+  font-size: 10px;
+}
+.p-coinranking__table {
+  text-align: center;
+  width: 100%;
+  background-color: #FFFFFF;
+  border: 1px solid;
+  animation-duration: 0.3s;
+  -webkit-animation-name: toleft;
+  animation-name: toleft;
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+.p-coinranking__table table {
+  width: 100%;
+}
+.p-coinranking__table th {
+  font-size: 70%;
+  background-color: #EEF1F2;
+  border: 1px solid;
+  padding: 7px 3px;
+  vertical-align: middle;
+}
+.p-coinranking__table td {
+  font-size: 14px;
+  letter-spacing: 5px;
+  padding: 5px;
+  border: 1px solid;
+  vertical-align: middle;
+}
+.p-coinranking__table tr {
+  height: 50px;
+  line-height: 50px;
+}
+.p-coinranking__table h4 {
+  background-color: #EEF1F2;
+  padding: 3px;
+}
+
+@media screen and (max-width:414px) {
+  .p-coin {
+    width: 100%;
+  }
+}
+.p-coin__side {
+  width: 20%;
+  float: left;
+  margin: 5% 0% 5% 5%;
+}
+@media screen and (max-width:414px) {
+  .p-coin__side {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 0;
+  }
+}
+.p-coin__main {
+  width: 80%;
+  margin: auto;
+}
+@media screen and (max-width:414px) {
+  .p-coin__main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 0;
+  }
 }
 
 .c-arelt {
@@ -994,6 +1157,20 @@ img {
 .c-img__logo {
   width: 100px;
   margin: auto;
+}
+.c-img__img {
+  margin-left: -50px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 110px;
+  height: 130px;
+  z-index: 1;
+}
+@media screen and (max-width:414px) {
+  .c-img__img {
+    display: none;
+  }
 }
 
 .c-top {
@@ -1238,6 +1415,15 @@ img {
   background-color: #FFFFFF;
   margin: 10px auto;
   text-align: center;
+}
+@media screen and (max-width:414px) {
+  .c-card__twitter {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 5px 0;
+    padding: 0;
+  }
 }
 .c-card__twitter p {
   max-height: 40%;

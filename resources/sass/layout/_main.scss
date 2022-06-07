@@ -8,6 +8,7 @@
     @include mq(){
         padding-top:0;
         width:100%;
+        display:block;
     }
 
     &__article{
