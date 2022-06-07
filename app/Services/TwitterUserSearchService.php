@@ -2,16 +2,13 @@
 
 namespace App\Services;
 
-use App\FollowedTarget;
-use App\FollowKeyword;
-use App\Target;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Log;
 
 //キーワード検索
-class SearchService
+class TwitterUserSearchService
 {
 
     //プロパティ
@@ -20,34 +17,35 @@ class SearchService
     public $access_token;
     public $access_token_secret;
     public $q;
+    public $count;
+    public $page;
 
-    public function __construct($api_key, $api_secret, $access_token, $access_token_secret, $q ,$before_hour,$now_time)
+    public function __construct($api_key, $api_secret, $access_token, $access_token_secret, $q, $count, $page)
     {
         $this->api_key = $api_key;
         $this->api_secret = $api_secret;
         $this->access_token = $access_token;
         $this->access_token_secret = $access_token_secret;
         $this->q = $q;
-        $this->before_hour = $before_hour;
-        $this->now_time = $now_time;
+        $this->count = $count;
+        $this->page = $page;
     }
 
     public function search()
     {
         Log::debug(print_r('////////////////////////////////////////', true));
-        Log::debug(print_r('SearchSrviceの処理を開始します', true));
+        Log::debug(print_r('TwitterUserSearchSrviceの処理を開始します', true));
 
 
-        $request_url = 'https://api.twitter.com/1.1/search/tweets.json';        // エンドポイント
+        $request_url = 'https://api.twitter.com/1.1/users/search.json';        // エンドポイント
         $request_method = 'GET';
 
 // パラメータA (オプション)
         $params_a = array(
             "q" => $this->q,
-            "count"=>100,
-            'result_type' => 'recent',
-            'since' => $this->before_hour,
-            'until' => $this->now_time
+            "count"=> $this->count,//10-20の間で指定
+            'page' => $this->page,
+            'include_entities' => 'false'
         );
 
 // キーを作成する (URLエンコードする)
@@ -142,7 +140,7 @@ class SearchService
         $arr = json_decode($json, true);
 //        $tweets = Arr::collapse($arr);
 
-        Log::debug(print_r('SearchService処理を終了します',true));
+        Log::debug(print_r('TwitterUserSearchSrvice処理を終了します',true));
         Log::debug(print_r('//////////////////////////////////////////',true));
 
         return $arr;

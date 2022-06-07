@@ -50,4 +50,17 @@
         width:100px;
         margin:auto;
     }
+
+    &__img {
+        margin-left: -50px;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        width: 110px;
+        height: 130px;
+        z-index: 1;
+        @include mq() {
+            display: none;
+        }
+    }
 }

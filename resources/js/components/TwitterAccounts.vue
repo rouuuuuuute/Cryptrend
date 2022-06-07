@@ -21,7 +21,7 @@
                                     <option v-for="(account,key) in accounts" v-bind:value="account.id">
                                         {{ account.screen_name }}
                                     </option>
-                                    <option v-bind:value="'register'" v-if="accounts.length < 10">アカウントを登録する</option>
+                                    <option v-bind:value="'register'" v-if="accounts.length < 1">アカウントを登録する</option>
                                 </select>
                                 <div class="c-select__expand--arrow"></div>
                             </div>

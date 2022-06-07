@@ -1,0 +1,83 @@
+.p-coinranking{
+    &__top{
+      text-align: center;
+      font-size: $font-size-l;
+      padding: 5px;
+    }
+    &__each{
+      font-size: 50px;
+    }
+    &__container{
+    float: left;
+    margin: 5% 5% 10% 5%;
+    width: 60%;
+        @include mq(){
+            width:100%;
+            display: flex;
+            flex-direction: column;
+            margin:auto;
+            padding:0;
+        }
+      h2{
+        padding: 5%;
+      }
+      h3{
+        height: 60px;
+        line-height: 20px;
+        font-size: 16px;
+        padding: 1%;
+        background-color: $black;
+          color : $white;
+        width: 100%;
+        margin: auto auto;
+        text-align: center;
+        border-bottom: 0.1px solid;
+          @include mq(){
+              height:60px;
+          }
+      }
+      span{
+        font-size: 10px;
+      }
+    }
+    &__table{
+      text-align: center;
+      width: 100%;
+      background-color: $white;
+      border: 1px solid;
+      animation-duration: 0.3s;
+      -webkit-animation-name: toleft;
+      animation-name: toleft;
+      margin-bottom: 15px;
+        border-radius:5px;
+      table{
+        width: 100%;
+      }
+      th{
+        font-size: 70%;
+        background-color: $color-main;
+        border: 1px solid;
+        padding: 7px 3px;
+        vertical-align: middle;
+      }
+      td{
+        font-size:14px;
+        letter-spacing: 5px;
+        padding: 5px;
+        border: 1px solid;
+        vertical-align: middle;
+      }
+
+      tr{
+        height: 50px;
+        line-height: 50px;
+      }
+
+      h4{
+        background-color: $color_main;
+        padding: 3px;
+      }
+    }
+
+
+}

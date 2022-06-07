@@ -7,9 +7,17 @@
     line-height: 50px;
     cursor: pointer;
     background-color:$color_button;
+    border: 3px solid #232323;
     color: $white;
     @include mq(){
         font-size: $font-size_m;
+    }
+
+    &:hover {
+        transform: translate3d(0, 5px, 0);
+        color: $black;
+        box-shadow: none;
+        background: $white;
     }
 
 
@@ -34,5 +42,9 @@
         @include mq(){
             width:150px;
         }
+    }
+    &__autofollow{
+        width: 50%;
+        display: block;
     }
 }

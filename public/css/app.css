@@ -486,6 +486,7 @@ img {
   #l-main {
     padding-top: 0;
     width: 100%;
+    display: block;
   }
 }
 @media screen and (max-width:414px) {
@@ -556,6 +557,18 @@ img {
     width: 100%;
   }
 }
+.p-main__service {
+  width: 1080px;
+}
+@media screen and (max-width:414px) {
+  .p-main__service {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+  }
+}
 
 .p-form {
   width: 500px;
@@ -591,6 +604,361 @@ img {
 @media screen and (max-width:414px) {
   #p-service {
     width: 100%;
+  }
+}
+
+.p-autofollow {
+  width: 500px;
+  background-color: #FFFFFF;
+  padding: 20px;
+  text-align: center;
+}
+@media screen and (max-width:414px) {
+  .p-autofollow {
+    width: 100%;
+  }
+}
+.p-autofollow__container p {
+  text-align: center;
+  width: 80%;
+  margin: 25px auto;
+  line-height: 30px;
+}
+.p-autofollow__btncontainer {
+  padding: 15px;
+  border: solid 5px #6091d3;
+  background-color: #00000014;
+  width: 80%;
+  margin: auto;
+}
+.p-autofollow__description {
+  width: 100%;
+  margin: auto;
+  animation-duration: 0.5s;
+  -webkit-animation-name: toup;
+  animation-name: toup;
+}
+.p-autofollow__ongoing {
+  text-align: center;
+  color: #68c6df;
+  font-weight: bold;
+  font-size: 16px;
+  animation: 2s linear infinite blink_effect;
+}
+
+.p-twiiter__container {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: #EEF1F2;
+}
+@media screen and (max-width:414px) {
+  .p-twiiter__container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}
+.p-twiiter__container h2 {
+  text-align: center;
+  width: 100%;
+  margin: 24px;
+}
+.p-twiiter__container p {
+  width: 100%;
+}
+
+.p-news__container {
+  width: 100%;
+  margin: 10px auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+}
+@media screen and (max-width:414px) {
+  .p-news__container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+  }
+}
+.p-news__card {
+  width: 45%;
+  min-height: 200px;
+  box-sizing: border-box;
+  text-align: center;
+  display: flex;
+  margin: 5px;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+}
+@media screen and (max-width:414px) {
+  .p-news__card {
+    width: 100%;
+    margin: 5px auto;
+    display: flex;
+    flex-direction: column;
+  }
+}
+.p-news__card h4 {
+  height: 100%;
+  padding: 15px;
+  font-size: 18px;
+  width: 80%;
+  text-align: left;
+  box-sizing: border-box;
+}
+@media screen and (max-width:414px) {
+  .p-news__card h4 {
+    width: 100%;
+    margin: auto;
+  }
+}
+.p-news__card span {
+  font-size: 10px;
+  width: 30%;
+}
+.p-news__jamp {
+  padding: 5px;
+  margin: 15px 0;
+  color: #111;
+  background: #FFFFFF;
+  border: solid 1px #111;
+  line-height: 30px;
+  display: inline-block;
+  border-radius: 10px;
+}
+@media screen and (max-width:414px) {
+  .p-news__jamp {
+    width: 40%;
+    margin: auto;
+  }
+}
+.p-news__jamp:hover {
+  transform: translate3d(0, 5px, 0);
+  color: #FFFFFF;
+  box-shadow: none;
+  background: #111;
+}
+
+.p-sidebtn {
+  position: relative;
+  padding-left: 20px;
+  margin-right: 20px;
+  display: none;
+}
+.p-sidebtn__container {
+  width: 100%;
+  margin: 10px auto;
+}
+.p-sidebtn__container label {
+  margin: 5px;
+  padding: 5px;
+  box-shadow: 2px 2px;
+  display: block;
+  height: 30px;
+  line-height: 25px;
+  text-align: center;
+  border-radius: 5px;
+}
+.p-sidebtn__container label:hover {
+  transform: translate3d(0, 1px, 0);
+  box-shadow: 1px 1px;
+}
+.p-sidebtn__coin {
+  height: 30px;
+  line-height: 30px;
+  width: 100%;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  margin: 3px;
+}
+.p-sidebtn__coin__input {
+  display: none;
+}
+.p-sidebtn__coin__checkparts {
+  padding-left: 20px;
+  position: relative;
+  margin-right: 20px;
+}
+.p-sidebtn__coin label {
+  margin: 1px auto;
+  display: block;
+}
+.p-sidebtn__coin:hover {
+  transform: translate3d(0, 1px, 0);
+  color: #FFFFFF;
+  box-shadow: none;
+  background: #111;
+}
+.p-sidebtn__coin__container {
+  height: 70%;
+  text-align: left;
+  animation-duration: 0.3s;
+  animation-name: toup;
+}
+.p-sidebtn__highlight {
+  height: 30px;
+  color: #111;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-radius: 5px;
+}
+.p-sidebtn__coinshow {
+  width: 95%;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+.p-sidebtn__coinshow button {
+  height: 25px;
+  box-shadow: 2px 2px;
+}
+.p-sidebtn__toshowcoin {
+  width: 100%;
+  box-shadow: 2px 2px;
+  height: 25px;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.btn_active {
+  background-color: #111;
+  color: #FFFFFF;
+}
+
+.p-sidebtn__coin__input:checked + .p-sidebtn__coin__checkparts {
+  color: #e3342f;
+}
+
+.p-sidebtn__coin__input:checked + .p-sidebtn__coin__checkparts::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -5px;
+  left: 5px;
+  width: 7px;
+  height: 14px;
+  transform: rotate(40deg);
+  border-bottom: 3px solid #d01137;
+  border-right: 3px solid #d01137;
+}
+
+.p-coinranking__top {
+  text-align: center;
+  font-size: 18px;
+  padding: 5px;
+}
+.p-coinranking__each {
+  font-size: 50px;
+}
+.p-coinranking__container {
+  float: left;
+  margin: 5% 5% 10% 5%;
+  width: 60%;
+}
+@media screen and (max-width:414px) {
+  .p-coinranking__container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 0;
+  }
+}
+.p-coinranking__container h2 {
+  padding: 5%;
+}
+.p-coinranking__container h3 {
+  height: 60px;
+  line-height: 20px;
+  font-size: 16px;
+  padding: 1%;
+  background-color: #111;
+  color: #FFFFFF;
+  width: 100%;
+  margin: auto auto;
+  text-align: center;
+  border-bottom: 0.1px solid;
+}
+@media screen and (max-width:414px) {
+  .p-coinranking__container h3 {
+    height: 60px;
+  }
+}
+.p-coinranking__container span {
+  font-size: 10px;
+}
+.p-coinranking__table {
+  text-align: center;
+  width: 100%;
+  background-color: #FFFFFF;
+  border: 1px solid;
+  animation-duration: 0.3s;
+  -webkit-animation-name: toleft;
+  animation-name: toleft;
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+.p-coinranking__table table {
+  width: 100%;
+}
+.p-coinranking__table th {
+  font-size: 70%;
+  background-color: #EEF1F2;
+  border: 1px solid;
+  padding: 7px 3px;
+  vertical-align: middle;
+}
+.p-coinranking__table td {
+  font-size: 14px;
+  letter-spacing: 5px;
+  padding: 5px;
+  border: 1px solid;
+  vertical-align: middle;
+}
+.p-coinranking__table tr {
+  height: 50px;
+  line-height: 50px;
+}
+.p-coinranking__table h4 {
+  background-color: #EEF1F2;
+  padding: 3px;
+}
+
+@media screen and (max-width:414px) {
+  .p-coin {
+    width: 100%;
+  }
+}
+.p-coin__side {
+  width: 20%;
+  float: left;
+  margin: 5% 0% 5% 5%;
+}
+@media screen and (max-width:414px) {
+  .p-coin__side {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 0;
+  }
+}
+.p-coin__main {
+  width: 80%;
+  margin: auto;
+}
+@media screen and (max-width:414px) {
+  .p-coin__main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 0;
   }
 }
 
@@ -790,6 +1158,20 @@ img {
   width: 100px;
   margin: auto;
 }
+.c-img__img {
+  margin-left: -50px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 110px;
+  height: 130px;
+  z-index: 1;
+}
+@media screen and (max-width:414px) {
+  .c-img__img {
+    display: none;
+  }
+}
 
 .c-top {
   display: flex;
@@ -854,12 +1236,19 @@ img {
   line-height: 50px;
   cursor: pointer;
   background-color: #111;
+  border: 3px solid #232323;
   color: #FFFFFF;
 }
 @media screen and (max-width:414px) {
   .c-button {
     font-size: 14px;
   }
+}
+.c-button:hover {
+  transform: translate3d(0, 5px, 0);
+  color: #111;
+  box-shadow: none;
+  background: #FFFFFF;
 }
 .c-button__wrap {
   display: flex;
@@ -884,6 +1273,10 @@ img {
   .c-button__form {
     width: 150px;
   }
+}
+.c-button__autofollow {
+  width: 50%;
+  display: block;
 }
 
 .c-form__input {
@@ -1015,4 +1408,50 @@ img {
     min-height: 150px;
     margin-bottom: 30px;
   }
+}
+.c-card__twitter {
+  width: 45%;
+  min-height: 300px;
+  background-color: #FFFFFF;
+  margin: 10px auto;
+  text-align: center;
+}
+@media screen and (max-width:414px) {
+  .c-card__twitter {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 5px 0;
+    padding: 0;
+  }
+}
+.c-card__twitter p {
+  max-height: 40%;
+  height: auto;
+  margin: auto;
+  font-size: 16px;
+  letter-spacing: 1px;
+  width: 90%;
+}
+.c-card__twitter button {
+  margin-top: 5%;
+}
+.c-card__twitter--header {
+  display: flex;
+  justify-content: flex-start;
+  line-height: 30px;
+  margin-top: 10px;
+  font-size: 10px;
+}
+.c-card__twitter--header h4 {
+  width: 100%;
+  margin-right: 10%;
+  letter-spacing: 2px;
+  font-weight: bold;
+  font-size: 16px;
+}
+.c-card__twitter--header img {
+  width: 60px;
+  height: 60px;
+  margin: 5px;
 }

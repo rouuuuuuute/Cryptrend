@@ -24,25 +24,6 @@ class RequestDatabaseController extends Controller
         $user_id = Auth::id();
         return DB::table('twitter_accounts')->where('user_id', '=', $user_id)->get()->toJson();
     }
-
-    public function keywords(Request $request)
-    {
-        $account_id = $request->input('id');
-        return DB::table('follow_keywords')->where('account_id', '=', $account_id)->get()->toJson();
-    }
-
-    public function favoriteKeywords(Request $request)
-    {
-        $account_id = $request->input('id');
-        return DB::table('favorites')->where('account_id', '=', $account_id)->get()->toJson();
-    }
-
-    public function tweets(Request $request)
-    {
-        $account_id = $request->input('id');
-        return DB::table('tweets')->where('account_id', '=', $account_id)->get()->toJson();
-    }
-
     public function name()
     {
         $id = Auth::id();
@@ -55,10 +36,5 @@ class RequestDatabaseController extends Controller
         return DB::table('users')->where('id', '=', $id)->value('email');
     }
 
-    public function targets(Request $request)
-    {
-        $account_id = $request->input('id');
-        return DB::table('targets')->where('account_id', '=', $account_id)->get()->toJson();
-    }
 
 }
