@@ -38,6 +38,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('command:coinhourcommand')->hourly();//1時間に一度、1時間のツイート数を更新
         $schedule->command('command:coindaycommand')->daily();//1日のツイート数を更新
         $schedule->command('command:coinweekcommand')->daily();//1日に一度、1週間のツイート数を更新
+        $schedule->command('command:autofollowcommand')->everyFifteenMinutes();//15分に一度フォロー
 //        $schedule->command('command:coincommand')->everyFiveMinutes();//1日に一度、coinの取引高を更新
     }
 

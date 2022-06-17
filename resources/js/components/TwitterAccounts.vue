@@ -35,7 +35,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="c-button c-button__form" v-else>
+                            <div class="c-button c-button__form" v-else-if="account !== null">
                                 <div>
                                     <button type="submit" formaction="/twitter/accounts/delete">
                                         削除する

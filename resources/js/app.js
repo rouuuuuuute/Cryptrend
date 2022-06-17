@@ -38,12 +38,6 @@ const sidebar = new Vue({
     el: '#js-sidebar'
 });
 
-
-
-// const home = new Vue({
-//     el: '#js-home'
-// });
-
 const profile = new Vue({
     el: '#js-profile'
 });
@@ -68,4 +62,4 @@ const nologin = new Vue({
     el: '#js-nologin'
 });
 
-//aaaazaaaaaaa
+//aaaaaaaaaaaaaaaaaa

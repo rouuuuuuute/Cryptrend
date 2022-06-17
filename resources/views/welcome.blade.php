@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','Twitterデータを利用した集客サービス')
+@section('title','集客にイノベーションを')
 
 @section('header')
     @parent
@@ -50,8 +50,9 @@
         <section class="p-prof">
             <section class="">
                 <div class="c-top">
-                    <h2 class="c-top__heading">Cryptrendとは</h2>
-                    <p class="c-top__text">Twitter社やGoogle社から提供されるデータを使って<br>仮想通貨に関するリアルタイムの情報を収集し<br>利用者の投資検討先に役立つツールです</p>
+                    <h2 class="c-top__heading">CryptoTrendとは</h2>
+                    <p class="c-top__text">Twitter社やGoogle社から提供されるデータを使って<br>仮想通貨に関するリアルタイムの情報を収集し<br>利用者の投資検討先に役立つツールです
+                    </p>
                 </div>
             </section>
             <section class="">
@@ -60,7 +61,7 @@
                     <p class="c-top__text">仮想通貨に関するリアルタイムのニュースが欲しい</p>
                     <p class="c-top__text">仮想通貨に関するナマの声が聞きたい</p>
                     <p class="c-top__text">仮想通貨のトレンドを知りたい</p>
-                    <p class="c-top__text">Cryptrendなら解決できます！</p>
+                    <p class="c-top__text">CryptoTrendなら解決できます！</p>
                 </div>
             </section>
         </section>
@@ -91,13 +92,20 @@
                     </div>
                 </div>
             </section>
-            <section id="p-price" class="">
-                <div class="c-top">
-                    <h2 class="c-top__heading">料金プラン</h2>
-                    <p class="c-top__heading">いまなら月額無料！</p>
-                    <p class="c-top__text">まずは無料登録へ</p>
-                </div>
-            </section>
+
+            @if (Route::has('register'))
+                <section id="p-price" class="">
+                    <div class="c-top">
+                        @auth
+                            <a class="c-top__heading" href="{{ route('home.profile') }}">マイページへ</a>
+                        @else
+                            <h2 class="c-top__heading">料金プラン</h2>
+                            <p class="c-top__heading">いまなら月額無料！</p>
+                            <a class="c-top__text" href="{{ route('register') }}">まずは無料登録へ</a>
+                        @endauth
+                    </div>
+                    @endif
+                </section>
         </section>
     </article>
 @endsection

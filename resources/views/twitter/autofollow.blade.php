@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title','まとめてフォロー')
+
 @section('content')
 
     @if (session('today_follow_end'))

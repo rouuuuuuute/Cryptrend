@@ -1,5 +1,7 @@
 <template>
     <section class="p-main__service">
+        <div class="c-title c-title__form">仮想通貨トレンド</div>
+
         <section class="p-coin__side">
 
             <!--過去のツイート数集計を表示させるラジオボタン。-->
@@ -217,15 +219,18 @@ export default {
         },
         //exitCoinsは表示上のコインではなく、データ上登録されているcoinデータ。
         pushCoin(pcoin) {
+
             //exitCoinにpcoin.nameがなければ追加する
-            if (this.exitCoins.indexOf(pcoin.name) == -1) {
+            if (this.exitCoins.indexOf(pcoin.name) === -1) {
+                console.log('true');
                 this.showCoins.push(pcoin);
                 this.exitCoins.push(pcoin.coins_name);
-                console.log(this.exitCoins);
+                console.log(this.showCoins);
                 this.hour_show = false;
                 this.day_show = false;
                 this.week_show = false;
             } else {
+                console.log('false');
                 console.log(this.exitCoins);
                 this.exitCoins = this.exitCoins.filter(n => n !== pcoin.coins_name);
                 this.showCoins = this.showCoins.filter(n => n !== pcoin);

@@ -2,7 +2,7 @@
     <div>
         <article class="p-main">
             <div class="p-form">
-                <div class="c-title c-title__form">プロフィール</div>
+                <div class="c-title c-title__form">マイページ</div>
 
                 <div class="c-form">
                     <form method="POST" @submit="checkForm">

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title','仮想通貨トレンド')
+
 @section('content')
 
     <section>

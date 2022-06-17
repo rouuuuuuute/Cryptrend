@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title','リセットパスワード')
+
 @section('content')
     <div class="p-form">
         <div class="c-title c-title__form">{{ __('Reset Password') }}</div>

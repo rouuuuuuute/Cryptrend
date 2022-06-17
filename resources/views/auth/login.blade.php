@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title','ログイン')
+
 @section('content')
     <div class="p-form">
         <div class="c-title c-title__form">{{ __('Login') }}</div>
@@ -36,19 +38,6 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                         @enderror
-                    </div>
-                </div>
-
-                <div>
-                    <div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="remember"
-                                   id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                            <label class="form-check-label" for="remember">
-                                {{ __('Remember Me') }}
-                            </label>
-                        </div>
                     </div>
                 </div>
                 <div>

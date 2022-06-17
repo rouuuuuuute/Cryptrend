@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('title','登録')
+
+
 @section('content')
     <div class="p-form">
         <div class="c-title c-title__form">{{ __('Register') }}</div>
