@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use App\Services\LookupSearchService;
@@ -185,7 +186,6 @@ class AutofollowController extends Controller
 
         $search = new TwitterUserSearchService($api_key, $api_secret, $access_token, $access_token_secret, $q, $count, $page);
         $arr = $search->search();
-//      Log::debug(print_r($results, true));
 
         $users_results = [];
 
@@ -208,24 +208,42 @@ class AutofollowController extends Controller
 
         //updateOrCreateを使い同じscreen_nameがDB上autofollowsテーブルにあるかどうか確認し（第一引数）、
         //第二引数で情報を挿入、または既存のユーザー情報があるなら更新。
-        for ($i = 0; $i < 19; $i++) {
-            $autofollow = Autofollow::updateOrCreate(
-                [//第一引数
-                    'screen_name' => $users_results[$i]['screen_name']
-                ],
-                [//第二引数
-                    'screen_name' => $users_results[$i]['screen_name'], 'twitter_id' => $users_results[$i]['twitter_id'],
-                    'name' => $users_results[$i]['name'], 'text' => $users_results[$i]['text'],
-                    'registtime' => $users_results[$i]['registtime'],
-                ]
-            );
+
+        DB::beginTransaction();
+        try {
+            for ($i = 0; $i < 19; $i++) {
+                $autofollow = Autofollow::updateOrCreate(
+                    [//第一引数
+                        'screen_name' => $users_results[$i]['screen_name']
+                    ],
+                    [//第二引数
+                        'screen_name' => $users_results[$i]['screen_name'], 'twitter_id' => $users_results[$i]['twitter_id'],
+                        'name' => $users_results[$i]['name'], 'text' => $users_results[$i]['text'],
+                        'registtime' => $users_results[$i]['registtime'],
+                    ]
+                );
+            }
+            DB::commit(); // コミット
+        } catch (\Exception $e) {
+            DB::rollback(); // ロールバック
+            return;
         }
+
+
         //DB上の更新日時記録テーブルを更新
         date_default_timezone_set('Asia/Tokyo');
         $now_time = date("Y-m-d H:i:s");//今の時間
         $addusertime_update = Updatetime::where('id', 1)->first();//dbからデータ取得
         $data = ['update_twitter' => $now_time];
-        $addusertime_update->update($data);
+
+        DB::beginTransaction();
+        try {
+            $addusertime_update->update($data);
+            DB::commit(); // コミット
+        } catch (\Exception $e) {
+            DB::rollback(); // ロールバック
+            return;
+        }
 
         $results = json_encode($users_results, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
