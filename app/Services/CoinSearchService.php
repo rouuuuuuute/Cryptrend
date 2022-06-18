@@ -3,11 +3,8 @@
 namespace App\Services;
 
 //通貨トレンド関連のクラス。
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\TwitterAccount;
-use App\Services\SearchService;
-use App\Updatetime;
 use App\Coin;
 
 
@@ -18,7 +15,7 @@ class CoinSearchService
     public $now_time;
     public $before_time;
 
-    public function __construct($now_time, $before_time, $past,$request_loop)
+    public function __construct($now_time, $before_time, $past, $request_loop)
     {
         $this->now_time = $now_time;
         $this->before_time = $before_time;

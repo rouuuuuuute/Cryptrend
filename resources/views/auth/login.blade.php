@@ -29,7 +29,8 @@
 
                     <div>
                         <input id="password" type="password"
-                               class="c-form__input form-control @error('password') is-invalid @enderror" name="password"
+                               class="c-form__input form-control @error('password') is-invalid @enderror"
+                               name="password"
                                required
                                autocomplete="current-password">
 

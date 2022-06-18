@@ -2,9 +2,6 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\DB;
-
 use Illuminate\Support\Facades\Log;
 
 //キーワード検索
@@ -43,7 +40,7 @@ class TwitterUserSearchService
 // パラメータA (オプション)
         $params_a = array(
             "q" => $this->q,
-            "count"=> $this->count,//10-20の間で指定
+            "count" => $this->count,//10-20の間で指定
             'page' => $this->page,
             'include_entities' => 'false'
         );
@@ -140,8 +137,8 @@ class TwitterUserSearchService
         $arr = json_decode($json, true);
 //        $tweets = Arr::collapse($arr);
 
-        Log::debug(print_r('TwitterUserSearchSrvice処理を終了します',true));
-        Log::debug(print_r('//////////////////////////////////////////',true));
+        Log::debug(print_r('TwitterUserSearchSrvice処理を終了します', true));
+        Log::debug(print_r('//////////////////////////////////////////', true));
 
         return $arr;
     }

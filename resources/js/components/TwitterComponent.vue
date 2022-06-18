@@ -68,7 +68,6 @@ export default {
     mounted() {
         //mountedでページアクセス時に自動フォローを実施しているか判定。1なら自動フォロー中で、ongoingをtrue。
         //ongoingがtrueの場合、「自動フォロー実施中です」という表示が出る。
-        //console.log(this.autofollow_check);
         if (this.autofollow_check === '1') {
             this.ongoing = true;
             this.auto_status = this.autofollow_check
@@ -97,49 +96,37 @@ export default {
                     alert('フォローしました。');
                     this.users.splice(index, 1)
                 }).catch(error => {
-                console.log(error);
             });
         },
         //自動フォローを切り替えた際にボタンの表示、「自動フォロー実施中です」の表示非表示を切り替えるメソッド
         checkOngoing: function () {
-            //console.log("checkOngoingを呼び出します");
             if (this.autofollow_check === '1' || true) {
                 this.ongoing = true;
             } else {
                 this.ongoing = false;
             }
-            console.log("this.ongoingの値です");
-            console.log(this.ongoing);
         },
         //まとめてフォロー（自動フォローのONOFFを切り替えるメソッド）
         autofollowStart: function () {
             let self = this;
             let url = this.autofollowall_ajax; //ajax先のurl
             let auto_status = this.auto_status;
-            console.log(auto_status);
 
             //今現在のDB上のautofollowの状態が1の場合オートフォローの状態を0にする
             if (self.auto_status === '1') {
-                console.log(self.auto_status);
-                console.log("今現在の値です true");
                 this.ongoing = true;
                 self.auto_status = 0;
             } else {
-                console.log(self.auto_status);
-                console.log("今現在の値です false");
                 this.ongoing = false;
                 self.auto_status = 1; //今現在のフォローの状態が1ではない場合、フォローの状態を1にする
             }
             let request = self.auto_status;
-            console.log("切り替え後のauto_statusの状態です");
-            console.log(request);
             axios.post(url, {
                 request
             }).then((res) => {
                 alert('まとめてフォローの設定を切り替えました。ページを再読み込みします。');
                 location.reload();
             }).catch(error => {
-                console.log(error);
             });
         }
     },

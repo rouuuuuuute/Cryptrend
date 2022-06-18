@@ -17,7 +17,8 @@
 
                     <div class="col-md-6">
                         <input id="password" type="password"
-                               class="c-form__input form-control @error('password') is-invalid @enderror" name="password" required
+                               class="c-form__input form-control @error('password') is-invalid @enderror"
+                               name="password" required
                                autocomplete="current-password">
 
                         @error('password')

@@ -15,7 +15,6 @@
                         <input id="name" type="text"
                                class="c-form__input form-control @error('name') is-invalid @enderror"
                                name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
                         @error('name')
                         <span class="c-invalid__feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -26,35 +25,21 @@
 
                 <div>
                     <label for="email">{{ __('E-Mail Address') }}</label>
-
                     <div>
                         <input id="email" type="email"
                                class="c-form__input form-control @error('email') is-invalid @enderror"
                                name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                        @error('email')
-                        <span class="c-invalid__feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                        @enderror
                     </div>
                 </div>
 
                 <div>
-                    <label for="password">{{ __('Password') }}</label>
-
+                    <label for="password">{{ __('Password') }}(8文字以上で入力してください)</label>
                     <div>
                         <input id="password" type="password"
                                class="c-form__input form-control @error('password') is-invalid @enderror"
                                name="password"
                                required
                                autocomplete="new-password">
-
-                        @error('password')
-                        <span class="c-invalid__feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                        @enderror
                     </div>
                 </div>
 
@@ -77,6 +62,18 @@
                         </button>
                     </div>
                 </div>
+
+                @error('email')
+                <span class="c-invalid__feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                @enderror
+
+                @error('password')
+                <span class="c-invalid__feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                @enderror
             </form>
         </div>
     </div>

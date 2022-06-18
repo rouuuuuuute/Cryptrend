@@ -10,14 +10,14 @@ class CheckLogin
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
-      if(!Auth::check()){
-        return redirect('login')->with('flash_message',__('ログインしてください。'));
+        if (!Auth::check()) {
+            return redirect('login')->with('flash_message', __('ログインしてください。'));
         }
         return $next($request);
     }

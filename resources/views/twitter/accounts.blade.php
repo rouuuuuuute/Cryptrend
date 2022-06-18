@@ -4,9 +4,9 @@
 
 @section('content')
 
-<div id="js-accounts">
-    <accounts :csrf="{{ json_encode(csrf_token())}}"></accounts>
-</div>
+    <div id="js-accounts">
+        <accounts :csrf="{{ json_encode(csrf_token())}}"></accounts>
+    </div>
 
 @endsection
 

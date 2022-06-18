@@ -152,7 +152,6 @@ export default {
         this.showHour();
         let self = this;
         let url = this.coin_ajax;
-        console.log(url);
         axios.get(url).then(function (response) {
             self.coins = response.data;
         });
@@ -190,7 +189,6 @@ export default {
         //1時間ごとのコインのツイート数を出すメソッド
         showHour: function () {
             this.hour_show = true;
-            console.log(this.hour_show);
             this.showCoins = [];
             this.exitCoins = [];
             this.resetCheckbox();
@@ -200,7 +198,6 @@ export default {
         //1日ごとのコインのツイート数を出すメソッド
         showDay: function () {
             this.day_show = true;
-            console.log(this.day_show);
             this.showCoins = [];
             this.exitCoins = [];
             this.resetCheckbox();
@@ -210,7 +207,6 @@ export default {
         //1週間ごとのコインのツイート数を出すメソッド
         showWeek: function () {
             this.week_show = true;
-            console.log(this.week_show);
             this.showCoins = [];
             this.exitCoins = [];
             this.resetCheckbox();
@@ -219,23 +215,16 @@ export default {
         },
         //exitCoinsは表示上のコインではなく、データ上登録されているcoinデータ。
         pushCoin(pcoin) {
-
-            //exitCoinにpcoin.nameがなければ追加する
-            if (this.exitCoins.indexOf(pcoin.name) === -1) {
-                console.log('true');
-                this.showCoins.push(pcoin);
-                this.exitCoins.push(pcoin.coins_name);
-                console.log(this.showCoins);
-                this.hour_show = false;
-                this.day_show = false;
-                this.week_show = false;
-            } else {
-                console.log('false');
-                console.log(this.exitCoins);
-                this.exitCoins = this.exitCoins.filter(n => n !== pcoin.coins_name);
-                this.showCoins = this.showCoins.filter(n => n !== pcoin);
-                console.log(this.exitCoins);
-            }
+                if (this.exitCoins.indexOf(pcoin.coins_name) === -1) {
+                    this.showCoins.push(pcoin);
+                    this.exitCoins.push(pcoin.coins_name);
+                    this.hour_show = false;
+                    this.day_show = false;
+                    this.week_show = false;
+                } else {
+                    this.exitCoins = this.exitCoins.filter(n => n !== pcoin.coins_name);
+                    this.showCoins = this.showCoins.filter(n => n !== pcoin);
+                }
         },
         //表示内容を初期化するメソッド。
         resetCoin() {
@@ -256,7 +245,6 @@ export default {
         },
         //コインの表示をするためのボックスを出し入れするメソッド。
         coinbuttonShow() {
-            console.log("スタート");
             this.check_show = !this.check_show;
         }
     }

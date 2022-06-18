@@ -2,7 +2,8 @@
 
 namespace App\Services;
 
-class AccessTokenService{
+class AccessTokenService
+{
     //プロパティ
     public $api_key;
     public $api_secret;
@@ -11,11 +12,12 @@ class AccessTokenService{
     public $request_url;
     public $request_method;
 
-    public function __construct($api_key, $api_secret, $callback_url,$request_token_secret,$request_url,$request_method){
+    public function __construct($api_key, $api_secret, $callback_url, $request_token_secret, $request_url, $request_method)
+    {
         $this->api_key = $api_key;
         $this->api_secret = $api_secret;
         $this->callback_url = $callback_url;
-        $this->request_token_secret =$request_token_secret;
+        $this->request_token_secret = $request_token_secret;
         $this->request_url = $request_url;
         $this->request_method = $request_method;
     }
@@ -105,6 +107,5 @@ class AccessTokenService{
         return $query;
 
 
-
     }
-    }
+}

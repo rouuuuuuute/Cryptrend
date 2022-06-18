@@ -30,22 +30,22 @@ class ProfileController extends Controller
 
     public function edit(Request $request)
     {
-        $request -> validate([
+        $request->validate([
             'name' => 'required | string| max:255',
             'email' => 'string | email | max:255 '
         ]);
         $id = Auth::id();
         $user = User::find($id);
-        $user -> fill($request->all())->save();
-        return redirect('/profile')->with('flash_message','更新しました');
+        $user->fill($request->all())->save();
+        return redirect('/profile')->with('flash_message', '更新しました');
     }
 
     public function withdraw()
     {
         $id = Auth::id();
-        User::where('id',$id)->delete();
+        User::where('id', $id)->delete();
         Auth::logout();
-        return redirect('/')->with('flash_message','退会しました');
+        return redirect('/')->with('flash_message', '退会しました');
     }
 
 }

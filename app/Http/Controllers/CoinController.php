@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use App\Updatetime;
 use App\Coin;
@@ -30,7 +28,7 @@ class CoinController extends Controller
         $week = $coinupdatedate["update_week"];
         $highlow = $coinupdatedate["update_highandlow"];
 
-    return view('home.coin',compact('hour','day','week','highlow'));
+        return view('home.coin', compact('hour', 'day', 'week', 'highlow'));
 //        return view('home.coin');
     }
 
@@ -44,9 +42,9 @@ class CoinController extends Controller
         $now_time = date("Y-m-d_H:i:s") . "_JST";//今の時間
         $before_time = date('Y-m-d_H:i:s', strtotime('-1 hour', time())) . "_JST";
         $past = 'hour';
-        $request_loop = 1 ;
+        $request_loop = 1;
 
-        $coin = new CoinSearchService($now_time, $before_time, $past,$request_loop);
+        $coin = new CoinSearchService($now_time, $before_time, $past, $request_loop);
         $coin->coinsearch();
 
         date_default_timezone_set('Asia/Tokyo');
@@ -68,9 +66,9 @@ class CoinController extends Controller
         $now_time = date("Y-m-d_H:i:s") . "_JST";//今の時間
         $before_time = date('Y-m-d_H:i:s', strtotime('-1 day', time())) . "_JST";
         $past = 'day';
-        $request_loop = 24 ;
+        $request_loop = 24;
 
-        $coin = new CoinSearchService($now_time, $before_time, $past,$request_loop);
+        $coin = new CoinSearchService($now_time, $before_time, $past, $request_loop);
         $coin->coinsearch();
 
         date_default_timezone_set('Asia/Tokyo');
@@ -91,9 +89,9 @@ class CoinController extends Controller
         $now_time = date("Y-m-d_H:i:s") . "_JST";//今の時間
         $before_time = date('Y-m-d_H:i:s', strtotime('-7 day', time())) . "_JST";
         $past = 'week';
-        $request_loop = 100 ;
+        $request_loop = 100;
 
-        $coin = new CoinSearchService($now_time, $before_time, $past,$request_loop);
+        $coin = new CoinSearchService($now_time, $before_time, $past, $request_loop);
         $coin->coinsearch();
 
         date_default_timezone_set('Asia/Tokyo');

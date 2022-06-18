@@ -7,9 +7,7 @@
                 <h4><a :href="list.url" target="_blank">{{ list.title }}</a></h4>
                 <div class="">
                     <a :href="list.url" class="p-news__jamp" target="_blank">続きを読む</a><br>
-                    <span>投稿日時：<br>
-      {{ list.pubDate }}
-      </span>
+                    <span>投稿日時：<br>{{ list.pubDate }}</span>
                 </div>
             </div>
         </div>

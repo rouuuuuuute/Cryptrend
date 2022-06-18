@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','まとめてフォロー')
+@section('title','一括フォロー')
 
 @section('content')
 
@@ -31,7 +31,6 @@
                 <!--users_resultsはログインユーザーがフォローしてないユーザー一覧のスクリーンネーム。-->
                 <!--autofollow_ajaxは個別フォローするurlへのポストの時のurl-->
                 <!--autofollowall_ajaxは自動フォローをonにするポストのurl-->
-
                 <!--$autofollow_checkこの値で現在オートフォロー中か判断-->
                 <div id="js-twitter">
                     <twitter

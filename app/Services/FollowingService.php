@@ -2,11 +2,6 @@
 
 namespace App\Services;
 
-use App\FollowedTarget;
-use App\FollowKeyword;
-use App\Target;
-use Illuminate\Support\Arr;
-use App\FollowingTarget;
 use Illuminate\Support\Facades\Log;
 
 class FollowingService

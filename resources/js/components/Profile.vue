@@ -91,8 +91,8 @@ export default {
                 return false;
             }
 
-            if (this.name && this.email ) {
-                if(!window.confirm('本当に更新しますか？')){
+            if (this.name && this.email) {
+                if (!window.confirm('本当に更新しますか？')) {
                     window.alert('キャンセルされました');
                     e.preventDefault();
                     return false;
@@ -108,8 +108,8 @@ export default {
         deleteForm: function (e) {
             this.errors = [];
 
-            if (this.name === this.confirmName  && this.email === this.confirmEmail) {
-                if(!window.confirm('本当に退会しますか？')) {
+            if (this.name === this.confirmName && this.email === this.confirmEmail) {
+                if (!window.confirm('本当に退会しますか？')) {
                     window.alert('キャンセルされました');
                     e.preventDefault();
                     return false;
@@ -133,8 +133,8 @@ export default {
             name: [],
             email: [],
             errors: [],
-            confirmName:[],
-            confirmEmail:[]
+            confirmName: [],
+            confirmEmail: []
         }
     }
 }
