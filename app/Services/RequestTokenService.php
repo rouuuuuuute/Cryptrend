@@ -40,7 +40,7 @@ class RequestTokenService
 // 各パラメータをURLエンコードする
         foreach ($params as $key => $value) {
             // コールバックURLはエンコードしない
-            if ($key == "oauth_callback") {
+            if ($key === "oauth_callback") {
                 continue;
             }
 

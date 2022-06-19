@@ -31,6 +31,17 @@
                     </label>
                 </div>
             </div>
+
+            <div class="p-sidebtn__coinsp__container"  v-if="check_show">
+                <div class="p-sidebtn__coinsp">
+                    <select class="p-sidebtn__coinsp" v-model="spcoin" v-on:change="sppushCoin(spcoin)">
+                        <option class="p-sidebtn__coinsp__select" v-bind:value="null" disabled hidden>選択してください</option>
+                        <option class="p-sidebtn__coinsp__select" v-for="spcoin in coins" v-bind:key="spcoin.id" v-bind:value="spcoin">
+                            {{ spcoin.coins_name }}
+                        </option>
+                    </select>
+                </div>
+            </div>
         </section>
 
         <section class="p-coin__main">
@@ -97,7 +108,7 @@
                     <table>
                         <th>過去1時間</th>
                         <th>過去1日</th>
-                        <th>過去1日</th>
+                        <th>過去1週間</th>
                         <tr>
                             <td>{{ pcoin.hour }}</td>
                             <td>{{ pcoin.day }}</td>
@@ -145,6 +156,7 @@ export default {
             day_show: false, //trueになれば1日ごとのツイート数を表示
             week_show: false, //trueになれば1週間ごとのツイート数を表示
             check_show: false, //trueになればコインボタンの表示を行う。
+            spcoin: null
         }
     },
     //ページ表示の時点では1時間ごとの表示を行う。
@@ -215,16 +227,25 @@ export default {
         },
         //exitCoinsは表示上のコインではなく、データ上登録されているcoinデータ。
         pushCoin(pcoin) {
-                if (this.exitCoins.indexOf(pcoin.coins_name) === -1) {
-                    this.showCoins.push(pcoin);
-                    this.exitCoins.push(pcoin.coins_name);
-                    this.hour_show = false;
-                    this.day_show = false;
-                    this.week_show = false;
-                } else {
-                    this.exitCoins = this.exitCoins.filter(n => n !== pcoin.coins_name);
-                    this.showCoins = this.showCoins.filter(n => n !== pcoin);
-                }
+            if (this.exitCoins.indexOf(pcoin.coins_name) === -1) {
+                this.showCoins.push(pcoin);
+                this.exitCoins.push(pcoin.coins_name);
+                this.hour_show = false;
+                this.day_show = false;
+                this.week_show = false;
+            } else {
+                this.exitCoins = this.exitCoins.filter(n => n !== pcoin.coins_name);
+                this.showCoins = this.showCoins.filter(n => n !== pcoin);
+            }
+        },
+        sppushCoin(spcoin) {
+            this.showCoins = [];
+            this.exitCoins = [];
+            this.showCoins.push(spcoin);
+            this.exitCoins.push(spcoin.coins_name);
+            this.hour_show = false;
+            this.day_show = false;
+            this.week_show = false;
         },
         //表示内容を初期化するメソッド。
         resetCoin() {
@@ -234,6 +255,7 @@ export default {
             this.day_show = false;
             this.week_show = false;
             this.resetCheckbox();
+            this.spcoin= null;
         },
         //チェックボックスのチェックをリセットするメソッド。
         //期間集計を表示するときにも使うため「resetCoin」とは分けています。
@@ -246,6 +268,7 @@ export default {
         //コインの表示をするためのボックスを出し入れするメソッド。
         coinbuttonShow() {
             this.check_show = !this.check_show;
+            this.spcoin= null;
         }
     }
 }

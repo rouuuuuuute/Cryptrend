@@ -45,7 +45,7 @@ class AutofollowController extends Controller
         Log::debug(print_r("1だとオートフォローはon、0だとオートフォローはoff", true));
         Log::debug(print_r("セッション：autofollowを調整します", true));
 
-        if ($autofollow_flg == 1) {
+        if ($autofollow_flg === 1) {
             Session::put('autofollow', true);//セッションにオートフォロー実施中である旨を入れる。
         } else {
             Session::forget('autofollow');
@@ -274,7 +274,7 @@ class AutofollowController extends Controller
         Log::debug("autoフォロー1の状態の人です。" . $follow_acount);
         $num = count($follow_acount);
         Log::debug("numです" . $num);
-        if ($num == 0) {
+        if ($num === 0) {
             Log::debug("自動フォロー実行中の人がいません。終了します");
             return;
         }
