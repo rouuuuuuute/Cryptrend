@@ -2,15 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\RateLimitStatusService;
-use App\Target;
-use App\TwitterAccount;
-use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
-use Illuminate\Support\Facades\Log;
 
 class RequestDatabaseController extends Controller
 {
@@ -24,6 +17,7 @@ class RequestDatabaseController extends Controller
         $user_id = Auth::id();
         return DB::table('twitter_accounts')->where('user_id', '=', $user_id)->get()->toJson();
     }
+
     public function name()
     {
         $id = Auth::id();

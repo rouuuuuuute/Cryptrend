@@ -2,12 +2,6 @@
 
 namespace App\Services;
 
-use App\FollowedTarget;
-use App\FollowKeyword;
-use App\Target;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\DB;
-
 use Illuminate\Support\Facades\Log;
 
 //キーワード検索
@@ -21,7 +15,7 @@ class SearchService
     public $access_token_secret;
     public $q;
 
-    public function __construct($api_key, $api_secret, $access_token, $access_token_secret, $q ,$before_hour,$now_time)
+    public function __construct($api_key, $api_secret, $access_token, $access_token_secret, $q, $before_hour, $now_time)
     {
         $this->api_key = $api_key;
         $this->api_secret = $api_secret;
@@ -44,7 +38,7 @@ class SearchService
 // パラメータA (オプション)
         $params_a = array(
             "q" => $this->q,
-            "count"=>100,
+            "count" => 100,
             'result_type' => 'recent',
             'since' => $this->before_hour,
             'until' => $this->now_time
@@ -142,8 +136,8 @@ class SearchService
         $arr = json_decode($json, true);
 //        $tweets = Arr::collapse($arr);
 
-        Log::debug(print_r('SearchService処理を終了します',true));
-        Log::debug(print_r('//////////////////////////////////////////',true));
+        Log::debug(print_r('SearchService処理を終了します', true));
+        Log::debug(print_r('//////////////////////////////////////////', true));
 
         return $arr;
     }

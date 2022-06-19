@@ -5,7 +5,7 @@
                 <div class="c-title c-title__form">Twitterアカウント連携</div>
 
                 <div class="c-form">
-                    <form method="POST" @submit="checkForm">
+                    <form method="POST">
                         <input type="hidden" name="_token" v-bind:value="csrf">
                         <div>
                             <div>
@@ -30,14 +30,14 @@
                         <div class="c-button__wrap">
                             <div class="c-button c-button__form" v-if="account === 'register'">
                                 <div>
-                                    <button type="submit" formaction="/twitter/accounts/request">
+                                    <button type="submit" formaction="/twitter/accounts/request" @click="registForm">
                                         登録する
                                     </button>
                                 </div>
                             </div>
-                            <div class="c-button c-button__form" v-else>
+                            <div class="c-button c-button__form" v-else-if="account !== null">
                                 <div>
-                                    <button type="submit" formaction="/twitter/accounts/delete">
+                                    <button type="submit" formaction="/twitter/accounts/delete" @click="deleteForm">
                                         削除する
                                     </button>
                                 </div>
@@ -76,8 +76,25 @@ export default {
         })
     },
     methods: {
-        checkForm: function (e) {
+        registForm: function (e) {
             if (this.account) {
+                return true;
+            }
+
+            this.errors = [];
+
+            if (!this.account) {
+                this.errors.push('アカウントを選択してください');
+            }
+            e.preventDefault();
+        },
+        deleteForm: function (e) {
+            if (this.account) {
+                if (!window.confirm('本当に削除しますか？')) {
+                    window.alert('キャンセルされました');
+                    e.preventDefault();
+                    return false;
+                }
                 return true;
             }
 

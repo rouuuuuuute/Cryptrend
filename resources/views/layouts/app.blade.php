@@ -14,7 +14,7 @@
 
     <!-- 子テンプレートでsection('title')があるかどうかで表示をわけている -->
     @hasSection('title')
-        <title>@yield('title') | CrypTrend</title>
+        <title>@yield('title') | CryptoTrend</title>
     @else
         <title>{{ config('app.name') }}</title>
 @endif
@@ -33,7 +33,7 @@
 <!-- ヘッダーのテンプレート -->
 @section('header')
     <header id="l-header">
-        <h1 class="c-title"><a class="c-menu__link" href="/welcome">仮想通貨トレンド分析システム|CrypTrend</a></h1>
+        <h1 class="c-title"><a class="c-menu__link" href="/welcome">仮想通貨トレンド分析システム|CryptoTrend</a></h1>
         <div class="c-menu__sp js-toggle-sp-menu">
             <span></span>
             <span></span>
@@ -102,7 +102,7 @@
 @section('footer')
     <footer id="l-footer">
         <div class="p-footer">
-            <p>Copyright ©CrypTrend. All Rights Reserved</p>
+            <p>Copyright ©CryptoTrend. All Rights Reserved</p>
         </div>
     </footer>
 @show

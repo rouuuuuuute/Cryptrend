@@ -1,16 +1,12 @@
 @extends('layouts.app')
 
+@section('title','パスワードリセットメール送信')
+
 @section('content')
     <div class="p-form">
         <div class="c-title c-title__form">{{ __('Reset Password') }}</div>
 
         <div class="c-form">
-            @if (session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
-                </div>
-            @endif
-
             <form method="POST" action="{{ route('password.email') }}">
                 @csrf
 
@@ -18,7 +14,8 @@
                     <label for="email">{{ __('E-Mail Address') }}</label>
 
                     <div>
-                        <input id="email" type="email" class="c-form__input form-control @error('email') is-invalid @enderror"
+                        <input id="email" type="email"
+                               class="c-form__input form-control @error('email') is-invalid @enderror"
                                name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                         @error('email')
@@ -26,6 +23,14 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                         @enderror
+
+                        @if (session('status'))
+                            <div class="c-invalid__feedback" role="alert">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+
+
                     </div>
                 </div>
 

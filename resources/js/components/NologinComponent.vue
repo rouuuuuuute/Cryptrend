@@ -1,5 +1,7 @@
 <template>
     <section>
+        <div class="c-title c-title__form">一括フォロー</div>
+
         <article class="p-main__service">
             <!--ツイッター認証していない場合はDBからランダムに取得したsampleusersを並べる。-->
             <div class="p-twiiter__container">

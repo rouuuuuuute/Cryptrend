@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title','リセットパスワード')
+
 @section('content')
     <div class="p-form">
         <div class="c-title c-title__form">{{ __('Reset Password') }}</div>
@@ -14,7 +16,8 @@
                     <label for="email">{{ __('E-Mail Address') }}</label>
 
                     <div>
-                        <input id="email" type="email" class="c-form__input form-control @error('email') is-invalid @enderror"
+                        <input id="email" type="email"
+                               class="c-form__input form-control @error('email') is-invalid @enderror"
                                name="email" value="{{ $email ?? old('email') }}" required autocomplete="email"
                                autofocus>
 
@@ -31,7 +34,8 @@
 
                     <div>
                         <input id="password" type="password"
-                               class="c-form__input form-control @error('password') is-invalid @enderror" name="password" required
+                               class="c-form__input form-control @error('password') is-invalid @enderror"
+                               name="password" required
                                autocomplete="new-password">
 
                         @error('password')
@@ -46,7 +50,8 @@
                     <label for="password-confirm">{{ __('Confirm Password') }}</label>
 
                     <div>
-                        <input id="password-confirm" type="password" class="c-form__input form-control" name="password_confirmation"
+                        <input id="password-confirm" type="password" class="c-form__input form-control"
+                               name="password_confirmation"
                                required autocomplete="new-password">
                     </div>
                 </div>

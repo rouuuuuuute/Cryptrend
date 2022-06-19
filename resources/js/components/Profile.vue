@@ -2,17 +2,17 @@
     <div>
         <article class="p-main">
             <div class="p-form">
-                <div class="c-title c-title__form">プロフィール</div>
+                <div class="c-title c-title__form">マイページ</div>
 
                 <div class="c-form">
-                    <form method="POST" @submit="checkForm">
+                    <form method="POST">
                         <input type="hidden" name="_token" v-bind:value="csrf">
                         <div>
                             <label for="name"> ニックネーム </label>
                             <div>
                                 <input id="name" type="text"
                                        class="c-form__input form-control"
-                                       name="name" v-bind:value="name" required
+                                       name="name" v-model="name" required
                                        autofocus>
                             </div>
                         </div>
@@ -21,15 +21,13 @@
                             <div>
                                 <input id="email" type="text"
                                        class="c-form__input form-control "
-                                       name="email" v-bind:value="email" required
+                                       name="email" v-model="email" required
                                        autofocus>
-
-
                             </div>
                         </div>
 
                         <div class="c-button__wrap">
-                            <div class="c-button c-button__form">
+                            <div class="c-button c-button__form" @click="updateForm">
                                 <div>
                                     <button type="submit" formaction="/profile/edit">
                                         更新する
@@ -38,7 +36,7 @@
                             </div>
                             <div class="c-button c-button__form">
                                 <div>
-                                    <button type="submit" formaction="/profile/withdraw">
+                                    <button type="submit" formaction="/profile/withdraw" @click="deleteForm">
                                         退会する
                                     </button>
                                 </div>
@@ -73,31 +71,70 @@ export default {
         this.$nextTick(function () {
             axios.get('/home/json/name').then(response => {
                 this.name = response.data;
+                this.confirmName = response.data;
             })
             axios.get('/home/json/email').then(response => {
                 this.email = response.data;
+                this.confirmEmail = response.data;
+
             })
         })
     },
     methods: {
-        checkForm: function (e) {
-            if (this.name && this.email) {
-                return true;
+        updateForm: function (e) {
+            this.errors = [];
+
+            let email = this.email;
+            if (!email.match(/.+@.+\..+/)) {
+                this.errors.push('Emailの形式で入力してください');
+                e.preventDefault();
+                return false;
             }
 
-            this.errors = [];
+            if (this.name && this.email) {
+                if (!window.confirm('本当に更新しますか？')) {
+                    window.alert('キャンセルされました');
+                    e.preventDefault();
+                    return false;
+                }
+                return true;
+            }
 
             if (!this.name || !this.email) {
                 this.errors.push('全て入力必須項目です');
             }
             e.preventDefault();
+        },
+        deleteForm: function (e) {
+            this.errors = [];
+
+            if (this.name === this.confirmName && this.email === this.confirmEmail) {
+                if (!window.confirm('本当に退会しますか？')) {
+                    window.alert('キャンセルされました');
+                    e.preventDefault();
+                    return false;
+                }
+                return true;
+            }
+
+            this.errors.push('登録情報と一致させてください');
+
+            if (!this.name || !this.email) {
+                this.errors.push('全て入力必須項目です');
+            }
+            e.preventDefault();
+        },
+        inputForm: function (e) {
+            this.email = this.target.value;
         }
     },
     data: function () {
         return {
             name: [],
             email: [],
-            errors: []
+            errors: [],
+            confirmName: [],
+            confirmEmail: []
         }
     }
 }

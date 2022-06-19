@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use App\Updatetime;
 use App\Coin;
 use App\Services\CoinSearchService;
+use Illuminate\Support\Facades\DB;
 
 //通貨トレンド関連のクラス。
 //indexでページを表示させ、hour/day/week/highandlowでdb上のcoinテーブルの値を更新。cronで定期更新
@@ -30,23 +29,23 @@ class CoinController extends Controller
         $week = $coinupdatedate["update_week"];
         $highlow = $coinupdatedate["update_highandlow"];
 
-    return view('home.coin',compact('hour','day','week','highlow'));
-//        return view('home.coin');
+        return view('home.coin', compact('hour', 'day', 'week', 'highlow'));
     }
 
 
-    //ーーーーーーーーーーDBに1時間のツイート数をインサートする処理（定期バッジ）ーーーーーーーーーー
+    //ーーーーーーーーーーDBに1時間のツイート数をインサートする処理（定期バッチ）ーーーーーーーーーー
     public static function hour()
     {
+
         Log::debug(print_r('////////////////////////////////////////', true));
         Log::debug(print_r('Coinコントローラーの処理を開始します', true));
 
         $now_time = date("Y-m-d_H:i:s") . "_JST";//今の時間
         $before_time = date('Y-m-d_H:i:s', strtotime('-1 hour', time())) . "_JST";
         $past = 'hour';
-        $request_loop = 1 ;
+        $request_loop = 1;
 
-        $coin = new CoinSearchService($now_time, $before_time, $past,$request_loop);
+        $coin = new CoinSearchService($now_time, $before_time, $past, $request_loop);
         $coin->coinsearch();
 
         date_default_timezone_set('Asia/Tokyo');
@@ -55,10 +54,25 @@ class CoinController extends Controller
         $data = ['update_hour' => $now_time];
         $addusertime_update->update($data);
 
+        $coin = new CoinSearchService($now_time, $before_time, $past, $request_loop);
+
+        date_default_timezone_set('Asia/Tokyo');
+        $now_time = date("Y-m-d H:i:s");//今の時間
+        $addusertime_update = Updatetime::where('id', 1)->first();//dbからデータ取得
+        $data = ['update_hour' => $now_time];
+
+        DB::beginTransaction();
+        try {
+            $addusertime_update->update($data);
+            DB::commit(); // コミット
+        } catch (\Exception $e) {
+            DB::rollback(); // ロールバック
+            return;
+        }
         return;
     }
 
-    //ーーーーーーーーーーDBに1日のツイート数をインサートする処理（定期バッジ）ーーーーーーーーーー
+    //ーーーーーーーーーーDBに1日のツイート数をインサートする処理（定期バッチ）ーーーーーーーーーー
     public static function day()
     {
 
@@ -68,20 +82,28 @@ class CoinController extends Controller
         $now_time = date("Y-m-d_H:i:s") . "_JST";//今の時間
         $before_time = date('Y-m-d_H:i:s', strtotime('-1 day', time())) . "_JST";
         $past = 'day';
-        $request_loop = 24 ;
+        $request_loop = 24;
 
-        $coin = new CoinSearchService($now_time, $before_time, $past,$request_loop);
+        $coin = new CoinSearchService($now_time, $before_time, $past, $request_loop);
         $coin->coinsearch();
 
         date_default_timezone_set('Asia/Tokyo');
         $now_time = date("Y-m-d H:i:s");//今の時間
         $addusertime_update = Updatetime::where('id', 1)->first();//dbからデータ取得
         $data = ['update_day' => $now_time];
-        $addusertime_update->update($data);
 
+        DB::beginTransaction();
+        try {
+            $addusertime_update->update($data);
+            DB::commit(); // コミット
+        } catch (\Exception $e) {
+            DB::rollback(); // ロールバック
+            return;
+        }
         return;
     }
 
+    //ーーーーーーーーーーDBに1週間のツイート数をインサートする処理（定期バッチ）ーーーーーーーーーー
     public static function week()
     {
 
@@ -91,21 +113,29 @@ class CoinController extends Controller
         $now_time = date("Y-m-d_H:i:s") . "_JST";//今の時間
         $before_time = date('Y-m-d_H:i:s', strtotime('-7 day', time())) . "_JST";
         $past = 'week';
-        $request_loop = 100 ;
+        $request_loop = 168;
 
-        $coin = new CoinSearchService($now_time, $before_time, $past,$request_loop);
+        $coin = new CoinSearchService($now_time, $before_time, $past, $request_loop);
         $coin->coinsearch();
 
         date_default_timezone_set('Asia/Tokyo');
         $now_time = date("Y-m-d H:i:s");//今の時間
         $addusertime_update = Updatetime::where('id', 1)->first();//dbからデータ取得
         $data = ['update_week' => $now_time];
-        $addusertime_update->update($data);
+
+        DB::beginTransaction();
+        try {
+            $addusertime_update->update($data);
+            DB::commit(); // コミット
+        } catch (\Exception $e) {
+            DB::rollback(); // ロールバック
+            return;
+        }
 
         return;
     }
 
-    //ーーーーーーーーーーcoincheckAPIから取引価格取得しDBに保管（定期バッジ）ーーーーーーーーーー
+    //ーーーーーーーーーーcoincheckAPIから取引価格取得しDBに保管（定期バッチ）ーーーーーーーーーー
     public static function highandlow()
     {
 
@@ -136,21 +166,28 @@ class CoinController extends Controller
         $coin_mona = Coin::where('id', 9)->first();
 
 
-        $coin_btc->high = $btc['high'];
-        $coin_btc->low = $btc['low'];
-        $coin_btc->save();
+        DB::beginTransaction();
+        try {
+            $coin_btc->high = $btc['high'];
+            $coin_btc->low = $btc['low'];
+            $coin_btc->save();
 
-        $coin_etc->high = $etc['high'];
-        $coin_etc->low = $etc['low'];
-        $coin_etc->save();
+            $coin_etc->high = $etc['high'];
+            $coin_etc->low = $etc['low'];
+            $coin_etc->save();
 
-        $coin_plt->high = $plt['high'];
-        $coin_plt->low = $plt['low'];
-        $coin_plt->save();
+            $coin_plt->high = $plt['high'];
+            $coin_plt->low = $plt['low'];
+            $coin_plt->save();
 
-        $coin_mona->high = $mona['high'];
-        $coin_mona->low = $mona['low'];
-        $coin_mona->save();
+            $coin_mona->high = $mona['high'];
+            $coin_mona->low = $mona['low'];
+            $coin_mona->save();
+            DB::commit(); // コミット
+        } catch (\Exception $e) {
+            DB::rollback(); // ロールバック
+            return;
+        }
 
 
         //DB上の更新日時記録テーブルを更新
@@ -159,7 +196,15 @@ class CoinController extends Controller
         //Log::debug($now_time);
         $addusertime_update = Updatetime::where('id', 1)->first();//dbからデータ取得
         $data = ['update_highandlow' => $now_time];
-        $addusertime_update->update($data);
+
+        DB::beginTransaction();
+        try {
+            $addusertime_update->update($data);
+            DB::commit(); // コミット
+        } catch (\Exception $e) {
+            DB::rollback(); // ロールバック
+            return;
+        }
         return;
     }
 
