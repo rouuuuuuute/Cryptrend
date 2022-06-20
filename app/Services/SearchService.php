@@ -2,8 +2,6 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Facades\Log;
-
 //キーワード検索
 class SearchService
 {
@@ -28,10 +26,6 @@ class SearchService
 
     public function search()
     {
-        Log::debug(print_r('////////////////////////////////////////', true));
-        Log::debug(print_r('SearchSrviceの処理を開始します', true));
-
-
         $request_url = 'https://api.twitter.com/1.1/search/tweets.json';        // エンドポイント
         $request_method = 'GET';
 
@@ -109,11 +103,6 @@ class SearchService
             $request_url .= '?' . http_build_query($params_a);
         }
 
-// オプションがある場合、コンテキストにPOSTフィールドを作成する (GETの場合は不要)
-//	if( $params_a ) {
-//		$context['http']['content'] = http_build_query( $params_a ) ;
-//	}
-
 // cURLを使ってリクエスト
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $request_url);
@@ -122,9 +111,6 @@ class SearchService
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);    // 証明書の検証を行わない
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);    // curl_execの結果を文字列で返す
         curl_setopt($curl, CURLOPT_HTTPHEADER, $context['http']['header']);    // ヘッダー
-//	if( isset( $context['http']['content'] ) && !empty( $context['http']['content'] ) ) {		// GETの場合は不要
-//		curl_setopt( $curl , CURLOPT_POSTFIELDS , $context['http']['content'] ) ;	// リクエストボディ
-//	}
         curl_setopt($curl, CURLOPT_TIMEOUT, 5);    // タイムアウトの秒数
         $res1 = curl_exec($curl);
         $res2 = curl_getinfo($curl);
@@ -134,10 +120,6 @@ class SearchService
         $json = substr($res1, $res2['header_size']);
 
         $arr = json_decode($json, true);
-//        $tweets = Arr::collapse($arr);
-
-        Log::debug(print_r('SearchService処理を終了します', true));
-        Log::debug(print_r('//////////////////////////////////////////', true));
 
         return $arr;
     }

@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Facades\Log;
 
 class FollowingService
 {
@@ -93,11 +92,6 @@ class FollowingService
             ),
         );
 
-        // パラメータがある場合、URLの末尾に追加 (POSTの場合は不要)
-//	if ( $params_a ) {
-//		$request_url .= '?' . http_build_query( $params_a ) ;
-//	}
-
         // オプションがある場合、コンテキストにPOSTフィールドを作成する
         if ($params_a) {
             $context['http']['content'] = http_build_query($params_a);
@@ -123,11 +117,6 @@ class FollowingService
         $json = substr($res1, $res2['header_size']);    // 取得したデータ(JSONなど)
 
         $arr = json_decode($json, true);
-
-        Log::debug(print_r($arr, true));
-
-        Log::debug(print_r('FollowingService処理を終了します', true));
-        Log::debug(print_r('//////////////////////////////////////////', true));
 
         return $arr;
     }

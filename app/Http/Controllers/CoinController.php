@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Log;
 use App\Updatetime;
 use App\Coin;
 use App\Services\CoinSearchService;
@@ -21,8 +20,6 @@ class CoinController extends Controller
     //ーーーーーーーーーーページの表示ーーーーーーーーーー
     public function index()
     {
-        //Log::debug("ーーーーーーーーーーーーーーー仮想通貨トレンドのページですーーーーーーーーーーーーーーー");
-
         $coinupdatedate = Updatetime::where('id', 1)->first();//全てのコインの更新日時をDBより引用
         $hour = $coinupdatedate["update_hour"];//時間単位のツイートの更新日時
         $day = $coinupdatedate["update_day"];//1日単位のツイートの更新日時
@@ -36,10 +33,6 @@ class CoinController extends Controller
     //ーーーーーーーーーーDBに1時間のツイート数をインサートする処理（定期バッチ）ーーーーーーーーーー
     public static function hour()
     {
-
-        Log::debug(print_r('////////////////////////////////////////', true));
-        Log::debug(print_r('Coinコントローラーの処理を開始します', true));
-
         $now_time = date("Y-m-d_H:i:s") . "_JST";//今の時間
         $before_time = date('Y-m-d_H:i:s', strtotime('-1 hour', time())) . "_JST";
         $past = 'hour';
@@ -75,10 +68,6 @@ class CoinController extends Controller
     //ーーーーーーーーーーDBに1日のツイート数をインサートする処理（定期バッチ）ーーーーーーーーーー
     public static function day()
     {
-
-        Log::debug(print_r('////////////////////////////////////////', true));
-        Log::debug(print_r('Coinコントローラーの処理を開始します', true));
-
         $now_time = date("Y-m-d_H:i:s") . "_JST";//今の時間
         $before_time = date('Y-m-d_H:i:s', strtotime('-1 day', time())) . "_JST";
         $past = 'day';
@@ -106,10 +95,6 @@ class CoinController extends Controller
     //ーーーーーーーーーーDBに1週間のツイート数をインサートする処理（定期バッチ）ーーーーーーーーーー
     public static function week()
     {
-
-        Log::debug(print_r('////////////////////////////////////////', true));
-        Log::debug(print_r('Coinコントローラーの処理を開始します', true));
-
         $now_time = date("Y-m-d_H:i:s") . "_JST";//今の時間
         $before_time = date('Y-m-d_H:i:s', strtotime('-7 day', time())) . "_JST";
         $past = 'week';
@@ -193,7 +178,6 @@ class CoinController extends Controller
         //DB上の更新日時記録テーブルを更新
         date_default_timezone_set('Asia/Tokyo');
         $now_time = date("Y-m-d H:i:s");//今の時間
-        //Log::debug($now_time);
         $addusertime_update = Updatetime::where('id', 1)->first();//dbからデータ取得
         $data = ['update_highandlow' => $now_time];
 

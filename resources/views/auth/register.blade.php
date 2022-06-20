@@ -66,7 +66,7 @@
                 @error('email')
                 <span class="c-invalid__feedback" role="alert">
                                         <strong>{{ $message }}</strong>
-                                    </span>
+                                    </span><br>
                 @enderror
 
                 @error('password')

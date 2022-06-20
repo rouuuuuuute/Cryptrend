@@ -829,7 +829,7 @@ img {
     width: 95%;
     display: block;
     height: 70%;
-    text-align: left;
+    text-align: center;
     animation-duration: 0.3s;
     animation-name: toup;
     margin: 10px;
@@ -1011,17 +1011,17 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: fade-out 3s ease 3s forwards;
-  -webkit-animation: fade-out 3s ease 3s forwards;
+  animation: fade-out 2s ease 2s forwards;
+  -webkit-animation: fade-out 2s ease 2s forwards;
 }
 @-webkit-keyframes fade-out {
   100% {
-    opacity: 0;
+    visibility: hidden;
   }
 }
 @keyframes fade-out {
   100% {
-    opacity: 0;
+    visibility: hidden;
   }
 }
 

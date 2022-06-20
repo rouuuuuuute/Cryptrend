@@ -19,9 +19,9 @@
                                name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                         @error('email')
-                        <span class="c-invalid__feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                        <div class="c-invalid__feedback" role="alert">
+                            {{ $message }}
+                        </div>
                         @enderror
 
                         @if (session('status'))

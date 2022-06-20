@@ -32,11 +32,12 @@
                 </div>
             </div>
 
-            <div class="p-sidebtn__coinsp__container"  v-if="check_show">
+            <div class="p-sidebtn__coinsp__container" v-if="check_show">
                 <div class="p-sidebtn__coinsp">
                     <select class="p-sidebtn__coinsp" v-model="spcoin" v-on:change="sppushCoin(spcoin)">
                         <option class="p-sidebtn__coinsp__select" v-bind:value="null" disabled hidden>選択してください</option>
-                        <option class="p-sidebtn__coinsp__select" v-for="spcoin in coins" v-bind:key="spcoin.id" v-bind:value="spcoin">
+                        <option class="p-sidebtn__coinsp__select" v-for="spcoin in coins" v-bind:key="spcoin.id"
+                                v-bind:value="spcoin">
                             {{ spcoin.coins_name }}
                         </option>
                     </select>
@@ -255,20 +256,20 @@ export default {
             this.day_show = false;
             this.week_show = false;
             this.resetCheckbox();
-            this.spcoin= null;
+            this.spcoin = null;
         },
         //チェックボックスのチェックをリセットするメソッド。
         //期間集計を表示するときにも使うため「resetCoin」とは分けています。
         resetCheckbox() {
             let checkboxs = document.getElementsByClassName("p-sidebtn__coin__input");
-            for (var i = 0; i < checkboxs.length; i++) {
+            for (let i = 0; i < checkboxs.length; i++) {
                 checkboxs[i].checked = false;
             }
         },
         //コインの表示をするためのボックスを出し入れするメソッド。
         coinbuttonShow() {
             this.check_show = !this.check_show;
-            this.spcoin= null;
+            this.spcoin = null;
         }
     }
 }
