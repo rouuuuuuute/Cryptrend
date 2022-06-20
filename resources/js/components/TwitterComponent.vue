@@ -6,20 +6,20 @@
             <article class="p-main__service">
                 <div class="p-autofollow__container">
                     <div class="p-autofollow__description">
-                        <p>まとめてフォローをONにすると15分に一度、自動フォローを実施します。</p>
+                        <p>一括フォローをONにすると15分に一度、自動フォローを実施します。</p>
                         <div class="p-autofollow__ongoing" v-show="ongoing">
                             <p>自動フォロー実施中です。</p>
                         </div>
                         <!--自動フォローのボタン。クリックするたびにautofollowStartをon/off切り替える-->
                         <button class="c-button c-button__autofollow" v-on:click="autofollowStart"
                                 v-bind:class='{nowfollow:ongoing}' v-if="auto_status === '1'">
-                            まとめてフォローOFFに切り替える
+                            一括フォローOFFにする
                         </button>
                         <button class="c-button c-button__autofollow" v-on:click="autofollowStart"
                                 v-bind:class='{nowfollow:ongoing}' v-else>
-                            まとめてフォローONに切り替える
+                            一括フォローONにする
                         </button>
-                        <p>※まとめてフォローONの状態でも、個別フォローが可能です。</p>
+                        <p>※一括フォローONの状態でも、個別フォローが可能です。</p>
                     </div>
                 </div>
 
@@ -106,7 +106,7 @@ export default {
                 this.ongoing = false;
             }
         },
-        //まとめてフォロー（自動フォローのONOFFを切り替えるメソッド）
+        //一括フォロー（自動フォローのONOFFを切り替えるメソッド）
         autofollowStart: function () {
             let self = this;
             let url = this.autofollowall_ajax; //ajax先のurl
@@ -124,7 +124,7 @@ export default {
             axios.post(url, {
                 request
             }).then((res) => {
-                alert('まとめてフォローの設定を切り替えました。ページを再読み込みします。');
+                alert('一括フォローの設定を切り替えました。ページを再読み込みします。');
                 location.reload();
             }).catch(error => {
             });

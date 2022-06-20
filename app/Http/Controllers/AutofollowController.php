@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use App\Services\LookupSearchService;
 use App\Services\TwitterUserSearchService;
@@ -37,13 +36,8 @@ class AutofollowController extends Controller
     public function index()
     {
 
-        Log::debug("ーーーーーーーーーーーーーーーまとめてフォローのページですーーーーーーーーーーーーーーー");
         $autofollow_flg = Auth::user()->autofollow;
         $autofollow_check = $autofollow_flg;
-        Log::debug(print_r("autofollow_checkの状態", true));
-        Log::debug(print_r($autofollow_flg, true));
-        Log::debug(print_r("1だとオートフォローはon、0だとオートフォローはoff", true));
-        Log::debug(print_r("セッション：autofollowを調整します", true));
 
         if ($autofollow_flg === 1) {
             Session::put('autofollow', true);//セッションにオートフォロー実施中である旨を入れる。
@@ -52,38 +46,27 @@ class AutofollowController extends Controller
         }
 
         //■■■前回にフォローした日付（follow_day）をDBから確認し、違う日であればリセットする。■■■
-        Log::debug(print_r("処理:DB上の前回のアクセス日と異なるかチェックします。", true));
         date_default_timezone_set('Asia/Tokyo');
         $today = date("Y-m-d");
-        Log::debug(print_r("本日の日付" . $today, true));
         $dbfollow_day = Auth::user()->follow_day;
-        Log::debug("DB上のフォローした日" . $dbfollow_day);
 
         //db上のフォローをした日付と本日が違う場合
         if ($today !== $dbfollow_day) {
-            Log::debug("日付が異なります。DB上のフォロー数をリセットし、DB上の日付を変更します。");
             //フォロー数をリセットし、本日に日付に更新。
             Auth::user()->follow_count = 0;
             Auth::user()->follow_day = $today;
             Auth::user()->update();
             Session::forget('today_follow_end');//フォロー自体できなくなる処理をリセット
-        } else {
-            //db上のフォローをした日付と本日が同じ場合は特に何もしない
-            Log::debug("以前の日付と同じです。DB上のフォロー数は維持されます。");
         }
 
 
         //1日のフォロー数制限が395超えていたらフォローできないようにするフラグをonにする
-        Log::debug("一日のフォロー数制限が395超えていたらフォローできないように制限します。");
         $follow_count = Auth::user()->follow_count;
-        Log::debug("本日このサービスでフォローした数" . $follow_count);
         if ($follow_count > 395) //本来は395にする！
         {
-            Log::debug("すでに385フォロー超えています。");
             Session::put('today_follow_end', true);
 
         } else {
-            Log::debug("まだフォロー数は395を超えていません。");
             Session::put('today_follow_end', false);
         }
 
@@ -93,8 +76,9 @@ class AutofollowController extends Controller
         //代わりにajaxでdb上から取得したユーザーデータを表示させる。値は$temp_userに入れます。
 
         $follow_users = array();
-        for ($i = 0; $i < 15; $i++) {
-            //DBからユーザーを15人、screen_nameのみランダムに取得し、$randomUserに詰め込む。
+        for ($i = 0; $i < 13; $i++) {
+            //DBからユーザーを14人、screen_nameのみランダムに取得し、$randomUserに詰め込む。
+            //凍結されないように14人に設定
             $randomUser = Autofollow::inRandomOrder()->first();
             //それを$follow_usersに詰め込む
             array_push($follow_users, $randomUser->screen_name);
@@ -127,15 +111,7 @@ class AutofollowController extends Controller
 
         $data = session()->all();
 
-        Log::debug(print_r('$user_token',true));
-        Log::debug(print_r($user_token,true));
-        Log::debug(print_r($data,true));
-        Log::debug(print_r($user_token,true));
-
-
         $getuser = count($results);
-        Log::debug("取得できた数。");
-        Log::debug($getuser);
         $temp_user = array();
         //取得データから「following」がfalse（フォローしてない）ユーザーであれば
         //$temp_userに格納（まとめてフォローは15分に1度実施可能にし、14人まで。）
@@ -160,12 +136,7 @@ class AutofollowController extends Controller
 
     public function all(Request $request)
     {
-        Log::debug("自動フォローのonoffを↓に切り替えます。");
-        //$status = $request->auto_status;
-        Log::debug($request['request']);//1
-        //Log::debug($request);
         $user = Auth::user();
-        //Log::debug($user);//1
         $user->autofollow = $request['request'];//数字を更新。
         $user->update();
         return;
@@ -203,7 +174,6 @@ class AutofollowController extends Controller
             $users_results[$i]['text'] = $arr[$i]['status']['text'];
             $users_results[$i]['following'] = $arr[$i]['following'];
 
-            Log::debug(print_r($users_results[$i]['text'], true));
         }
 
         //updateOrCreateを使い同じscreen_nameがDB上autofollowsテーブルにあるかどうか確認し（第一引数）、
@@ -255,27 +225,19 @@ class AutofollowController extends Controller
     //ーーーーーーDBからオートフォロー「1」にされていると実施される
     public static function autofollow()
     {
-        Log::debug("オートフォロー開始します");
-
-        //DBからユーザーを15人、screen_nameのみランダムに取得し、$randomUserに詰め込む。
+        //DBからユーザーを14人、screen_nameのみランダムに取得し、$randomUserに詰め込む。
         //そのscreen_nameを$follow_targetsに詰め込む
         $follow_targets = array();
-        for ($i = 0; $i < 15; $i++) {
+        for ($i = 0; $i < 13; $i++) {
             $randomUser = Autofollow::inRandomOrder()->first();
             array_push($follow_targets, $randomUser->screen_name);
         }
-        Log::debug(print_r('$follow_targetsの表示///////////////', true));
-        Log::debug(print_r($follow_targets, true));
-
 
         //フォロー元のユーザーアカウント（db上のautofollowが1のユーザー）を検索。
         //また、そのユーザー数をカウントする。
         $follow_acount = User::where('autofollow', 1)->get();
-        Log::debug("autoフォロー1の状態の人です。" . $follow_acount);
         $num = count($follow_acount);
-        Log::debug("numです" . $num);
         if ($num === 0) {
-            Log::debug("自動フォロー実行中の人がいません。終了します");
             return;
         }
         sleep(1);//負荷分散のため1秒間を開ける
@@ -286,35 +248,22 @@ class AutofollowController extends Controller
         //1週目$iは0 numは2。
         for ($i = 0; $i < $num; $i++) {
 
-            Log::debug("iの中身です" . $i);
             //1日のフォロー数制限が385超えていたらフォローできないようにするフラグをonにする
-            //Log::debug("処理2:一日のフォロー数制限が385超えていたらフォローできないように制限します。");
-
             //一人分の自動フォロー処理。------------------------------■
             $follow_count = $follow_acount[$i]->follow_count;
             $follow_id = $follow_acount[$i]->id;
-            Log::debug("本日このサービスでフォローした数" . $follow_count);
 
-            if ($follow_count > 395) {
-                Log::debug("すでに1日のフォロー数が395を超えています。処理を終了します。");
-            } else {
-                Log::debug("まだフォロー数は395を超えていません。ここからフォロー処理を実施します。");
-
+            if ($follow_count < 395) {
                 $account_id = TwitterAccount::where('user_id', $follow_id)->value('twitter_id');
-//                Log::debug(print_r('$account_idを表示します///////////////////',true));
-//                Log::debug(print_r($account_id,true));
                 $api_key = 'n2BFchS09CY5Myr9ZxTvJX887';
                 $api_secret = 'ShH0CWC93JF9uYjlyAlOt2vSgtUHG7j4NogjBTvxaYEVo6YGeP';
                 $access_token = TwitterAccount::where('twitter_id', $account_id)->value('oauth_token');
                 $access_token_secret = TwitterAccount::where('twitter_id', $account_id)->value('oauth_token_secret');
 
                 foreach ($follow_targets as $value) {
-                    //Log::debug($value);
                     $screen_name = $value;
-                    Log::debug("screen_nameの中身" . $screen_name);
                     $follow = new FollowingService($api_key, $api_secret, $access_token, $access_token_secret, $screen_name);
                     $results = $follow->following();
-                    Log::debug(print_r($results, true));
                 }
 
 
@@ -322,24 +271,12 @@ class AutofollowController extends Controller
                 $count = count($follow_targets);
                 $now_follow_num = $follow_acount[$i]->follow_count;//処理中のユーザーのカウント数
                 $now_follow_num = $now_follow_num + $count;
-
-                Log::debug("フォローした人数です" . $count);
-                Log::debug("db上の数です。" . $now_follow_num);
-                Log::debug("dbにオールフォロー数を足しました、saveします！db上の数はこちらに更新されます→" . $now_follow_num);
-
                 $user = User::where('id', $follow_id)->first();
                 $user->follow_count = $now_follow_num;
                 $user->update();
-
-                Log::debug("DBを更新しました");
-
-                Log::debug("フォロー処理を終了します。");
-
             }
-            Log::debug($follow_acount[$i]->name . "さんの処理が終わりました。");
             sleep(5);
         }
-        Log::debug("オートフォロー全て終了します");
     }
 
 

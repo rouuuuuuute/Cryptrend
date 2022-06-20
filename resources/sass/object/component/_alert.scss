@@ -12,14 +12,14 @@
     display:flex;
     justify-content: center;
     align-items: center;
-    animation: fade-out 3s ease 3s forwards;
-    -webkit-animation: fade-out 3s ease 3s forwards;
+    animation: fade-out 2s ease 2s forwards;
+    -webkit-animation: fade-out 2s ease 2s forwards;
 
     @-webkit-keyframes fade-out {
-        100% {opacity: 0;}
+        100% {visibility:hidden;}
     }
 
     @keyframes fade-out {
-        100% {opacity: 0;}
+        100% {visibility:hidden;}
     }
 }

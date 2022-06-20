@@ -4,7 +4,6 @@ namespace App\Services;
 
 //通貨トレンド関連のクラス。
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use App\TwitterAccount;
 use App\Services\SearchService;
 use App\Coin;
@@ -28,19 +27,12 @@ class CoinSearchService
 
     public function coinsearch()
     {
-        Log::debug(print_r('////////////////////////////////////////', true));
-        Log::debug(print_r('CoinSearchSrviceの処理を開始します', true));
-
         //ツイッター認証
         $account_id = TwitterAccount::where('id')->value('twitter_id');
         $api_key = 'n2BFchS09CY5Myr9ZxTvJX887';
         $api_secret = 'ShH0CWC93JF9uYjlyAlOt2vSgtUHG7j4NogjBTvxaYEVo6YGeP';
         $access_token = TwitterAccount::where('id', $account_id)->value('oauth_token');
         $access_token_secret = TwitterAccount::where('id', $account_id)->value('oauth_token_secret');
-
-        Log::debug(print_r($account_id, true));
-        Log::debug(print_r($access_token, true));
-        Log::debug(print_r($access_token_secret, true));
 
         date_default_timezone_set('Asia/Tokyo');//https://blog.codecamp.jp/php-datetime参考
         $now_time = $this->now_time;
@@ -51,14 +43,9 @@ class CoinSearchService
 
         $q = "'BTC' OR 'ETH' OR 'ETC' OR 'LSK' OR 'FCT' OR 'XRP' OR 'XEM' OR 'LTC' OR 'BCH' OR 'MONA' OR 'DASH' OR 'ZEC' OR 'XMR' OR 'REP' OR 'XLM' OR 'QTUM' OR 'BAT' OR 'IOST' OR 'ENJ' OR 'OMG' OR 'PLT' OR 'SAND' OR 'XYM' OR 'FCT'";
 
-        Log::debug(print_r('SearchServiceの処理を開始します', true));
-
         //アクセストークン取得用のサービスクラスをよびだす
         $search = new SearchService($api_key, $api_secret, $access_token, $access_token_secret, $q, $before_time, $now_time);
         $results = $search->search();
-
-        Log::debug(print_r('SearchServiceの処理を終了', true));
-        Log::debug(print_r($results, true));
 
         $c = 0;
         for ($i = 0; $i < $request_loop; $i++) {
@@ -102,15 +89,10 @@ class CoinSearchService
         $fct = 0;
 
         $count = count($tweet_results);//ツイート数
-        Log::debug(print_r('--------------------------------------------',true));
-        Log::debug(print_r($count,true));
-
         //一致するテキストがあればカウントアップ
         for ($i = 0; $i < $count; $i++) {
             if (stristr($tweet_results[$i]['text'], 'BTC') !== false) {
                 $btc++;
-                Log::debug(print_r($tweet_results[$i]['text'],true));
-                Log::debug(print_r($btc,true));
             }
             if (stristr($tweet_results[$i]['text'], 'ETH') !== false) {
                 $eth++;

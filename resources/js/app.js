@@ -14,13 +14,9 @@ import Vue from 'vue';
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
 Vue.component('sidebar', require('./components/Sidebar.vue').default);
 Vue.component('profile', require('./components/Profile.vue').default);
 Vue.component('accounts', require('./components/TwitterAccounts.vue').default);
-
 Vue.component('news', require('./components/News.vue').default);
 Vue.component('coin', require('./components/Coin.vue').default);
 Vue.component('twitter', require('./components/TwitterComponent.vue').default);
@@ -61,4 +57,4 @@ const nologin = new Vue({
     el: '#js-nologin'
 });
 
-//aaaa
+//

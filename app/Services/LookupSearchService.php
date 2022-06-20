@@ -24,11 +24,6 @@ class LookupSearchService
 
     public function lookup()
     {
-
-//        Log::debug(print_r('//////////////////////////////////////////', true));
-//        Log::debug(print_r('LookupSearchServiceを開始します', true));
-
-
         $request_url = 'https://api.twitter.com/1.1/users/lookup.json';
         $request_method = 'GET';
 
@@ -97,11 +92,6 @@ class LookupSearchService
             ),
         );
 
-        // パラメータがある場合、URLの末尾に追加 (POSTの場合は不要)
-//	if ( $params_a ) {
-//		$request_url .= '?' . http_build_query( $params_a ) ;
-//	}
-
         // オプションがある場合、コンテキストにPOSTフィールドを作成する
         if ($params_a) {
             $context['http']['content'] = http_build_query($params_a);
@@ -128,14 +118,6 @@ class LookupSearchService
 
         $arr = json_decode($json, true);
 
-//        Log::debug(print_r($arr, true));
-//
-//        Log::debug(print_r('LookupSearchServiceを終了します'));
-//        Log::debug(print_r('//////////////////////////////////////////', true));
-
-
-        //データ確認のため
-//        Log::debug(print_r($arr));
         return $arr;
     }
 }
