@@ -14,8 +14,6 @@ use App\User;
 use App\Updatetime;
 use App\TwitterAccount;
 
-use Illuminate\Support\Facades\Log;
-
 //まとめてフォロー関連のクラス。
 //twitteroauth でサービスへのログインユーザーのツイッター情報を取得する。
 //index:まとめてフォローのページ表示/followはフォローの実施アクション/allfollowは自動フォローのONOFF切り替え機能
