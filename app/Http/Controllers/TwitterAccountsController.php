@@ -24,7 +24,7 @@ class TwitterAccountsController extends Controller
         if (isset($_GET["oauth_token"]) && isset($_GET["oauth_verifier"])) {
             $api_key = 'n2BFchS09CY5Myr9ZxTvJX887';
             $api_secret = 'ShH0CWC93JF9uYjlyAlOt2vSgtUHG7j4NogjBTvxaYEVo6YGeP';
-            $callback_url = 'http://localhost:8000/twitter/accounts';
+            $callback_url = 'http://follobot.click/twitter/accounts';
             $request_token_secret = session("oauth_token_secret");
             $request_url = "https://api.twitter.com/oauth/access_token";
             $request_method = "POST";
@@ -60,7 +60,7 @@ class TwitterAccountsController extends Controller
 
             $api_key = 'n2BFchS09CY5Myr9ZxTvJX887';
             $api_secret = 'ShH0CWC93JF9uYjlyAlOt2vSgtUHG7j4NogjBTvxaYEVo6YGeP';
-            $callback_url = 'http://localhost:8000/twitter/accounts';
+            $callback_url = 'http://follobot.click/twitter/accounts';
             $access_token_secret = "";
             $request_url = "https://api.twitter.com/oauth/request_token";
             $request_method = "POST";
