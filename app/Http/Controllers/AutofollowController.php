@@ -92,7 +92,7 @@ class AutofollowController extends Controller
         $follow_users = implode(",", $follow_users);//クォーテーションをつける。
 
         $user_id = Auth::id();
-        $account_id = TwitterAccount::where('user_id',$user_id)->value('id');
+        $account_id = TwitterAccount::where('user_id', $user_id)->value('id');
         $api_key = 'n2BFchS09CY5Myr9ZxTvJX887';
         $api_secret = 'ShH0CWC93JF9uYjlyAlOt2vSgtUHG7j4NogjBTvxaYEVo6YGeP';
         $access_token = TwitterAccount::where('id', $account_id)->value('oauth_token');
@@ -104,7 +104,7 @@ class AutofollowController extends Controller
 
         $user_token = $access_token;
         if ($user_token) {
-            Session::put('user_token',$user_token);
+            Session::put('user_token', $user_token);
         } else {
             Session::forget('user_token');
         }
@@ -146,57 +146,59 @@ class AutofollowController extends Controller
     //ーーーーーユーザーを1日に数人DB追加するメソッド。cronで数回実施。依存ユーザーの情報がある場合はツイート更新。
     public static function addfollow()
     {
-        $account_id = TwitterAccount::where('id')->value('twitter_id');
-        $api_key = 'n2BFchS09CY5Myr9ZxTvJX887';
-        $api_secret = 'ShH0CWC93JF9uYjlyAlOt2vSgtUHG7j4NogjBTvxaYEVo6YGeP';
-        $access_token = TwitterAccount::where('id', $account_id)->value('oauth_token');
-        $access_token_secret = TwitterAccount::where('id', $account_id)->value('oauth_token_secret');
-        $q = '仮想通貨';
-        $count = 20;
-        $page = mt_rand(1, 10);
+        for ($p = 1; $p < 10; $p++) {
+            $account_id = TwitterAccount::where('id')->value('twitter_id');
+            $api_key = 'n2BFchS09CY5Myr9ZxTvJX887';
+            $api_secret = 'ShH0CWC93JF9uYjlyAlOt2vSgtUHG7j4NogjBTvxaYEVo6YGeP';
+            $access_token = TwitterAccount::where('id', $account_id)->value('oauth_token');
+            $access_token_secret = TwitterAccount::where('id', $account_id)->value('oauth_token_secret');
+            $q = '仮想通貨';
+            $count = 20;
+            $page = $p;
 
-        $search = new TwitterUserSearchService($api_key, $api_secret, $access_token, $access_token_secret, $q, $count, $page);
-        $arr = $search->search();
+            $search = new TwitterUserSearchService($api_key, $api_secret, $access_token, $access_token_secret, $q, $count, $page);
+            $arr = $search->search();
 
-        $users_results = [];
+            $users_results = [];
 
-        for ($i = 0; $i < 19; $i++) {
-            $users_results[$i]['screen_name'] = $arr[$i]['screen_name'];
-            $users_results[$i]['twitter_id'] = $arr[$i]['id'];
-            $users_results[$i]['registtime'] = date('Y-m-d H:i:s', strtotime($arr[$i]['created_at']));
-            $users_results[$i]['screen_name'] = $arr[$i]['screen_name'];
-            $users_results[$i]['user_id'] = $arr[$i]['id'];
-            $users_results[$i]['name'] = $arr[$i]['name'];
-            $users_results[$i]['profile_image'] = $arr[$i]['profile_image_url'];
-            $users_results[$i]['friends_count'] = $arr[$i]['friends_count'];
-            $users_results[$i]['followers_count'] = $arr[$i]['followers_count'];
-            $users_results[$i]['description'] = $arr[$i]['description'];
-            $users_results[$i]['text'] = $arr[$i]['status']['text'];
-            $users_results[$i]['following'] = $arr[$i]['following'];
-
-        }
-
-        //updateOrCreateを使い同じscreen_nameがDB上autofollowsテーブルにあるかどうか確認し（第一引数）、
-        //第二引数で情報を挿入、または既存のユーザー情報があるなら更新。
-
-        DB::beginTransaction();
-        try {
             for ($i = 0; $i < 19; $i++) {
-                $autofollow = Autofollow::updateOrCreate(
-                    [//第一引数
-                        'screen_name' => $users_results[$i]['screen_name']
-                    ],
-                    [//第二引数
-                        'screen_name' => $users_results[$i]['screen_name'], 'twitter_id' => $users_results[$i]['twitter_id'],
-                        'name' => $users_results[$i]['name'], 'text' => $users_results[$i]['text'],
-                        'registtime' => $users_results[$i]['registtime'],
-                    ]
-                );
+                $users_results[$i]['screen_name'] = $arr[$i]['screen_name'];
+                $users_results[$i]['twitter_id'] = $arr[$i]['id'];
+                $users_results[$i]['registtime'] = date('Y-m-d H:i:s', strtotime($arr[$i]['created_at']));
+                $users_results[$i]['screen_name'] = $arr[$i]['screen_name'];
+                $users_results[$i]['user_id'] = $arr[$i]['id'];
+                $users_results[$i]['name'] = $arr[$i]['name'];
+                $users_results[$i]['profile_image'] = $arr[$i]['profile_image_url'];
+                $users_results[$i]['friends_count'] = $arr[$i]['friends_count'];
+                $users_results[$i]['followers_count'] = $arr[$i]['followers_count'];
+                $users_results[$i]['description'] = $arr[$i]['description'];
+                $users_results[$i]['text'] = $arr[$i]['status']['text'];
+                $users_results[$i]['following'] = $arr[$i]['following'];
+
             }
-            DB::commit(); // コミット
-        } catch (\Exception $e) {
-            DB::rollback(); // ロールバック
-            return;
+
+            //updateOrCreateを使い同じscreen_nameがDB上autofollowsテーブルにあるかどうか確認し（第一引数）、
+            //第二引数で情報を挿入、または既存のユーザー情報があるなら更新。
+
+            DB::beginTransaction();
+            try {
+                for ($i = 0; $i < 19; $i++) {
+                    $autofollow = Autofollow::updateOrCreate(
+                        [//第一引数
+                            'screen_name' => $users_results[$i]['screen_name']
+                        ],
+                        [//第二引数
+                            'screen_name' => $users_results[$i]['screen_name'], 'twitter_id' => $users_results[$i]['twitter_id'],
+                            'name' => $users_results[$i]['name'], 'text' => $users_results[$i]['text'],
+                            'registtime' => $users_results[$i]['registtime'],
+                        ]
+                    );
+                }
+                DB::commit(); // コミット
+            } catch (\Exception $e) {
+                DB::rollback(); // ロールバック
+                return;
+            }
         }
 
 
@@ -225,12 +227,22 @@ class AutofollowController extends Controller
     //ーーーーーーDBからオートフォロー「1」にされていると実施される
     public static function autofollow()
     {
-        //DBからユーザーを14人、screen_nameのみランダムに取得し、$randomUserに詰め込む。
-        //そのscreen_nameを$follow_targetsに詰め込む
+        //DBからユーザーを13人、updated_atを古い順に取得
+        //取得したscreen_nameを$follow_targetsに詰め込む
         $follow_targets = array();
         for ($i = 0; $i < 13; $i++) {
-            $randomUser = Autofollow::inRandomOrder()->first();
-            array_push($follow_targets, $randomUser->screen_name);
+            DB::beginTransaction();
+            try {
+                $randomUser = Autofollow::orderBy('updated_at', 'asc')->first();
+                array_push($follow_targets, $randomUser->screen_name);
+                $now_time = date("Y-m-d H:i:s");//今の時間
+                $data = ['updated_at' => $now_time];
+                Autofollow::orderBy('updated_at', 'asc')->first()->update($data);
+                DB::commit(); // コミット
+            } catch (\Exception $e) {
+                DB::rollback(); // ロールバック
+                return;
+            }
         }
 
         //フォロー元のユーザーアカウント（db上のautofollowが1のユーザー）を検索。
@@ -248,7 +260,7 @@ class AutofollowController extends Controller
         //1週目$iは0 numは2。
         for ($i = 0; $i < $num; $i++) {
 
-            //1日のフォロー数制限が385超えていたらフォローできないようにするフラグをonにする
+            //1日のフォロー数制限が395超えていたらフォローできないようにするフラグをonにする
             //一人分の自動フォロー処理。------------------------------■
             $follow_count = $follow_acount[$i]->follow_count;
             $follow_id = $follow_acount[$i]->id;
@@ -264,16 +276,23 @@ class AutofollowController extends Controller
                     $screen_name = $value;
                     $follow = new FollowingService($api_key, $api_secret, $access_token, $access_token_secret, $screen_name);
                     $results = $follow->following();
+
                 }
 
-
                 //フォローした数をカウントとしてdbに追加。
-                $count = count($follow_targets);
-                $now_follow_num = $follow_acount[$i]->follow_count;//処理中のユーザーのカウント数
-                $now_follow_num = $now_follow_num + $count;
-                $user = User::where('id', $follow_id)->first();
-                $user->follow_count = $now_follow_num;
-                $user->update();
+                DB::beginTransaction();
+                try {
+                    $count = count($follow_targets);
+                    $now_follow_num = $follow_acount[$i]->follow_count;//処理中のユーザーのカウント数
+                    $now_follow_num = $now_follow_num + $count;
+                    $user = User::where('id', $follow_id)->first();
+                    $user->follow_count = $now_follow_num;
+                    $user->update();
+                    DB::commit(); // コミット
+                } catch (\Exception $e) {
+                    DB::rollback(); // ロールバック
+                    return;
+                }
             }
             sleep(5);
         }
