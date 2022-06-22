@@ -21,6 +21,7 @@ Vue.component('news', require('./components/News.vue').default);
 Vue.component('coin', require('./components/Coin.vue').default);
 Vue.component('twitter', require('./components/TwitterComponent.vue').default);
 Vue.component('nologin', require('./components/NologinComponent.vue').default);
+Vue.component('limit', require('./components/LimitTwitterComponentComponent.vue').default);
 
 
 /**
@@ -56,5 +57,9 @@ const twitter = new Vue({
 const nologin = new Vue({
     el: '#js-nologin'
 });
-//
+
+const limit = new Vue({
+    el: '#js-limit'
+});
+////
 
