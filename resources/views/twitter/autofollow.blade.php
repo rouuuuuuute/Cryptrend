@@ -17,11 +17,15 @@
                     </p>
                     <div class="u-short"></div>
 
-                    <!--ユーザーのツイッター情報がないので、管理者の引っ張ってきた情報を見本として表示-->
-                    <div id="js-nologin">
-                        <nologin
-                            autofollowsample_ajax="{{ url('/twitterautofollow/sampleindex') }}">
-                        </nologin>
+                    <div id="js-limit">
+                        <limit
+                            :users_results="{{ $users_results }}"
+                            follow_users="{{$follow_users}}"
+                            autofollow_check="{{ $autofollow_check }}"
+                            autofollow_ajax="{{ url('/twitter/autofollow/follow') }}"
+                            autofollowall_ajax="{{ url('/twitter/autofollow/all') }}"
+                        >
+                        </limit>
                     </div>
                 </div>
         @else

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','リセットパスワード')
+@section('title','パスワードリセット')
 
 @section('content')
     <div class="p-form">

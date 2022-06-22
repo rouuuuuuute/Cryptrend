@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
-use Illuminate\Support\Facades\Log;
-
 use Illuminate\Support\Facades\Session;
 use App\Services\LookupSearchService;
 use App\Services\TwitterUserSearchService;
@@ -16,7 +13,6 @@ use App\Autofollow;
 use App\User;
 use App\Updatetime;
 use App\TwitterAccount;
-
 
 
 //一括フォロー関連のクラス。
@@ -54,11 +50,6 @@ class AutofollowController extends Controller
         $today = date("Y-m-d 00:00:00");
         $dbfollow_day = Auth::user()->follow_day;
 
-        Log::debug(print_r('dbfollowday////////////////////////////////////',true));
-        Log::debug(print_r($dbfollow_day,true));
-        Log::debug(print_r($today,true));
-
-
         //db上のフォローをした日付と本日が違う場合
         if ($today !== $dbfollow_day) {
             //フォロー数をリセットし、本日に日付に更新。
@@ -66,17 +57,13 @@ class AutofollowController extends Controller
             Auth::user()->follow_day = $today;
             Auth::user()->update();
             Session::forget('today_follow_end');//フォロー自体できなくなる処理をリセット
-
-            Log::debug(print_r('日付が一致しない',true));
         }
-        Log::debug(print_r('日付が一致する',true));
 
 
         //1日のフォロー数制限が400超えていたらフォローできないようにするフラグをonにする
         $follow_count = Auth::user()->follow_count;
         if ($follow_count > 400) {
             Session::put('today_follow_end', true);
-
         } else {
             Session::put('today_follow_end', false);
         }

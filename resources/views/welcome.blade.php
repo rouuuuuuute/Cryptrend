@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','集客にイノベーションを')
+@section('title','情報収集にイノベーションを')
 
 @section('header')
     @parent
