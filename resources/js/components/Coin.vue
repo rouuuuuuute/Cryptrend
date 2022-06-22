@@ -16,7 +16,7 @@
             </div>
 
             <!--コイン一覧のチェックボックスの表示非表示とリセットボタン。-->
-            <!--スマホではコイン情報（行21~29）をデフォルトで表示すると、実際のデータの表示部分がかなり下になるため、表示非表示を切り替え可能にしました。-->
+            <!--スマホではコイン情報をデフォルトで表示すると、実際のデータの表示部分がかなり下になるため、表示非表示を切り替え可能にしました。-->
             <div class="p-sidebtn__coinshow">
                 <button class="p-sidebtn__toshowcoin" v-on:click="coinbuttonShow()">コイン毎の情報を調べる</button>
                 <button class="p-sidebtn__highlight" v-on:click="resetCoin()">リセット</button>
@@ -32,6 +32,7 @@
                 </div>
             </div>
 
+            <!--スマホからのアクセスの場合は、セレクトボックスで表示されるようにしました-->
             <div class="p-sidebtn__coinsp__container" v-if="check_show">
                 <div class="p-sidebtn__coinsp">
                     <select class="p-sidebtn__coinsp" v-model="spcoin" v-on:change="sppushCoin(spcoin)">

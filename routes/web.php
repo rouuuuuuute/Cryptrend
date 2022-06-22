@@ -62,7 +62,8 @@ Route::get('coin/highandlow','CoinController@highandlow')->name('coin.highandlow
 Route::get('/twitter/autofollow','AutofollowController@index')->name('autofollow.index');
 Route::post('/twitter/autofollow/all','AutofollowController@all')->name('autofollow.all');//自動フォローをonにする処理
 Route::get('/twitter/autofollow/addfollow','AutofollowController@addfollow')->name('autofollow.addfollow');//DBにツイッターアカウントを追加。cronに追加する処理
-Route::get('/twitterautofollow/autofollow','AutofollowController@addfollow')->name('autofollow.autofollow');//自動フォロー。15分に一度行う。
+Route::get('/twitterautofollow/autofollow','AutofollowController@autofollow')->name('autofollow.autofollow');//自動フォロー。15分に一度行う。
+Route::get('/twitterautofollow/sampleindex','AutofollowController@sampleindex')->name('autofollow.autofollow');//サンプル表示
 
 Route::post('/twitter/autofollow/follow','FollowController@follow')->name('autofollow.follow');//フォロー
 

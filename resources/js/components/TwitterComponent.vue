@@ -35,7 +35,7 @@
                         <button v-on:click="follow(user,index)">@{{ user.screen_name }} をフォローする</button>
                         <p>{{ user.description }}</p><br>
                         <p>《最新ツイート》<br>
-                            {{ user.status.text }}</p><br>
+                            {{ typeof user.status !== 'undefined' ? user.status.text :'ツイートがありません'}}</p><br>
                         フォロー数：{{ user.friends_count }} フォロワー数：{{ user.followers_count }}<br>
                     </div>
                 </div>

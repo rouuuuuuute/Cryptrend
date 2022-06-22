@@ -28,6 +28,7 @@ class ProfileController extends Controller
         return view('home.profile');
     }
 
+    //プロフィール編集
     public function edit(Request $request)
     {
         $request->validate([
@@ -40,6 +41,7 @@ class ProfileController extends Controller
         return redirect('/profile')->with('flash_message', '更新しました');
     }
 
+    //プロフィール退会
     public function withdraw()
     {
         $id = Auth::id();

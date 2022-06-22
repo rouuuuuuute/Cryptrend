@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
+//DBから情報をとる処理
 class RequestDatabaseController extends Controller
 {
     public function __construct()

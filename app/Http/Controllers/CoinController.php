@@ -45,14 +45,6 @@ class CoinController extends Controller
         $now_time = date("Y-m-d H:i:s");//今の時間
         $addusertime_update = Updatetime::where('id', 1)->first();//dbからデータ取得
         $data = ['update_hour' => $now_time];
-        $addusertime_update->update($data);
-
-        $coin = new CoinSearchService($now_time, $before_time, $past, $request_loop);
-
-        date_default_timezone_set('Asia/Tokyo');
-        $now_time = date("Y-m-d H:i:s");//今の時間
-        $addusertime_update = Updatetime::where('id', 1)->first();//dbからデータ取得
-        $data = ['update_hour' => $now_time];
 
         DB::beginTransaction();
         try {
