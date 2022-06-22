@@ -4,28 +4,27 @@
 
 @section('content')
 
-    @if (session('today_follow_end'))
-        <!--セッション情報にtoday_follow_endが入っている場合、本日のフォローができない。-->
+    <section>
+    @if (session('user_token'))
 
-        <div class="p-desc__container">
-            <p class="p-desc__text c-text" >
-                本日はすでに多くのフォローを実施しているため、フォローは実施できません。<br>
-                明日以降アクセスしてください。<br>
-            </p>
-            <div class="u-short"></div>
+        @if (session('today_follow_end'))
+            <!--セッション情報にtoday_follow_endが入っている場合、本日のフォローができない。-->
 
-            <!--ユーザーのツイッター情報がないので、管理者の引っ張ってきた情報を見本として表示-->
-            <div id="js-nologin">
-                <nologin
-                    autofollowsample_ajax="{{ url('/twitterautofollow/sampleindex') }}">
-                </nologin>
-            </div>
-        </div>
+                <div class="p-desc__container">
+                    <p class="p-desc__text c-text">
+                        本日はすでに多くのフォローを実施しているため、フォローは実施できません。<br>
+                        明日以降アクセスしてください。<br>
+                    </p>
+                    <div class="u-short"></div>
 
-    @else
-
-        <section class="l-main__twitter">
-        @if (session('user_token'))
+                    <!--ユーザーのツイッター情報がないので、管理者の引っ張ってきた情報を見本として表示-->
+                    <div id="js-nologin">
+                        <nologin
+                            autofollowsample_ajax="{{ url('/twitterautofollow/sampleindex') }}">
+                        </nologin>
+                    </div>
+                </div>
+        @else
             <!--ツイッター認証をしている場合は下記コンポーネントを表示。受け渡す変数の内容は以下の通りです。-->
                 <!--autofollow_checkはセッションの状態。1ならば自動フォロー実施中。-->
                 <!--users_resultsはログインユーザーがフォローしてないユーザー一覧のスクリーンネーム。-->
@@ -42,29 +41,23 @@
                     >
                     </twitter>
                 </div>
+        @endif
 
-        @else
+    @else
+        <!--ツイッター認証をしていない場合は下記を表示-->
+            <div class="c-text p-twiiter__top">
+                <p>各アカウントのフォローをするには<br>「Twitter認証」をしてください。</p>
+                <a href="/twitter/accounts" class="">Twitter認証を行う。</a>
+            </div>
 
-
-            <!--ツイッター認証をしていない場合は下記を表示-->
-                <div class="c-text p-twiiter__top">
-                    <p>各アカウントのフォローをするには<br>「Twitter認証」をしてください。</p>
-                    <a href="/twitter/accounts" class="">Twitter認証を行う。</a>
-                </div>
-
-                <!--ユーザーのツイッター情報がないので、情報を見本としてコンポーネントで表示-->
-                <!--autofollowsample_ajaxは、DBから取得するためのajax用の変数-->
-                <div id="js-nologin">
-                    <nologin
-                        autofollowsample_ajax="{{ url('/twitterautofollow/sampleindex') }}"
-                    ></nologin>
-                </div>
-            @endif
-        </section>
-    @endif
-
-
-
-
+            <!--ユーザーのツイッター情報がないので、情報を見本としてコンポーネントで表示-->
+            <!--autofollowsample_ajaxは、DBから取得するためのajax用の変数-->
+            <div id="js-nologin">
+                <nologin
+                    autofollowsample_ajax="{{ url('/twitterautofollow/sampleindex') }}"
+                ></nologin>
+            </div>
+        @endif
+    </section>
 
 @endsection
