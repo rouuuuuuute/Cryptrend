@@ -34,7 +34,7 @@
                         <button>@{{ user.screen_name }}</button>
                         <p>{{ user.description }}</p><br>
                         <p>《最新ツイート》<br>
-                            {{ typeof user.status !== 'undefined' ? user.status.text :'ツイートがありません'}}</p><br>
+                            {{ typeof user.status !== 'undefined' ? user.status.text : 'ツイートがありません' }}</p><br>
                         フォロー数：{{ user.friends_count }} フォロワー数：{{ user.followers_count }}<br>
                     </div>
                 </div>

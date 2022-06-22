@@ -15,7 +15,6 @@ use App\Updatetime;
 use App\TwitterAccount;
 
 
-
 //一括フォロー関連のクラス。
 //index:まとめてフォローのページ表示はフォローの実施アクション/allfollowは自動フォローのONOFF切り替え機能
 //autofollowは自動フォローをONにしているユーザーのみ、自動で14人フォローする
