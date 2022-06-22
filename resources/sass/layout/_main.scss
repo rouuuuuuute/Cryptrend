@@ -1,19 +1,19 @@
-#l-main{
-    margin:auto;
+#l-main {
+    margin: auto;
     padding-top: 80px;
     width: $site-width;
     flex: 1;
     display: flex;
-    background-color:$color-main;
-    @include mq(){
-        padding-top:0;
-        width:100%;
-        display:block;
+    background-color: $color-main;
+    @include mq() {
+        padding-top: 0;
+        width: 100%;
+        display: block;
     }
 
-    &__article{
-        @include mq(){
-            width:100%;
+    &__article {
+        @include mq() {
+            width: 100%;
         }
     }
 }
