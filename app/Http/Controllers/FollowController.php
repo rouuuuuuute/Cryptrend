@@ -37,6 +37,7 @@ class FollowController extends Controller
         $follow = new FollowingService($api_key, $api_secret, $access_token, $access_token_secret, $screen_name);
         $results = $follow->following();
 
+        //フォローした数をカウント
         $now_follow_num = Auth::user()->follow_count;
         $sum = $now_follow_num + 1;
         Auth::user()->follow_count = $sum;

@@ -53,6 +53,7 @@ class TwitterAccountsController extends Controller
         }
     }
 
+    //Twitterアカウント情報を取得する処理
     public function request()
     {
         $user_id = Auth::id();
@@ -76,11 +77,11 @@ class TwitterAccountsController extends Controller
         }
     }
 
+    //Twitterアカウントを削除する処理
     public function destroy(Request $request)
     {
         $account_id = $request->account_id;
         TwitterAccount::where('id', $account_id)->delete();
         return view('twitter.accounts')->with('flash_message', '削除しました');
-
     }
 }

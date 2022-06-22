@@ -17,7 +17,7 @@
             <!--ユーザーのツイッター情報がないので、管理者の引っ張ってきた情報を見本として表示-->
             <div id="js-nologin">
                 <nologin
-                    autofollowsample_ajax="{{ url('/twitter/autofollow/addfollow') }}">
+                    autofollowsample_ajax="{{ url('/twitterautofollow/sampleindex') }}">
                 </nologin>
             </div>
         </div>
@@ -56,7 +56,7 @@
                 <!--autofollowsample_ajaxは、DBから取得するためのajax用の変数-->
                 <div id="js-nologin">
                     <nologin
-                        autofollowsample_ajax="{{ url('/twitter/autofollow/addfollow') }}"
+                        autofollowsample_ajax="{{ url('/twitterautofollow/sampleindex') }}"
                     ></nologin>
                 </div>
             @endif

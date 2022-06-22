@@ -29,7 +29,7 @@ import axios from 'axios';
 
 export default {
     props: [
-        'autofollowsample_ajax', //viewから受け渡されたURL：autofollow/addfollow
+        'autofollowsample_ajax', //viewから受け渡されたURL：autofollow/sampleindex
     ],
     data: function () {
         return {

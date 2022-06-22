@@ -14,12 +14,11 @@ use App\User;
 use App\Updatetime;
 use App\TwitterAccount;
 
-//まとめてフォロー関連のクラス。
-//twitteroauth でサービスへのログインユーザーのツイッター情報を取得する。
-//index:まとめてフォローのページ表示/followはフォローの実施アクション/allfollowは自動フォローのONOFF切り替え機能
+//一括フォロー関連のクラス。
+//index:まとめてフォローのページ表示はフォローの実施アクション/allfollowは自動フォローのONOFF切り替え機能
 //autofollowは自動フォローをONにしているユーザーのみ、自動で14人フォローする
-//addfollowでdbに定期的（日に一度）ツイッターから情報を取得し、仮想通貨関連のアカウントを取り込む。
-//（それを元にindex側でアカウントを表示します。）
+//addfollowでdbに定期的（日に一度）ツイッターから情報を取得し、仮想通貨関連のアカウントを取り込む。
+//Twitterアカウントを登録していないユーザーはサンプル情報を表示させる
 
 
 class AutofollowController extends Controller
@@ -32,7 +31,7 @@ class AutofollowController extends Controller
 
 
     //ーーーーーーーーーーオートフォロートップページーーーーーーーーーー
-    //Sessionに'today_follow_end';が入っていると本日の本サービスでのフォローはできないようにします。(1日に395人以上を超えたら制限。)
+    //Sessionに'today_follow_end';が入っていると本日の本サービスでのフォローはできないようにします。(1日に400人以上を超えたら制限。)
     public function index()
     {
 
@@ -60,10 +59,9 @@ class AutofollowController extends Controller
         }
 
 
-        //1日のフォロー数制限が395超えていたらフォローできないようにするフラグをonにする
+        //1日のフォロー数制限が400超えていたらフォローできないようにするフラグをonにする
         $follow_count = Auth::user()->follow_count;
-        if ($follow_count > 395) //本来は395にする！
-        {
+        if ($follow_count > 400) {
             Session::put('today_follow_end', true);
 
         } else {
@@ -124,7 +122,7 @@ class AutofollowController extends Controller
         $users_results = json_encode($temp_user, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
         return view('twitter.autofollow', compact('users_results', 'follow_users', 'autofollow_check'));
-        //viewに渡す変数の説明↓
+
         //$follow_usersはランダムにDBから取得したユーザー情報。
         //$users_resultsは、ログインユーザーがフォローしてないユーザー一覧のスクリーンネーム。
         //autofollow_checkは、dbからログインしているユーザーの自動フォローの状態を判断したフラグ。0ならオートフォローは実施していない、1なら実施している
@@ -143,10 +141,11 @@ class AutofollowController extends Controller
     }
 
 
-    //ーーーーーユーザーを1日に数人DB追加するメソッド。cronで数回実施。依存ユーザーの情報がある場合はツイート更新。
+    //ーーーーーユーザーを1日に1回追加するメソッド。cronで数回実施。依存ユーザーの情報がある場合はツイート更新。
     public static function addfollow()
     {
-        for ($p = 1; $p < 10; $p++) {
+        //ユーザーを取得20人×40回ループ
+        for ($p = 1; $p < 40; $p++) {
             $account_id = TwitterAccount::where('id')->value('twitter_id');
             $api_key = 'n2BFchS09CY5Myr9ZxTvJX887';
             $api_secret = 'ShH0CWC93JF9uYjlyAlOt2vSgtUHG7j4NogjBTvxaYEVo6YGeP';
@@ -172,9 +171,8 @@ class AutofollowController extends Controller
                 $users_results[$i]['friends_count'] = $arr[$i]['friends_count'];
                 $users_results[$i]['followers_count'] = $arr[$i]['followers_count'];
                 $users_results[$i]['description'] = $arr[$i]['description'];
-                $users_results[$i]['text'] = $arr[$i]['status']['text'];
+                $users_results[$i]['text'] = (isset($arr[$i]['status'])) ? $arr[$i]['status']['text'] : '';
                 $users_results[$i]['following'] = $arr[$i]['following'];
-
             }
 
             //updateOrCreateを使い同じscreen_nameがDB上autofollowsテーブルにあるかどうか確認し（第一引数）、
@@ -216,6 +214,45 @@ class AutofollowController extends Controller
             DB::rollback(); // ロールバック
             return;
         }
+
+        //Vue上で表示させるデータを渡す
+        $results = json_encode($users_results, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+
+        return $results;
+    }
+
+    //ーーーーーTwitterを登録していないユーザーに、フォローはできないがTwitterユーザーを表示させる
+    public static function sampleindex()
+    {
+        $account_id = TwitterAccount::where('id')->value('twitter_id');
+        $api_key = 'n2BFchS09CY5Myr9ZxTvJX887';
+        $api_secret = 'ShH0CWC93JF9uYjlyAlOt2vSgtUHG7j4NogjBTvxaYEVo6YGeP';
+        $access_token = TwitterAccount::where('id', $account_id)->value('oauth_token');
+        $access_token_secret = TwitterAccount::where('id', $account_id)->value('oauth_token_secret');
+        $q = '仮想通貨';
+        $count = 20;
+        $page = mt_rand(1, 10);
+
+        $search = new TwitterUserSearchService($api_key, $api_secret, $access_token, $access_token_secret, $q, $count, $page);
+        $arr = $search->search();
+
+        $users_results = [];
+
+        for ($i = 0; $i < 19; $i++) {
+            $users_results[$i]['screen_name'] = $arr[$i]['screen_name'];
+            $users_results[$i]['twitter_id'] = $arr[$i]['id'];
+            $users_results[$i]['registtime'] = date('Y-m-d H:i:s', strtotime($arr[$i]['created_at']));
+            $users_results[$i]['screen_name'] = $arr[$i]['screen_name'];
+            $users_results[$i]['user_id'] = $arr[$i]['id'];
+            $users_results[$i]['name'] = $arr[$i]['name'];
+            $users_results[$i]['profile_image'] = $arr[$i]['profile_image_url'];
+            $users_results[$i]['friends_count'] = $arr[$i]['friends_count'];
+            $users_results[$i]['followers_count'] = $arr[$i]['followers_count'];
+            $users_results[$i]['description'] = $arr[$i]['description'];
+            $users_results[$i]['text'] = (isset($arr[$i]['status'])) ? $arr[$i]['status']['text'] : '';
+            $users_results[$i]['following'] = $arr[$i]['following'];
+        }
+
 
         $results = json_encode($users_results, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
@@ -260,12 +297,12 @@ class AutofollowController extends Controller
         //1週目$iは0 numは2。
         for ($i = 0; $i < $num; $i++) {
 
-            //1日のフォロー数制限が395超えていたらフォローできないようにするフラグをonにする
+            //1日のフォロー数制限が400超えていたらフォローできないようにするフラグをonにする
             //一人分の自動フォロー処理。------------------------------■
             $follow_count = $follow_acount[$i]->follow_count;
             $follow_id = $follow_acount[$i]->id;
 
-            if ($follow_count < 395) {
+            if ($follow_count < 400) {
                 $account_id = TwitterAccount::where('user_id', $follow_id)->value('twitter_id');
                 $api_key = 'n2BFchS09CY5Myr9ZxTvJX887';
                 $api_secret = 'ShH0CWC93JF9uYjlyAlOt2vSgtUHG7j4NogjBTvxaYEVo6YGeP';

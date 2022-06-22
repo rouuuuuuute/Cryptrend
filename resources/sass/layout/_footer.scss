@@ -2,13 +2,13 @@
     width: 100%;
     height: 80px;
     display: flex;
-    justify-content:center;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
     box-sizing: border-box;
     background-color: $color_footer;
     color: $font-color-footer;
-    @include mq(){
+    @include mq() {
         width: 100%;
         font-size: $font-size_s;
     }
