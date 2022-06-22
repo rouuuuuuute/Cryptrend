@@ -12,11 +12,8 @@
                                 sampleuser.name
                             }}</a></h4>
                     </div>
-                    <button>フォローするにはツイッター認証が必要です。</button>
-                    <p>{{ sampleuser.description }}</p>
-                    <p>《最新ツイート》<br>
-                        {{ sampleuser.tweet }}</p><br>
-                    フォロー数：{{ sampleuser.friends_count }} フォロワー数：{{ sampleuser.followers_count }}<br>
+                    <p>{{ sampleuser.description }}</p><br>
+                    <p><br>フォロー数：{{ sampleuser.friends_count }} フォロワー数：{{ sampleuser.followers_count }}</p>
                 </div>
             </div>
         </article>

@@ -34,6 +34,8 @@ class FollowController extends Controller
         $access_token_secret = TwitterAccount::where('twitter_id', $account_id)->value('oauth_token_secret');
         $screen_name = $username;
 
+
+
         $follow = new FollowingService($api_key, $api_secret, $access_token, $access_token_secret, $screen_name);
         $results = $follow->following();
 

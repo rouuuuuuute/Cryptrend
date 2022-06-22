@@ -5,10 +5,10 @@
 @section('content')
 
     @if (session('today_follow_end'))
-        <!--セッション情報にtoday_follow_endが入っている場合、本日のフォローができない。-->>
+        <!--セッション情報にtoday_follow_endが入っている場合、本日のフォローができない。-->
 
         <div class="p-desc__container">
-            <p class="p-desc__text c-text">
+            <p class="p-desc__text c-text" >
                 本日はすでに多くのフォローを実施しているため、フォローは実施できません。<br>
                 明日以降アクセスしてください。<br>
             </p>
